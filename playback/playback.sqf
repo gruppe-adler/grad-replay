@@ -5,7 +5,7 @@
 if (!isNull (findDisplay 7810)) then {closeDialog 0};
 
 if (isServer || isDedicated) then {
-	["Terminate"] call BIS_fnc_EGSpectator;
+	
 	[{["Starting Replay."] call EFUNC(common,displayTextStructured);},"BIS_fnc_spawn",true,true] call BIS_fnc_MP;
 	[{openMap [true,true];},"BIS_fnc_spawn",true,true] call BIS_fnc_MP;
 	[{[player, true] call TFAR_fnc_forceSpectator;},"BIS_fnc_spawn",true,true] call BIS_fnc_MP;
@@ -174,10 +174,10 @@ if (isServer || isDedicated) then {
 
 		if (!(local_recording_counter < local_recording_length)) exitWith {
 			[{["Replay finished."] call EFUNC(common,displayTextStructured);},"BIS_fnc_spawn",true,true] call BIS_fnc_MP;
-			sleep 5;
+			sleep 8;
 			[{openMap [false,true];},"BIS_fnc_spawn",true,true] call BIS_fnc_MP;
 
-			REPLAY_FINISHED = true; publicVariable "REPLAY_FINISHED";
+			REPLAY_FINISHED = true;
 		};
 
 		sleep REPLAY_SPEED;

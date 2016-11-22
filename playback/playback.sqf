@@ -5,7 +5,7 @@
 if (!isNull (findDisplay 7810)) then {closeDialog 0};
 
 if (isServer || isDedicated) then {
-	
+
 	[{["Starting Replay."] call EFUNC(common,displayTextStructured);},"BIS_fnc_spawn",true,true] call BIS_fnc_MP;
 	[{openMap [true,true];},"BIS_fnc_spawn",true,true] call BIS_fnc_MP;
 	[{[player, true] call TFAR_fnc_forceSpectator;},"BIS_fnc_spawn",true,true] call BIS_fnc_MP;
@@ -178,6 +178,7 @@ if (isServer || isDedicated) then {
 			[{openMap [false,true];},"BIS_fnc_spawn",true,true] call BIS_fnc_MP;
 
 			REPLAY_FINISHED = true;
+			publicVariable "REPLAY_FINISHED";
 		};
 
 		sleep REPLAY_SPEED;

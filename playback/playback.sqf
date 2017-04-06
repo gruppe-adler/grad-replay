@@ -4,6 +4,10 @@
 // {deleteMarker _x;} forEach allMapMarkers; // cleanup of markers for replay --> buggy, deletes also replay markers -.-
 if (!isNull (findDisplay 7810)) then {closeDialog 0};
 
+if (player getVariable ["ACE_isUnconscious", false]) then {
+	forceRespawn player;
+};
+
 if (isServer || isDedicated) then {
 
 	[{["Starting Replay."] call EFUNC(common,displayTextStructured);},"BIS_fnc_spawn",true,true] call BIS_fnc_MP;

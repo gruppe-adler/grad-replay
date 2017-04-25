@@ -1,7 +1,7 @@
 #include "\z\ace\addons\main\script_component.hpp"
 
 
-// {deleteMarker _x;} forEach allMapMarkers; // cleanup of markers for replay --> buggy, deletes also replay markers -.-
+{_x setMarkerAlpha 0;} forEach allMapMarkers; // hide all markers for replay --> to be tested
 if (!isNull (findDisplay 7810)) then {closeDialog 0};
 
 if (player getVariable ["ACE_isUnconscious", false]) then {

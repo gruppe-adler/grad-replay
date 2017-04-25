@@ -1,15 +1,19 @@
 #include "\z\ace\addons\main\script_component.hpp"
 
 
-{_x setMarkerAlpha 0;} forEach allMapMarkers; // hide all markers for replay --> to be tested
-if (!isNull (findDisplay 7810)) then {closeDialog 0};
-
-if (player getVariable ["ACE_isUnconscious", false]) then {
-	forceRespawn player;
+if (hasInterface) then {
+	{_x setMarkerAlphaLocal 0;} forEach allMapMarkers; // hide all markers for replay --> to be tested
+	
+	if (!isNull (findDisplay 7810)) then {closeDialog 0};
+	if (player getVariable ["ACE_isUnconscious", false]) then {
+		forceRespawn player;
+	};
 };
 
 if (isServer || isDedicated) then {
-
+	
+	{ _x enableSimulationGlobal false; } forEach allPlayers;
+	
 	[{["Starting Replay."] call EFUNC(common,displayTextStructured);},"BIS_fnc_spawn",true,true] call BIS_fnc_MP;
 	[{openMap [true,true];},"BIS_fnc_spawn",true,true] call BIS_fnc_MP;
 	[{[player, true] call TFAR_fnc_forceSpectator;},"BIS_fnc_spawn",true,true] call BIS_fnc_MP;

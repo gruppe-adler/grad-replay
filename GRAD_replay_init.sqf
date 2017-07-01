@@ -1,14 +1,29 @@
 // idea from a script by austin_medic
 // completely reworked by nomisum for Gruppe Adler
 
-////// SETUP
-_recording_precision = _this select 0; // smaller is more precise (delay between snapshots)
+if (!isServer) exitWith {};
 
-GRAD_startRecording = compile preprocessFile "node_modules\grad_replay\recording\recording.sqf";
-GRAD_startPlayback = compile preprocessFile "node_modules\grad_replay\playback\playback.sqf";
+params [["_precision", 3], ["_specialVehicle", objNull]];
 
-[_recording_precision] call GRAD_startRecording;
+// constants
+GRAD_REPLAY_PAUSED = false;
+GRAD_REPLAY_STOPPED = false;
 
-waitUntil {MISSION_COMPLETED};
+GRAD_REPLAY_EMPTY_TRACKED = false;
+GRAD_REPLAY_SIDES_TRACKED = [west, east, independent, civilian];
+GRAD_REPLAY_AI_TRACKED = false;
 
-[] call GRAD_startPlayback;
+GRAD_REPLAY_DATABASE_TEMP = [];
+GRAD_REPLAY_DATABASE = [];
+
+REPLAY_STEPS_PER_TICK = 3;
+
+[_precision, _specialVehicle] call GRAD_replay_fnc_startRecord;
+
+
+
+/* to start playback:
+
+[] GRAD_replay_fnc_stopRecord;
+
+*/

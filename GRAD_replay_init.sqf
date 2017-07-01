@@ -3,7 +3,7 @@
 
 if (!isServer) exitWith {};
 
-params [["_precision", 3], ["_specialVehicle", objNull]];
+params [["_precision", 1], ["_specialVehicle", objNull]];
 
 // constants
 GRAD_REPLAY_PAUSED = false;
@@ -16,9 +16,11 @@ GRAD_REPLAY_AI_TRACKED = false;
 GRAD_REPLAY_DATABASE_TEMP = [];
 GRAD_REPLAY_DATABASE = [];
 
-REPLAY_STEPS_PER_TICK = 3;
+REPLAY_STEPS_PER_TICK = 1;
 
 [_precision, _specialVehicle] call GRAD_replay_fnc_startRecord;
+
+diag_log format ["grad replay: starting record"];
 
 
 

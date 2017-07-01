@@ -1,35 +1,51 @@
 #include "\z\ace\addons\main\script_component.hpp"
 
-params ["_database"];
-
 grad_replay_playbackPosition = 0;
 
 [{
-    params ["_args", "_handle"];
-    _args params ["_database"];
+    // params ["_args", "_handle"];
 
-    grad_replay_playbackPosition = grad_replay_playbackPosition + REPLAY_STEPS_PER_TICK;
+    grad_replay_playbackPosition = grad_replay_playbackPosition + 1;
 
-    for [{_k=0}, {_k < (count _database select grad_replay_playbackPosition)}, {_k=_k+1}] do {
-		
-		((findDisplay 12) displayCtrl 51) ctrlAddEventHandler ["Draw", {
-			    [_this, _database] call GRAD_replay_drawIcon;
-		}];
+    
+		waitUntil { !(findDisplay 12 isEqualTo displayNull) };
 
-	};
 
+		for [{_k=0}, {_k < (count (GRAD_REPLAY_DATABASE select grad_replay_playbackPosition))}, {_k=_k+1}] do { 
+
+			_icon = [GRAD_REPLAY_DATABASE, grad_replay_playbackPosition, _k, 0] call getRecordEntry;
+			_color = [GRAD_REPLAY_DATABASE, grad_replay_playbackPosition, _k, 1] call getRecordEntry;
+			_pos = [GRAD_REPLAY_DATABASE, grad_replay_playbackPosition, _k, 2] call getRecordEntry;
+			_dir = [GRAD_REPLAY_DATABASE, grad_replay_playbackPosition, _k, 3] call getRecordEntry;
+			_special = [GRAD_REPLAY_DATABASE, grad_replay_playbackPosition, _k, 4] call getRecordEntry;
+			_veh = [GRAD_REPLAY_DATABASE, grad_replay_playbackPosition, _k, 5] call getRecordEntry;
+
+			_icon = "\A3\ui_f\data\map\vehicleicons\" + _icon;
+
+			findDisplay 12 displayCtrl 51 ctrlAddEventHandler    
+			[    
+				"Draw",     
+				format ["_this select 0 drawIcon     
+				[      
+					%1,     
+					%2,      
+					%3,      
+					24,     
+					24,      
+					%4,      
+					'',
+					0    
+				]", _icon, _color, _pos, _dir]
+			];  
+		};
+
+	/* diag_log format ["replay pos is %1, count grad_replay db is %2", grad_replay_playbackPosition, count GRAD_REPLAY_DATABASE];*/
 
     // end recording and start playback
-    if (grad_replay_playbackPosition >= count _database) then {
-    	[_handle] call CBA_fnc_removePerFrameHandler;
+    if (grad_replay_playbackPosition >= count GRAD_REPLAY_DATABASE) then {
+    	[_this select 1] call CBA_fnc_removePerFrameHandler;
 
-    	["Replay finished."] call EFUNC(common,displayTextStructured);
-
-		sleep 6;
-		openMap [false,true];
-
-		REPLAY_FINISHED = true;
-		publicVariable "REPLAY_FINISHED";
+    	[] spawn GRAD_replay_fnc_stopPlaybackClient;
 	};
 
-},1,[_database]] call CBA_fnc_addPerFrameHandler;
+},1,[]] call CBA_fnc_addPerFrameHandler;

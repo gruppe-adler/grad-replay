@@ -2,11 +2,16 @@
 
 {_x setMarkerAlphaLocal 0;} forEach allMapMarkers; // hide all markers for replay --> to be tested
 	
-if (!isNull (findDisplay 7810)) then {closeDialog 0};
+if (!isNull (findDisplay 7810)) then {closeDialog 0;};
 if (player getVariable ["ACE_isUnconscious", false]) then {
 	forceRespawn player;
 };
 
+player enableSimulation false;
+
 ["Starting Replay."] call EFUNC(common,displayTextStructured);
-openMap [true,true];
+openMap [true, false];
 [player, true] call TFAR_fnc_forceSpectator;
+
+
+[] spawn GRAD_replay_fnc_startPlaybackClient;

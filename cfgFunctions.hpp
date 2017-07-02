@@ -7,7 +7,7 @@ class GRAD_replay {
     class player {
         file = MODULES_DIRECTORY\GRAD_replay\functions\player;
 
-        
+        class drawIcon {};
         class getRecordEntry {};
         class preparePlaybackClient {};
         class startPlaybackClient {};

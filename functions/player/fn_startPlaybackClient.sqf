@@ -1,51 +1,60 @@
 #include "\z\ace\addons\main\script_component.hpp"
 
 grad_replay_playbackPosition = 0;
+grad_current_ehs = [];
+grad_current_playbackLoopPosition = 0;
+
+
 
 [{
-    // params ["_args", "_handle"];
+	{
+		((findDisplay 12) displayCtrl 51) ctrlRemoveEventHandler ["Draw", _x];
+	} forEach grad_current_ehs;
+
+	grad_current_ehs = [];
 
     grad_replay_playbackPosition = grad_replay_playbackPosition + 1;
 
-    
-		waitUntil { !(findDisplay 12 isEqualTo displayNull) };
+    for [{_k=0}, {_k < (count (GRAD_REPLAY_DATABASE select grad_replay_playbackPosition))}, {_k=_k+1}] do { 
 
+    		hintsilent format ["loopcount %1", (count (GRAD_REPLAY_DATABASE select grad_replay_playbackPosition))];
 
-		for [{_k=0}, {_k < (count (GRAD_REPLAY_DATABASE select grad_replay_playbackPosition))}, {_k=_k+1}] do { 
+			grad_current_playbackLoopPosition = _k;
+			// _special = [GRAD_REPLAY_DATABASE, grad_replay_playbackPosition, _k, 4] call GRAD_replay_fnc_getRecordEntry;
+			// _veh = [GRAD_REPLAY_DATABASE, grad_replay_playbackPosition, _k, 5] call GRAD_replay_fnc_getRecordEntry;
 
-			_icon = [GRAD_REPLAY_DATABASE, grad_replay_playbackPosition, _k, 0] call getRecordEntry;
-			_color = [GRAD_REPLAY_DATABASE, grad_replay_playbackPosition, _k, 1] call getRecordEntry;
-			_pos = [GRAD_REPLAY_DATABASE, grad_replay_playbackPosition, _k, 2] call getRecordEntry;
-			_dir = [GRAD_REPLAY_DATABASE, grad_replay_playbackPosition, _k, 3] call getRecordEntry;
-			_special = [GRAD_REPLAY_DATABASE, grad_replay_playbackPosition, _k, 4] call getRecordEntry;
-			_veh = [GRAD_REPLAY_DATABASE, grad_replay_playbackPosition, _k, 5] call getRecordEntry;
+			_eh = ((findDisplay 12) displayCtrl 51) ctrlAddEventHandler ["Draw",{
 
-			_icon = "\A3\ui_f\data\map\vehicleicons\" + _icon;
+				/* diag_log format ["%1, %2, %3, %4", _thisicon, _thiscolor, _thispos, _thisdir];*/
 
-			findDisplay 12 displayCtrl 51 ctrlAddEventHandler    
-			[    
-				"Draw",     
-				format ["_this select 0 drawIcon     
-				[      
-					%1,     
-					%2,      
-					%3,      
-					24,     
-					24,      
-					%4,      
-					'',
-					0    
-				]", _icon, _color, _pos, _dir]
-			];  
-		};
+				/*
+				format ["
+						(_this select 0) drawArrow [
+							'%1' call LOCPOSR,
+							%2,
+							[1,0.4,0,1]
+						];
+					",(_m getvariable "IDCODE"),_mPs select 0]];
+				*/
 
-	/* diag_log format ["replay pos is %1, count grad_replay db is %2", grad_replay_playbackPosition, count GRAD_REPLAY_DATABASE];*/
+				 diag_log format ["%1", grad_current_playbackLoopPosition];
+				 call compile format ["
+				 	[
+				 		_this select 0,
+						%1
+					] call GRAD_replay_fnc_drawIcon", grad_current_playbackLoopPosition
+				];
+			}];
+			
+	};
+
+	grad_current_ehs = grad_current_ehs + [_eh];
 
     // end recording and start playback
     if (grad_replay_playbackPosition >= count GRAD_REPLAY_DATABASE) then {
-    	[_this select 1] call CBA_fnc_removePerFrameHandler;
+    	// [_this select 1] call CBA_fnc_removePerFrameHandler;
 
-    	[] spawn GRAD_replay_fnc_stopPlaybackClient;
+    	// [] spawn GRAD_replay_fnc_stopPlaybackClient;
 	};
 
-},1,[]] call CBA_fnc_addPerFrameHandler;
+},5,[]] call CBA_fnc_addPerFrameHandler;

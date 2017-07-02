@@ -19,6 +19,7 @@ grad_current_ehs = [];
     grad_replay_playbackPosition = grad_replay_playbackPosition + 1;
 
     {
+    		if (grad_current_playbackLoopPosition >= (count (GRAD_REPLAY_DATABASE select grad_replay_playbackPosition) - 1)) exitWith {};
     		grad_current_playbackLoopPosition = grad_current_playbackLoopPosition + 1;
     		_fickediefackfack = grad_current_playbackLoopPosition;
 
@@ -28,39 +29,24 @@ grad_current_ehs = [];
 			// _special = [GRAD_REPLAY_DATABASE, grad_replay_playbackPosition, _k, 4] call GRAD_replay_fnc_getRecordEntry;
 			// _veh = [GRAD_REPLAY_DATABASE, grad_replay_playbackPosition, _k, 5] call GRAD_replay_fnc_getRecordEntry;
 
-			_eh = ((findDisplay 12) displayCtrl 51) ctrlAddEventHandler ["Draw",{
-
-				/* diag_log format ["%1, %2, %3, %4", _thisicon, _thiscolor, _thispos, _thisdir];*/
-
-				/*
-				format ["
-						(_this select 0) drawArrow [
-							'%1' call LOCPOSR,
-							%2,
-							[1,0.4,0,1]
-						];
-					",(_m getvariable "IDCODE"),_mPs select 0]];
-				*/
-
-				 
-				 call compile format ["
-				 	[
-				 		_this select 0,
-						%1
-					] call GRAD_replay_fnc_drawIcon", _fickediefackfack
-				];
-			}];
+			_eh = ((findDisplay 12) displayCtrl 51) ctrlAddEventHandler ["Draw",format [
+				"[
+                   _this select 0,
+                   %1
+                ] call GRAD_replay_fnc_drawIcon;", _fickediefackfack]
+            ];
 			grad_current_ehs = grad_current_ehs + [_eh];
 
 	} count (GRAD_REPLAY_DATABASE select grad_replay_playbackPosition);
+	// you begin counting with 0, so delete 1
 
 	
 
     // end recording and start playback
     if (grad_replay_playbackPosition >= count GRAD_REPLAY_DATABASE) then {
-    	// [_this select 1] call CBA_fnc_removePerFrameHandler;
+    	[_this select 1] call CBA_fnc_removePerFrameHandler;
 
-    	// [] spawn GRAD_replay_fnc_stopPlaybackClient;
+    	[] spawn GRAD_replay_fnc_stopPlaybackClient;
 	};
 
-},5,[]] call CBA_fnc_addPerFrameHandler;
+},0.5,[]] call CBA_fnc_addPerFrameHandler;

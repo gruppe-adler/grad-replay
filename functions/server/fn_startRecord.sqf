@@ -37,6 +37,7 @@ diag_log format ["grad replay: starting record with precision %1", _precision];
 
 		    	if (_isNoShit) then {
 
+		    		_name = name _unit;
 					_veh = vehicle _unit;
 					_pos = getpos _unit;
 					_side = side (group _unit);
@@ -58,7 +59,7 @@ diag_log format ["grad replay: starting record with precision %1", _precision];
 					};
 
 					// current values: position, side, kindof
-					[[_icon,_color,_pos,_dir,_special,_veh]] call GRAD_replay_fnc_storeValue;
+					[[_icon,_color,_pos,_dir,_special,_veh,_name]] call GRAD_replay_fnc_storeValue;
 
 					// diag_log format ["grad replay: storing %1, %2, %3, %4, %5, %6", _unit,_color,_pos,_dir,_special,_veh];
 

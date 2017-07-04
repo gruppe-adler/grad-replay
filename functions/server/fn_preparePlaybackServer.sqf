@@ -5,6 +5,6 @@ if (isServer || isDedicated) then {
 	{ _x enableSimulationGlobal false; } forEach allPlayers;
 	
 	publicVariable "GRAD_REPLAY_DATABASE";
-	[] remoteExec ["GRAD_replay_fnc_preparePlaybackClient", 0, false];
+	[] remoteExec ["GRAD_replay_fnc_preparePlaybackClient", allPlayers, false];
 		
 };

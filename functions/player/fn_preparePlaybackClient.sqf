@@ -7,7 +7,13 @@ if (player getVariable ["ACE_isUnconscious", false]) then {
 	forceRespawn player;
 };
 
-player enableSimulation false;
+if (isMultiplayer) then {
+	player enableSimulationGlobal false;
+	player hideObjectGlobal true;
+} else {
+	player enableSimulation false;
+	player hideObject true;
+};
 
 ["Starting Replay."] call EFUNC(common,displayTextStructured);
 openMap [true, false];

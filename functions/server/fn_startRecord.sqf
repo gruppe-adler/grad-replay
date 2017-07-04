@@ -42,20 +42,20 @@ diag_log format ["grad replay: starting record with precision %1", _precision];
 					_pos = getpos _unit;
 					_side = side (group _unit);
 					_color = [_side] call GRAD_replay_fnc_getSideColor;
-					_icon = getText (configfile >> "CfgVehicles" >> typeOf _unit >> "icon");
+					_icon = getText (configfile >> "CfgVehicles" >> typeOf (vehicle _unit) >> "icon");
 					_special = "none";
 
 
 					// todo filter empty vehicles and special vehicle
 
-					_dir = (getDir _unit);
+					_dir = getDir (vehicle _unit);
 
 					if (_unit getVariable ["ACE_isUnconscious", false]) then {
-						_special = "unconscious";
+						_icon = "iconManVirtual";
 					};
 
 					if (!alive _unit) then {
-						_special = "dead";
+						_icon = "iconExplosiveGP";
 					};
 
 					// current values: position, side, kindof

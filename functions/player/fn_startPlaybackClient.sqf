@@ -49,4 +49,4 @@ grad_current_ehs = [];
     	[] spawn GRAD_replay_fnc_stopPlaybackClient;
 	};
 
-},0.5,[]] call CBA_fnc_addPerFrameHandler;
+},0.1,[]] call CBA_fnc_addPerFrameHandler;

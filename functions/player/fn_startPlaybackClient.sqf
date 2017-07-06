@@ -23,9 +23,9 @@ grad_current_ehs = [];
     		grad_current_playbackLoopPosition = grad_current_playbackLoopPosition + 1;
     		_fickediefackfack = grad_current_playbackLoopPosition;
 
-    		hintsilent format ["loopcount %1", (count (GRAD_REPLAY_DATABASE select grad_replay_playbackPosition))];
+    		/* hintsilent format ["loopcount %1", (count (GRAD_REPLAY_DATABASE select grad_replay_playbackPosition))];*/
 
-    		diag_log format ["loopcount %1", _fickediefackfack];
+    		/* diag_log format ["loopcount %1", _fickediefackfack];*/
 			// _special = [GRAD_REPLAY_DATABASE, grad_replay_playbackPosition, _k, 4] call GRAD_replay_fnc_getRecordEntry;
 			// _veh = [GRAD_REPLAY_DATABASE, grad_replay_playbackPosition, _k, 5] call GRAD_replay_fnc_getRecordEntry;
 

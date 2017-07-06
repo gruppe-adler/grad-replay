@@ -9,7 +9,7 @@ params [["_precision", 1], ["_specialVehicle", objNull]];
 GRAD_REPLAY_PAUSED = false;
 GRAD_REPLAY_STOPPED = false;
 
-GRAD_REPLAY_EMPTY_TRACKED = false;
+GRAD_REPLAY_EMPTY_TRACKED = true; // vehicle setVariable ["GRAD_replay_track", true];
 GRAD_REPLAY_SIDES_TRACKED = [west, east, independent, civilian];
 GRAD_REPLAY_AI_TRACKED = false;
 
@@ -17,6 +17,7 @@ GRAD_REPLAY_DATABASE_TEMP = [];
 GRAD_REPLAY_DATABASE = [];
 
 REPLAY_STEPS_PER_TICK = 1;
+
 
 [_precision, _specialVehicle] call GRAD_replay_fnc_startRecord;
 

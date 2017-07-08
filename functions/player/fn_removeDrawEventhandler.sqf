@@ -1,5 +1,7 @@
 params ["_array"];
 
+// diag_log "removing draw eh";
+
 // delete icons frame before
 if (count _array > 0) then {
 	{

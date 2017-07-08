@@ -2,15 +2,19 @@ params ["_precision"];
 
 diag_log format ["grad replay: starting record with precision %1", _precision];
 
+
 {
 	_x setVariable ["GRAD_replay_persistentName", name _x, true];
 
-} forEach allUnits;
+} forEach playableUnits + switchableUnits;
 
 {
 	_x setVariable ["GRAD_replay_track", true];
 	_x setVariable ["asr_ai_exclude", true];
-} forEach playableUnits + switchableUnits + allPlayers;
+} forEach playableUnits + switchableUnits;
+
+
+GRAD_REPLAY_DATABASE_TEMP = []; // global local
 
 [{
     params ["_args", "_handle"];
@@ -105,15 +109,13 @@ diag_log format ["grad replay: starting record with precision %1", _precision];
 
 					// current values: position, side, kindof
 					if (_isMan || _isEmptyVehicle || _isCustomObject) then {
-						[[_icon,_color,_pos,_dir,_veh,_name,_groupname,_unit]] call GRAD_replay_fnc_storeValue;
+						GRAD_REPLAY_DATABASE_TEMP pushBack [_icon,_color,_pos,_dir,_name,_groupname];
 					};
 				};
-
-				// diag_log format ["grad replay: storing %1, %2, %3, %4, %5, %6", _unit,_color,_pos,_dir,_special,_veh];
 			
 			} forEach _trackedUnits;
 
-		    GRAD_REPLAY_DATABASE = GRAD_REPLAY_DATABASE + [GRAD_REPLAY_DATABASE_TEMP];
+		    GRAD_REPLAY_DATABASE pushBack GRAD_REPLAY_DATABASE_TEMP;
 			GRAD_REPLAY_DATABASE_TEMP = [];
 		    
 		    // end recording and start playback
@@ -124,4 +126,4 @@ diag_log format ["grad replay: starting record with precision %1", _precision];
 			};
 	};
 
-},_precision] call CBA_fnc_addPerFrameHandler;
+},_precision, []] call CBA_fnc_addPerFrameHandler;

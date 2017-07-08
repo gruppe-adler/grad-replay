@@ -74,6 +74,7 @@ diag_log format ["grad replay: starting record with precision %1", _precision];
 					_type = typeOf (vehicle _unit);
 					_icon = getText (configfile >> "CfgVehicles" >> _type >> "icon");
 
+					/*
 					diag_log format ["
 					_isEmptyVehicle: %1, 
 					_isMan %2, 
@@ -88,7 +89,7 @@ diag_log format ["grad replay: starting record with precision %1", _precision];
 					_side,
 					_color,
 					_type,
-					_icon];
+					_icon];*/
 
 					// mark funkwagen if he is sending in red
 					if (_type isEqualTo "rhs_gaz66_r142_vv" && {_veh getVariable ["tf_range",0] == 50000}) then {
@@ -103,7 +104,7 @@ diag_log format ["grad replay: starting record with precision %1", _precision];
 						_color = [sideEmpty] call GRAD_replay_fnc_getSideColor;
 					};
 
-					// todo filter empty vehicles and crew
+					
 
 					_dir = getDir (vehicle _unit);
 

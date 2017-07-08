@@ -11,9 +11,9 @@ _showName = _scale < 0.03;
 _name = [GRAD_REPLAY_DATABASE, grad_replay_playbackPosition, _blub, 5] call GRAD_replay_fnc_getRecordEntry;
 _groupname = [GRAD_REPLAY_DATABASE, grad_replay_playbackPosition, _blub, 6] call GRAD_replay_fnc_getRecordEntry;
 
-diag_log format ["%1, %2, %3, %4, %5, %6, %7, %8", _map, _icon, _color, _pos, _dir, _blub, _showName, _name];
+// diag_log format ["%1, %2, %3, %4, %5, %6, %7, %8", _map, _icon, _color, _pos, _dir, _blub, _showName, _name];
 
-// _name =  if (_showName) then { _name + " " + _groupname } else { "" };
+_nameCluster =  if (_showName) then { _name + " " + _groupname } else { "" };
 
 
 
@@ -24,7 +24,7 @@ _map drawIcon [
 			24,
 			24,
 			_dir,
-			_name, 
+			_nameCluster, 
 			1, 
 			0.03, 
 			'TahomaB', 

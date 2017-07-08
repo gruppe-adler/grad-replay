@@ -7,15 +7,17 @@ grad_playback_finished = false;
 
 
 [{
+	
+	
 	// delete icons frame before
 	if (count grad_current_ehs > 0) then {
 		{
 			((findDisplay 12) displayCtrl 51) ctrlRemoveEventHandler ["Draw", _x];
 		} forEach grad_current_ehs;
 	};
-
 	grad_current_ehs = [];
 	grad_current_playbackLoopPosition = 0;
+
 
 	// counter
 	if (!grad_playback_finished) then {
@@ -24,17 +26,11 @@ grad_playback_finished = false;
 	
 
     {
-    		if (grad_current_playbackLoopPosition >= (count (GRAD_REPLAY_DATABASE select grad_replay_playbackPosition) - 1)) exitWith {};
+    		if (grad_current_playbackLoopPosition >= (count (GRAD_REPLAY_DATABASE select grad_replay_playbackPosition)) - 1) exitWith {};
     		grad_current_playbackLoopPosition = grad_current_playbackLoopPosition + 1;
     		
     		
     		_fickediefackfack = grad_current_playbackLoopPosition;
-
-    		/* hintsilent format ["loopcount %1", (count (GRAD_REPLAY_DATABASE select grad_replay_playbackPosition))];*/
-
-    		/* diag_log format ["loopcount %1", _fickediefackfack];*/
-			// _special = [GRAD_REPLAY_DATABASE, grad_replay_playbackPosition, _k, 4] call GRAD_replay_fnc_getRecordEntry;
-			// _veh = [GRAD_REPLAY_DATABASE, grad_replay_playbackPosition, _k, 5] call GRAD_replay_fnc_getRecordEntry;
 
 			_eh = ((findDisplay 12) displayCtrl 51) ctrlAddEventHandler ["Draw",format [
 				"[
@@ -47,11 +43,10 @@ grad_playback_finished = false;
 	} count (GRAD_REPLAY_DATABASE select grad_replay_playbackPosition);
 	// you begin counting with 0, so delete 1
 
-	
-
     // end recording and start playback
     if (grad_replay_playbackPosition >= count (GRAD_REPLAY_DATABASE) && !(grad_playback_finished)) then {
     	grad_playback_finished = true;
+    	grad_replay_playbackPosition = grad_replay_playbackPosition - 1;
     	[] spawn GRAD_replay_fnc_stopPlaybackClient;
 	};
 

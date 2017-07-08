@@ -1,5 +1,7 @@
 #include "\z\ace\addons\main\script_component.hpp"
 
+params ["GRAD_REPLAY_DATABASE"];
+
 {_x setMarkerAlphaLocal 0;} forEach allMapMarkers; // hide all markers for replay --> to be tested
 	
 if (!isNull (findDisplay 7810)) then {closeDialog 0;};
@@ -20,4 +22,4 @@ openMap [true, false];
 [player, true] call TFAR_fnc_forceSpectator;
 
 
-[] spawn GRAD_replay_fnc_startPlaybackClient;
+[GRAD_REPLAY_DATABASE] spawn GRAD_replay_fnc_startPlaybackClient;

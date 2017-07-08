@@ -1,5 +1,7 @@
 #include "\z\ace\addons\main\script_component.hpp"
 
+params ["GRAD_REPLAY_DATABASE"];
+
 grad_replay_playbackPosition = 0;
 grad_current_ehs = [];
 grad_playback_finished = false;
@@ -7,6 +9,9 @@ grad_playback_finished = false;
 
 
 [{
+    params ["_args", "_handle"];
+    _args params ["GRAD_REPLAY_DATABASE"];
+    
 	// delete icons frame before
 	if (count grad_current_ehs > 0) then {
 		{
@@ -52,4 +57,4 @@ grad_playback_finished = false;
     	[] spawn GRAD_replay_fnc_stopPlaybackClient;
 	};
 
-},0.1,[]] call CBA_fnc_addPerFrameHandler;
+},0.1,[GRAD_REPLAY_DATABASE]] call CBA_fnc_addPerFrameHandler;

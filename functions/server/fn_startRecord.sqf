@@ -61,7 +61,7 @@ diag_log format ["grad replay: starting record with precision %1", _precision];
 		    	if (_unit getVariable ["GRAD_replay_track", false]) then {
 
 		    		_isEmptyVehicle = _unit isKindOf "LandVehicle" && ({alive _x} count (crew _unit) == 0);
-					_isMan = (vehicle _unit) isKindOf "Man";
+					_isMan = (vehicle _unit) isKindOf "Man" || isPlayer _unit;
 					_isCustomObject = _unit getVariable ["GRAD_replay_track", false];
 					// _isPlayerVehicle = _unit isPlayer;
 
@@ -85,7 +85,7 @@ diag_log format ["grad replay: starting record with precision %1", _precision];
 					};
 
 					if (_isEmptyVehicle && !_isMan) then {
-						_color = [sideEmpty] call BIS_fnc_sideColor;
+						_color = [sideEmpty] call GRAD_replay_fnc_getSideColor;
 					};
 
 					// todo filter empty vehicles and crew

@@ -74,6 +74,21 @@ diag_log format ["grad replay: starting record with precision %1", _precision];
 					_type = typeOf (vehicle _unit);
 					_icon = getText (configfile >> "CfgVehicles" >> _type >> "icon");
 
+					diag_log format ["
+					_isEmptyVehicle: %1, 
+					_isMan %2, 
+					_isCustomObject %3, 
+					%4, %5, %6, %7, %8, %9, %10", 
+					_isEmptyVehicle, 
+					_isMan, 
+					_isCustomObject, 
+					_name,
+					_groupname,
+					_veh,
+					_side,
+					_color,
+					_type,
+					_icon];
 
 					// mark funkwagen if he is sending in red
 					if (_type isEqualTo "rhs_gaz66_r142_vv" && {_veh getVariable ["tf_range",0] == 50000}) then {

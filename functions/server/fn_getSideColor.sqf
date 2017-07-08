@@ -12,6 +12,6 @@ switch (_side) do {
 
 _colorArrayRGBA = (configfile >> "CfgMarkerColors" >> _color >> "color") call BIS_fnc_colorConfigToRGBA;
 
-/* diag_log format ["converting %1 to %2", _side, _colorArrayRGBA]; */
+ diag_log format ["converting %1 to %2", _side, _colorArrayRGBA]; 
 
 _colorArrayRGBA

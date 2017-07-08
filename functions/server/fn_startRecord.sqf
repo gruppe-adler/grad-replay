@@ -9,7 +9,8 @@ diag_log format ["grad replay: starting record with precision %1", _precision];
 
 {
 	_x setVariable ["GRAD_replay_track", true];
-} forEach playableUnits + switchableUnits;
+	_x setVariable ["asr_ai_exclude", true];
+} forEach playableUnits + switchableUnits + allPlayers;
 
 [{
     params ["_args", "_handle"];
@@ -60,7 +61,7 @@ diag_log format ["grad replay: starting record with precision %1", _precision];
 		    	if (_unit getVariable ["GRAD_replay_track", false]) then {
 
 		    		_isEmptyVehicle = _unit isKindOf "LandVehicle" && {alive _x} count crew _unit == 0;
-					_isMan = vehicle _unit isKindOf "Man";
+					_isMan = (vehicle _unit) isKindOf "Man" || (isPlayer _unit);
 
 		    		_name = if (alive _unit && _isMan) then {name _unit} else {""};
 		    		_groupname = if (_unit isEqualTo (leader group _unit)) then {" (" + groupId (group _unit) + ")"} else {""};
@@ -81,7 +82,7 @@ diag_log format ["grad replay: starting record with precision %1", _precision];
 						_color = [1,0,0,1];
 					};
 
-					if (_isEmptyVehicle) then {
+					if (_isEmptyVehicle && !_isMan) then {
 						_color = (configfile >> "CfgMarkerColors" >> "colorUnknown" >> "color") call BIS_fnc_colorConfigToRGBA;
 					};
 

@@ -45,7 +45,7 @@ grad_playback_finished = false;
 	
 
     // end recording and start playback
-    if (grad_replay_playbackPosition >= count (GRAD_REPLAY_DATABASE - 1)) then {
+    if (grad_replay_playbackPosition >= count (GRAD_REPLAY_DATABASE)) then {
     	grad_playback_finished = true;
     	[] spawn GRAD_replay_fnc_stopPlaybackClient;
 	};

@@ -2,6 +2,11 @@ params ["_precision", "_specialVehicle"];
 
 diag_log format ["grad replay: starting record with precision %1", _precision];
 
+{
+	_x setVariable ["GRAD_replay_persistentName", name _x, true];
+	
+} forEach allUnits;
+
 [{
     params ["_args", "_handle"];
     _args params ["_specialVehicle"];
@@ -14,7 +19,8 @@ diag_log format ["grad replay: starting record with precision %1", _precision];
 	    	_ai = allUnits - playableUnits - switchableUnits;
 	    	_trackedUnits = _players;
 
-	    	if (GRAD_REPLAY_AI_TRACKED) then {
+
+	    	if (GRAD_CIVILIAN_TRAFFIC_TRACKED) then {
 	    		_trackedUnits = _trackedUnits + _ai;
 	    	};
 
@@ -25,6 +31,7 @@ diag_log format ["grad replay: starting record with precision %1", _precision];
 		    {
 		    	_unit = _x;
 
+		    	/*
 		    	// dont render different stuff
 		    	_isNoShit = (
 		    		!(_unit isKindOf "#particlesource") && 
@@ -36,13 +43,17 @@ diag_log format ["grad replay: starting record with precision %1", _precision];
 		    		(count (crew _unit) > 0)
 		    	);
 
+		    	_shouldBeTracked = _unit getVariable ["GRAD_replay_track", false];
+
 		    	_isEmptyVehicle = (count (crew _unit)) == 0;
+				*/
+				
 
 		    	// !(count (crew _unit) > 0 && ((crew _unit) select 0 != _unit))
 
 		    	// diag_log format ["grad replay: is no shit is %1", _isNoShit];
 
-		    	if (_isNoShit || _isEmptyVehicle) then {
+		    	if (_unit getVariable ["GRAD_replay_track", false]) then {
 
 		    		_name = if (alive _unit) then {name _unit} else {"dead guy"};
 		    		_groupname = if (_unit isEqualTo (leader group _unit)) then {" (" + groupId (group _unit) + ")"} else {""};
@@ -79,13 +90,13 @@ diag_log format ["grad replay: starting record with precision %1", _precision];
 					};
 
 					// current values: position, side, kindof
-					if ((count crew _veh isEqualTo 0 && _veh getVariable ["GRAD_replay_track", false]) || count crew _veh > 0) then {
-						[[_icon,_color,_pos,_dir,_veh,_name,_groupname]] call GRAD_replay_fnc_storeValue;
-					};
-
-					// diag_log format ["grad replay: storing %1, %2, %3, %4, %5, %6", _unit,_color,_pos,_dir,_special,_veh];
-
+					
+					[[_icon,_color,_pos,_dir,_veh,_name,_groupname]] call GRAD_replay_fnc_storeValue;
 				};
+
+				// diag_log format ["grad replay: storing %1, %2, %3, %4, %5, %6", _unit,_color,_pos,_dir,_special,_veh];
+
+				
 			
 			} forEach _trackedUnits;
 

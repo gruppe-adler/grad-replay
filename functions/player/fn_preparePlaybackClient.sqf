@@ -19,11 +19,5 @@ if (isMultiplayer) then {
 openMap [true, false];
 [player, true] call TFAR_fnc_forceSpectator;
 
-if (isNil "ace_map_BFT_Enabled" && {ace_map_BFT_Enabled}) then {
-
-	ace_map_BFT_Enabled = false;
-	ace_map_mapShake = false;
-	call ACE_map_fnc_blueForceTrackingUpdate;
-};
 
 [] spawn GRAD_replay_fnc_startPlaybackClient;

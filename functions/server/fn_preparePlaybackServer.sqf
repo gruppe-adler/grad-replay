@@ -12,6 +12,17 @@ if (isServer || isDedicated) then {
 		_x setVariable ["ace_map_hideBlueForceMarker", true];
 
 	} forEach allUnits;
+
+	// remove ace blu force tracking marker
+	
+	ace_map_BFT_Enabled = false;
+	ace_map_mapShake = false;
+	call ACE_map_fnc_blueForceTrackingUpdate;
+	
+	publicVariable "ace_map_BFT_Enabled";
+	publicVariable "ace_map_mapShake";
+	
+
 	
 	publicVariable "GRAD_REPLAY_DATABASE";
 	[] remoteExec ["GRAD_replay_fnc_preparePlaybackClient", allPlayers, false];

@@ -10,8 +10,8 @@ GRAD_REPLAY_PAUSED = false;
 GRAD_REPLAY_STOPPED = false;
 
 GRAD_REPLAY_EMPTY_TRACKED = true; // vehicle setVariable ["GRAD_replay_track", true];
-GRAD_REPLAY_SIDES_TRACKED = [west, east, independent, civilian];
-GRAD_REPLAY_AI_TRACKED = false;
+GRAD_REPLAY_CIVILIAN_TRAFFIC_TRACKED = false;
+GRAD_REPLAY_CIVILIAN_ONFOOT_TRACKED = false;
 
 GRAD_REPLAY_DATABASE_TEMP = [];
 GRAD_REPLAY_DATABASE = [];

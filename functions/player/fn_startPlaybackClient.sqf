@@ -2,7 +2,7 @@
 
 grad_replay_playbackPosition = 0;
 grad_current_ehs = [];
-
+grad_playback_finished = false;
 
 
 
@@ -16,7 +16,9 @@ grad_current_ehs = [];
 	grad_current_ehs = [];
 	grad_current_playbackLoopPosition = 0;
 
-    grad_replay_playbackPosition = grad_replay_playbackPosition + 1;
+	if (!grad_playback_finished) then {
+    	grad_replay_playbackPosition = grad_replay_playbackPosition + 1;
+	};
 
     {
     		if (grad_current_playbackLoopPosition >= (count (GRAD_REPLAY_DATABASE select grad_replay_playbackPosition) - 1)) exitWith {};
@@ -43,9 +45,8 @@ grad_current_ehs = [];
 	
 
     // end recording and start playback
-    if (grad_replay_playbackPosition >= count GRAD_REPLAY_DATABASE) then {
-    	[_this select 1] call CBA_fnc_removePerFrameHandler;
-
+    if (grad_replay_playbackPosition >= count (GRAD_REPLAY_DATABASE - 1)) then {
+    	grad_playback_finished = true;
     	[] spawn GRAD_replay_fnc_stopPlaybackClient;
 	};
 

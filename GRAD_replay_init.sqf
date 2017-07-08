@@ -3,7 +3,11 @@
 
 if (!isServer) exitWith {};
 
-params [["_precision", 1], ["_specialVehicle", objNull]];
+{
+	_x setVariable ["GRAD_replay_track", true];
+} forEach playableUnits + switchableUnits;
+
+params [["_precision", 1]];
 
 // constants
 GRAD_REPLAY_PAUSED = false;
@@ -18,12 +22,8 @@ GRAD_REPLAY_DATABASE = [];
 
 REPLAY_STEPS_PER_TICK = 1;
 
-{
-	_x setVariable ["GRAD_replay_track", true];
-} forEach playableUnits + switchableUnits;
 
-
-[_precision, _specialVehicle] call GRAD_replay_fnc_startRecord;
+[_precision] call GRAD_replay_fnc_startRecord;
 
 diag_log format ["grad replay: starting record"];
 

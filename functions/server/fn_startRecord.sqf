@@ -1,4 +1,4 @@
-params ["_precision", "_specialVehicle"];
+params ["_precision"];
 
 diag_log format ["grad replay: starting record with precision %1", _precision];
 
@@ -9,7 +9,7 @@ diag_log format ["grad replay: starting record with precision %1", _precision];
 
 [{
     params ["_args", "_handle"];
-    _args params ["_specialVehicle"];
+    _args params [];
 
     // just skip if currently paused
     if (!GRAD_REPLAY_PAUSED) then {
@@ -55,11 +55,14 @@ diag_log format ["grad replay: starting record with precision %1", _precision];
 
 		    	if (_unit getVariable ["GRAD_replay_track", false]) then {
 
-		    		_name = if (alive _unit) then {name _unit} else {""};
+		    		_isEmptyVehicle = _unit isKindOf "LandVehicle" && {alive _x} count crew _unit == 0;
+					_isMan = _unit isKindOf "Man";
+
+		    		_name = if (alive _unit && _isMan) then {name _unit} else {""};
 		    		_groupname = if (_unit isEqualTo (leader group _unit)) then {" (" + groupId (group _unit) + ")"} else {""};
 					_veh = vehicle _unit;
 					_pos = getpos _unit;
-					_side = faction _unit;
+					_side = side _unit;
 					_color = [_side] call GRAD_replay_fnc_getSideColor;
 					_type = typeOf (vehicle _unit);
 					_icon = getText (configfile >> "CfgVehicles" >> _type >> "icon");
@@ -74,6 +77,10 @@ diag_log format ["grad replay: starting record with precision %1", _precision];
 						_color = [1,0,0,1];
 					};
 
+					if (_isEmptyVehicle) then {
+						_color = (configfile >> "CfgMarkerColors" >> "colorUnknown" >> "color") call BIS_fnc_colorConfigToRGBA;
+					};
+
 					// todo filter empty vehicles and crew
 
 					_dir = getDir (vehicle _unit);
@@ -83,8 +90,7 @@ diag_log format ["grad replay: starting record with precision %1", _precision];
 						_groupname = "unconscious";
 					};
 
-					_isEmptyVehicle = _unit isKindOf "LandVehicle" && {alive _x} count crew _unit == 0;
-					_isMan = _unit isKindOf "Man";
+					
 
 					if (!alive _unit && _isMan) then {
 						_icon = "iconExplosiveGP";
@@ -120,4 +126,4 @@ diag_log format ["grad replay: starting record with precision %1", _precision];
 			};
 	};
 
-},_precision,[_specialVehicle]] call CBA_fnc_addPerFrameHandler;
+},_precision] call CBA_fnc_addPerFrameHandler;

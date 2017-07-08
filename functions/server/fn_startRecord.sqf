@@ -55,7 +55,7 @@ diag_log format ["grad replay: starting record with precision %1", _precision];
 
 		    	if (_unit getVariable ["GRAD_replay_track", false]) then {
 
-		    		_name = if (alive _unit) then {name _unit} else {"dead guy"};
+		    		_name = if (alive _unit) then {name _unit} else {""};
 		    		_groupname = if (_unit isEqualTo (leader group _unit)) then {" (" + groupId (group _unit) + ")"} else {""};
 					_veh = vehicle _unit;
 					_pos = getpos _unit;
@@ -83,15 +83,24 @@ diag_log format ["grad replay: starting record with precision %1", _precision];
 						_groupname = "unconscious";
 					};
 
-					if (!alive _unit) then {
+					_isEmptyVehicle = _unit isKindOf "LandVehicle" && {alive _x} count crew _unit == 0;
+					_isMan = _unit isKindOf "Man";
+
+					if (!alive _unit && _isMan) then {
 						_icon = "iconExplosiveGP";
 						_groupname = _unit getVariable ["GRAD_replay_persistentName", ""];
 						_color = [.2,.2,.2,1];
 					};
 
+					if (!alive _unit && _isEmptyVehicle) then {
+						_groupname = _unit getVariable ["GRAD_replay_persistentName", ""];
+						_color = [.2,.2,.2,1];
+					};
+
 					// current values: position, side, kindof
-					
-					[[_icon,_color,_pos,_dir,_veh,_name,_groupname]] call GRAD_replay_fnc_storeValue;
+					if (_isMan || _isEmptyVehicle) then {
+						[[_icon,_color,_pos,_dir,_veh,_name,_groupname]] call GRAD_replay_fnc_storeValue;
+					};
 				};
 
 				// diag_log format ["grad replay: storing %1, %2, %3, %4, %5, %6", _unit,_color,_pos,_dir,_special,_veh];

@@ -7,8 +7,6 @@ grad_playback_finished = false;
 
 
 [{
-	
-	
 	// delete icons frame before
 	if (count grad_current_ehs > 0) then {
 		{
@@ -44,7 +42,10 @@ grad_playback_finished = false;
 	// you begin counting with 0, so delete 1
 
     // end recording and start playback
-    if (grad_replay_playbackPosition >= count (GRAD_REPLAY_DATABASE) && !(grad_playback_finished)) then {
+    if (
+    	grad_replay_playbackPosition >= count (GRAD_REPLAY_DATABASE) && 
+    	(grad_playback_finished)
+    	) then {
     	grad_playback_finished = true;
     	grad_replay_playbackPosition = grad_replay_playbackPosition - 1;
     	[] spawn GRAD_replay_fnc_stopPlaybackClient;

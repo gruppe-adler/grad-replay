@@ -3,9 +3,6 @@
 
 if (!isServer) exitWith {};
 
-{
-	_x setVariable ["GRAD_replay_track", true];
-} forEach playableUnits + switchableUnits;
 
 params [["_precision", 1]];
 

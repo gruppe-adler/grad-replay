@@ -7,15 +7,19 @@ grad_playback_finished = false;
 
 
 [{
+	// delete icons frame before
 	if (count grad_current_ehs > 0) then {
 		{
 			((findDisplay 12) displayCtrl 51) ctrlRemoveEventHandler ["Draw", _x];
 		} forEach grad_current_ehs;
 	};
 
-	grad_current_ehs = [];
-	grad_current_playbackLoopPosition = 0;
+	// last pic should stay a bit after replay finish
+	if (grad_playback_finished) then {
+		grad_current_playbackLoopPosition = count (GRAD_REPLAY_DATABASE select grad_replay_playbackPosition) - 1;
+	};
 
+	// counter
 	if (!grad_playback_finished) then {
     	grad_replay_playbackPosition = grad_replay_playbackPosition + 1;
 	};
@@ -45,7 +49,7 @@ grad_playback_finished = false;
 	
 
     // end recording and start playback
-    if (grad_replay_playbackPosition >= count (GRAD_REPLAY_DATABASE)) then {
+    if (grad_replay_playbackPosition >= count (GRAD_REPLAY_DATABASE) && !(grad_playback_finished)) then {
     	grad_playback_finished = true;
     	[] spawn GRAD_replay_fnc_stopPlaybackClient;
 	};

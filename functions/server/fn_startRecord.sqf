@@ -60,8 +60,10 @@ diag_log format ["grad replay: starting record with precision %1", _precision];
 
 		    	if (_unit getVariable ["GRAD_replay_track", false]) then {
 
-		    		_isEmptyVehicle = _unit isKindOf "LandVehicle" && {alive _x} count crew _unit == 0;
-					_isMan = (vehicle _unit) isKindOf "Man" || (isPlayer _unit);
+		    		_isEmptyVehicle = _unit isKindOf "LandVehicle" && ({alive _x} count (crew _unit) == 0);
+					_isMan = (vehicle _unit) isKindOf "Man";
+					_isCustomObject = _unit getVariable ["GRAD_replay_track", false];
+					// _isPlayerVehicle = _unit isPlayer;
 
 		    		_name = if (alive _unit && _isMan) then {name _unit} else {""};
 		    		_groupname = if (_unit isEqualTo (leader group _unit)) then {" (" + groupId (group _unit) + ")"} else {""};
@@ -83,7 +85,7 @@ diag_log format ["grad replay: starting record with precision %1", _precision];
 					};
 
 					if (_isEmptyVehicle && !_isMan) then {
-						_color = (configfile >> "CfgMarkerColors" >> "colorUnknown" >> "color") call BIS_fnc_colorConfigToRGBA;
+						_color = [sideEmpty] call BIS_fnc_sideColor;
 					};
 
 					// todo filter empty vehicles and crew
@@ -109,7 +111,7 @@ diag_log format ["grad replay: starting record with precision %1", _precision];
 					};
 
 					// current values: position, side, kindof
-					if (_isMan || _isEmptyVehicle) then {
+					if (_isMan || _isEmptyVehicle || _isCustomObject) then {
 						[[_icon,_color,_pos,_dir,_veh,_name,_groupname]] call GRAD_replay_fnc_storeValue;
 					};
 				};

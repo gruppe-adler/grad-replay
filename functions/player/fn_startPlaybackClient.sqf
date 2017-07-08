@@ -14,19 +14,20 @@ grad_playback_finished = false;
 		} forEach grad_current_ehs;
 	};
 
-	// last pic should stay a bit after replay finish
-	if (grad_playback_finished) then {
-		grad_current_playbackLoopPosition = count (GRAD_REPLAY_DATABASE select grad_replay_playbackPosition) - 1;
-	};
+	grad_current_ehs = [];
+	grad_current_playbackLoopPosition = 0;
 
 	// counter
 	if (!grad_playback_finished) then {
     	grad_replay_playbackPosition = grad_replay_playbackPosition + 1;
 	};
+	
 
     {
     		if (grad_current_playbackLoopPosition >= (count (GRAD_REPLAY_DATABASE select grad_replay_playbackPosition) - 1)) exitWith {};
     		grad_current_playbackLoopPosition = grad_current_playbackLoopPosition + 1;
+    		
+    		
     		_fickediefackfack = grad_current_playbackLoopPosition;
 
     		/* hintsilent format ["loopcount %1", (count (GRAD_REPLAY_DATABASE select grad_replay_playbackPosition))];*/

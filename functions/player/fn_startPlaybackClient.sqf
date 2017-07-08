@@ -19,6 +19,7 @@ grad_replay_isPlaybackFinished = false;
 	grad_replay_current_playbackLoopPosition = 0;
 
 
+    diag_log format ["GRAD_REPLAY_DATABASE has %1 entries, grad_replay_playbackPosition is %2", count GRAD_REPLAY_DATABASE, grad_replay_playbackPosition];
     {
             if (grad_replay_current_playbackLoopPosition >= count ((GRAD_REPLAY_DATABASE select grad_replay_playbackPosition) - 1)) exitWith {};
 
@@ -34,6 +35,8 @@ grad_replay_isPlaybackFinished = false;
                 ] call GRAD_replay_fnc_drawIcon;", _fickediefackfack]
             ];
 			grad_replay_current_ehs = grad_replay_current_ehs + [_eh];
+
+
 
 	} count (GRAD_REPLAY_DATABASE select grad_replay_playbackPosition);
 	// you begin counting with 0

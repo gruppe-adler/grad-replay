@@ -35,11 +35,13 @@ grad_playback_finished = false;
             ];
 			grad_current_ehs = grad_current_ehs + [_eh];
 
+            grad_current_playbackLoopPosition = grad_current_playbackLoopPosition + 1;
+
 	} count (GRAD_REPLAY_DATABASE select grad_replay_playbackPosition);
 	// you begin counting with 0, so delete 1
 
-    grad_current_playbackLoopPosition = grad_current_playbackLoopPosition + 1;
     
+
     // counter
     if (!grad_playback_finished) then {
         grad_replay_playbackPosition = grad_replay_playbackPosition + 1;

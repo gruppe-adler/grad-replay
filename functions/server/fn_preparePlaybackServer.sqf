@@ -22,6 +22,9 @@ if (isServer || isDedicated) then {
 	publicVariable "ace_map_BFT_Enabled";
 	publicVariable "ace_map_mapShake";
 	
-	[GRAD_REPLAY_DATABASE] remoteExec ["GRAD_replay_fnc_preparePlaybackClient", [0,-2] select isDedicated, false];
+
+	
+	publicVariable "GRAD_REPLAY_DATABASE";
+	[] remoteExec ["GRAD_replay_fnc_preparePlaybackClient", allPlayers, false];
 		
 };

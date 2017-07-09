@@ -58,10 +58,10 @@ diag_log format ["grad replay: starting record with precision %1", _precision];
 
 		    	// diag_log format ["grad replay: is no shit is %1", _isNoShit];
 
-		    	if (_unit getVariable ["GRAD_replay_track", false]) then {
+		    	if (_unit getVariable ["GRAD_replay_track", false] || isPlayer _unit) then {
 
 		    		_isEmptyVehicle = _unit isKindOf "LandVehicle" && ({alive _x} count (crew _unit) == 0);
-					_isMan = (vehicle _unit) isKindOf "Man" || isPlayer _unit;
+					_isMan = (vehicle _unit) isKindOf "Man";
 					_isCustomObject = _unit getVariable ["GRAD_replay_track", false];
 					// _isPlayerVehicle = _unit isPlayer;
 

@@ -24,10 +24,11 @@ grad_playback_finished = false;
 	
 
     {
-    		if (grad_current_playbackLoopPosition >= (count (GRAD_REPLAY_DATABASE select grad_replay_playbackPosition)) - 1) exitWith {};
+    		if (grad_current_playbackLoopPosition >= (count (GRAD_REPLAY_DATABASE select grad_replay_playbackPosition) - 1)) exitWith {};
     		grad_current_playbackLoopPosition = grad_current_playbackLoopPosition + 1;
     		
     		
+
     		_fickediefackfack = grad_current_playbackLoopPosition;
 
 			_eh = ((findDisplay 12) displayCtrl 51) ctrlAddEventHandler ["Draw",format [
@@ -44,7 +45,7 @@ grad_playback_finished = false;
     // end recording and start playback
     if (
     	grad_replay_playbackPosition >= count (GRAD_REPLAY_DATABASE) && 
-    	(grad_playback_finished)
+    	!(grad_playback_finished)
     	) then {
     	grad_playback_finished = true;
     	grad_replay_playbackPosition = grad_replay_playbackPosition - 1;

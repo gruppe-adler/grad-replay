@@ -21,7 +21,7 @@ grad_playback_finished = false;
 
     {
     		if (grad_current_playbackLoopPosition >= (count (GRAD_REPLAY_DATABASE select grad_replay_playbackPosition) - 1)) exitWith {};
-    		grad_current_playbackLoopPosition = grad_current_playbackLoopPosition + 1;
+    		
     		
     		
 
@@ -38,6 +38,8 @@ grad_playback_finished = false;
 	} count (GRAD_REPLAY_DATABASE select grad_replay_playbackPosition);
 	// you begin counting with 0, so delete 1
 
+    grad_current_playbackLoopPosition = grad_current_playbackLoopPosition + 1;
+    
     // counter
     if (!grad_playback_finished) then {
         grad_replay_playbackPosition = grad_replay_playbackPosition + 1;

@@ -23,4 +23,13 @@ if ("ACE_MapTools" in items player) then {
 	player removeItem "ACE_MapTools";
 };
 
+if ("ItemCompass" in items player) then {
+	player removeItem "ItemCompass";
+};
+
+if ("ItemWatch" in items player) then {
+	player removeItem "ItemWatch";
+};
+
+
 [] spawn GRAD_replay_fnc_startPlaybackClient;

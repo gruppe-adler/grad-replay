@@ -85,7 +85,7 @@ diag_log format ["grad replay: starting record with precision %1", _precision];
 					};
 
 					if (_isEmptyVehicle && !_isMan) then {
-						_color = [sideEmpty] call GRAD_replay_fnc_getSideColor;
+						_color = [sideempty] call GRAD_replay_fnc_getSideColor;
 					};
 
 					// todo filter empty vehicles and crew

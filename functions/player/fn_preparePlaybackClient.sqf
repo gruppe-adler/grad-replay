@@ -19,5 +19,8 @@ if (isMultiplayer) then {
 openMap [true, false];
 [player, true] call TFAR_fnc_forceSpectator;
 
+if ("ACE_MapTools" in items player) then {
+	player removeItem "ACE_MapTools";
+};
 
 [] spawn GRAD_replay_fnc_startPlaybackClient;

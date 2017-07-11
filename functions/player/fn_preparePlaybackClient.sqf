@@ -7,10 +7,7 @@ if (player getVariable ["ACE_isUnconscious", false]) then {
 	forceRespawn player;
 };
 
-if (isMultiplayer) then {
-	player enableSimulationGlobal false;
-	player hideObjectGlobal true;
-} else {
+if (!isMultiplayer) then {
 	player enableSimulation false;
 	player hideObject true;
 };

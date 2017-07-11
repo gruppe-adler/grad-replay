@@ -20,6 +20,7 @@ class GRAD_replay {
 		class getSideColor {};
         class pauseRecord {};
         class preparePlaybackServer {};
+        class setMeSpectator {};
         class startRecord {};
         class stopRecord {};
         class storeValue {};

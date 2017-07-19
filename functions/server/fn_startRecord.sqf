@@ -26,11 +26,11 @@ diag_log format ["grad replay: starting record with precision %1", _precision];
 
 
 	    	if (GRAD_CIVILIAN_TRAFFIC_TRACKED) then {
-	    		_trackedUnits = _trackedUnits + _ai;
+	    		_trackedUnits append _ai;
 	    	};
 
 	    	if (GRAD_REPLAY_EMPTY_TRACKED) then {
-	    		_trackedUnits = _trackedUnits + _vehicles;
+	    		_trackedUnits append _vehicles;
 	    	};
 
 		    {
@@ -93,14 +93,13 @@ diag_log format ["grad replay: starting record with precision %1", _precision];
 					_dir = getDir (vehicle _unit);
 
 					if (_unit getVariable ["ACE_isUnconscious", false]) then {
-						_icon = "iconManVirtual";
+						_color = [_color select 0, _color select 1, _color select 2, 0.5];
 						_groupname = "unconscious";
 					};
 
 					
 
 					if (!alive _unit && _isMan) then {
-						_icon = "iconExplosiveGP";
 						_groupname = _unit getVariable ["GRAD_replay_persistentName", ""];
 						_color = [.2,.2,.2,1];
 					};

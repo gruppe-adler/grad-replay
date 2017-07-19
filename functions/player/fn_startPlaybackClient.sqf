@@ -4,7 +4,12 @@ grad_replay_playbackPosition = 0;
 grad_current_ehs = [];
 grad_playback_finished = false;
 
-
+// just in case he has no map
+if (!("itemMap" in items player)) then {
+    player linkItem "itemMap";
+};
+waitUntil {"itemMap" in items player};
+openMap [true, false];
 
 [{
 	// delete icons frame before

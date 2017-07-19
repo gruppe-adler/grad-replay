@@ -3,18 +3,12 @@
 ["Terminate"] call BIS_fnc_EGSpectator;
 GCamKill = true;
 
-// just in case he has no map
-if (!("itemMap" in items player)) then {
-	player linkItem "itemMap";
-};
-
 {_x setMarkerAlphaLocal 0;} forEach allMapMarkers; // hide all markers for replay --> to be tested
 	
 if (!isNull (findDisplay 7810)) then {closeDialog 0;};
 
 ["Starting Replay."] call EFUNC(common,displayTextStructured);
 
-openMap [true, false];
 [player, true] call TFAR_fnc_forceSpectator;
 
 // remove blocking stuff

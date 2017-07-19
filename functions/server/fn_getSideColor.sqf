@@ -10,7 +10,7 @@ switch (_side) do {
 	case east: { _colorArrayRGBA = [0.5,0,0,1]; };
 	case independent : { _colorArrayRGBA = [0,0.5,0,1]; };
 	case civilian : { _colorArrayRGBA = [0.7,0.6,0,1]; };
-	case sideempty: { _colorArrayRGBA = [0.4,0,0.5,1]; };
+	case sideEmpty: { _colorArrayRGBA = [0.4,0,0.5,1]; };
 	default { _colorArrayRGBA = [0.4,0,0.5,1];  };
 };
 

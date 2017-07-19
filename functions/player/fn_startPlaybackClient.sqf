@@ -5,10 +5,10 @@ grad_current_ehs = [];
 grad_playback_finished = false;
 
 // just in case he has no map
-if (!("itemMap" in items player)) then {
+if (!("ItemMap" in (items player + assignedItems player))) then {
     player linkItem "itemMap";
 };
-waitUntil {"itemMap" in items player};
+waitUntil {"ItemMap" in (items player + assignedItems player)};
 openMap [true, false];
 
 [{

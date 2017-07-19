@@ -12,15 +12,15 @@ if (!isNull (findDisplay 7810)) then {closeDialog 0;};
 [player, true] call TFAR_fnc_forceSpectator;
 
 // remove blocking stuff
-if ("ACE_MapTools" in items player) then {
+if ("ACE_MapTools" in (items player + assignedItems player)) then {
 	player removeItem "ACE_MapTools";
 };
 
-if ("ItemCompass" in items player) then {
+if ("ItemCompass" in (items player + assignedItems player)) then {
 	player removeItem "ItemCompass";
 };
 
-if ("ItemWatch" in items player) then {
+if ("ItemWatch" in (items player + assignedItems player)) then {
 	player removeItem "ItemWatch";
 };
 

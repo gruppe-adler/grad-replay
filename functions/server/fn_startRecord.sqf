@@ -111,7 +111,7 @@ diag_log format ["grad replay: starting record with precision %1", _precision];
 					};
 
 					// current values: position, side, kindof
-					if (_isMan || _isEmptyVehicle || _isCustomObject && _side in GRAD_REPLAY_SIDES) then {
+					if (_isMan && _side in GRAD_REPLAY_SIDES || _isEmptyVehicle || _isCustomObject && _side in GRAD_REPLAY_SIDES) then {
 						[[_icon,_color,_pos,_dir,_name,_groupname]] call GRAD_replay_fnc_storeValue;
 					};
 				};

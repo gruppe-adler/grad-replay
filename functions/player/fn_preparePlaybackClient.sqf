@@ -1,3 +1,5 @@
+#include "\z\ace\addons\main\script_component.hpp"
+
 ["Terminate"] call BIS_fnc_EGSpectator;
 GCamKill = true;
 

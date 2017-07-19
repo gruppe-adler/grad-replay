@@ -23,8 +23,8 @@ if (isServer || isDedicated) then {
 	publicVariable "ace_map_mapShake";
 	
 
-	
 	publicVariable "GRAD_REPLAY_DATABASE";
+	missionnamespace setVariable ["GRAD_replay_isRunning", true, true];
 	[] remoteExec ["GRAD_replay_fnc_preparePlaybackClient", allPlayers, false];
-		
+
 };

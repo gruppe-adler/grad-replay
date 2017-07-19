@@ -4,16 +4,15 @@
 	
 if (!isNull (findDisplay 7810)) then {closeDialog 0;};
 
-forceRespawn player;
 
-[player] remoteExec ["GRAD_replay_fnc_setMeSpectator", 2, false];
+
+forceRespawn player;
 
 ["Starting Replay."] call EFUNC(common,displayTextStructured);
 
 player linkItem "itemMap";
 
 openMap [true, false];
-[player, true] call TFAR_fnc_forceSpectator;
 
 
 

@@ -1,4 +1,4 @@
-params ["_unit", "_pos"];
+params ["_unit", "_deathPos"];
 
 player setPos [_deathPos select 0, _deathPos select 1, 10];
 

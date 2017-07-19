@@ -56,7 +56,7 @@ diag_log format ["grad replay: starting record with precision %1", _precision];
 
 		    	// !(count (crew _unit) > 0 && ((crew _unit) select 0 != _unit))
 
-		    	// diag_log format ["grad replay: is no shit is %1", _isNoShit];
+		    	
 
 		    	if (_unit getVariable ["GRAD_replay_track", false] || isPlayer _unit) then {
 
@@ -79,6 +79,8 @@ diag_log format ["grad replay: starting record with precision %1", _precision];
 					if (_type isEqualTo "rhs_gaz66_r142_vv" && {_veh getVariable ["tf_range",0] == 50000}) then {
 						_color = [1,0,0,1];
 					};
+
+					diag_log format ["grad replay: funkwagen tracked is %1 ", _type isEqualTo "rhs_gaz66_r142_vv"];
 
 					if (_type isEqualTo "Land_DataTerminal_01_F" && !(isNil "GRAD_TERMINAL_ACTIVE") && {GRAD_TERMINAL_ACTIVE}) then {
 						_color = [1,0,0,1];

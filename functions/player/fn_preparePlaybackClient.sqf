@@ -4,7 +4,9 @@
 GCamKill = true;
 
 // just in case he has no map
-player linkItem "itemMap";
+if (!("itemMap" in items player)) then {
+	player linkItem "itemMap";
+};
 
 {_x setMarkerAlphaLocal 0;} forEach allMapMarkers; // hide all markers for replay --> to be tested
 	

@@ -25,6 +25,6 @@ if (isServer || isDedicated) then {
 
 	publicVariable "GRAD_REPLAY_DATABASE";
 	missionnamespace setVariable ["GRAD_replay_isRunning", true, true];
-	[] remoteExec ["GRAD_replay_fnc_preparePlaybackClient", allPlayers, false];
+	[] remoteExec ["GRAD_replay_fnc_initReplay", allPlayers, false];
 
 };

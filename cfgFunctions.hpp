@@ -9,6 +9,7 @@ class GRAD_replay {
 
         class drawIcon {};
         class getRecordEntry {};
+        class initReplay {};
         class preparePlaybackClient {};
         class startPlaybackClient {};
         class stopPlaybackClient {};

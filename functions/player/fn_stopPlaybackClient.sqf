@@ -3,7 +3,7 @@
 ["Replay finished."] call EFUNC(common,displayTextStructured);
 
 sleep 6;
-openMap [false,false];
+// openMap [false,false];
 
 REPLAY_FINISHED = true;
 publicVariable "REPLAY_FINISHED";

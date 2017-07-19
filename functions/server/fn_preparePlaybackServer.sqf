@@ -28,8 +28,10 @@ if (isServer || isDedicated) then {
 	[] remoteExec ["GRAD_replay_fnc_initReplay", allPlayers, false];
 
 	// disable BC radio vehicle marker for replay
-	if (!(isNil "GRAD_RADIO_VEH_MARKER_HIDDEN")) then {
-		GRAD_RADIO_VEH_MARKER_HIDDEN = true;
-		publicVariable "GRAD_RADIO_VEH_MARKER_HIDDEN";
-	};
+	GRAD_RADIO_VEH_MARKER_HIDDEN = true;
+	publicVariable "GRAD_RADIO_VEH_MARKER_HIDDEN";
+
+	GRAD_TERMINAL_MARKER_HIDDEN = true;
+	publicVariable "GRAD_TERMINAL_MARKER_HIDDEN";
+	
 };

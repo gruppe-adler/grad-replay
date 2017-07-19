@@ -23,7 +23,8 @@ diag_log format ["grad replay: starting record with precision %1", _precision];
 	    	_vehicles = vehicles + allDead - allDeadMen;
 	    	_ai = allUnits - playableUnits - switchableUnits;
 	    	_trackedUnits = _players;
-
+	    	_terminals = allMissionObjects "Land_DataTerminal_01_F"; // speciality for mission "breaking contact"
+	    	_trackedUnits append _terminals;
 
 	    	if (GRAD_CIVILIAN_TRAFFIC_TRACKED) then {
 	    		_trackedUnits append _ai;
@@ -36,27 +37,6 @@ diag_log format ["grad replay: starting record with precision %1", _precision];
 		    {
 		    	_unit = _x;
 
-		    	/*
-		    	// dont render different stuff
-		    	_isNoShit = (
-		    		!(_unit isKindOf "#particlesource") && 
-		    		!(_unit isKindOf "GroundWeaponHolder") && 
-		    		!(_unit isKindOf "WeaponHolder") && 
-		    		!(_unit isKindOf "WeaponHolderSimulated") && 
-		    		!(_unit isKindOf "ACE_wheel") &&
-		    		!(_unit isKindOf "ACE_Track") &&
-		    		(count (crew _unit) > 0)
-		    	);
-
-		    	_shouldBeTracked = _unit getVariable ["GRAD_replay_track", false];
-
-		    	_isEmptyVehicle = (count (crew _unit)) == 0;
-				*/
-				
-
-		    	// !(count (crew _unit) > 0 && ((crew _unit) select 0 != _unit))
-
-		    	
 
 		    	if (_unit getVariable ["GRAD_replay_track", false] || isPlayer _unit) then {
 
@@ -75,13 +55,12 @@ diag_log format ["grad replay: starting record with precision %1", _precision];
 					_icon = getText (configfile >> "CfgVehicles" >> _type >> "icon");
 
 
-					// mark funkwagen if he is sending in red
+					// mark funkwagen if he is sending in red // speciality for mission "breaking contact"
 					if (_type isEqualTo "rhs_gaz66_r142_vv" && {_veh getVariable ["tf_range",0] == 50000}) then {
 						_color = [1,0,0,1];
 					};
 
-					diag_log format ["grad replay: funkwagen tracked is %1 ", _type isEqualTo "rhs_gaz66_r142_vv"];
-
+					// speciality for mission "breaking contact"
 					if (_type isEqualTo "Land_DataTerminal_01_F" && !(isNil "GRAD_TERMINAL_ACTIVE") && {GRAD_TERMINAL_ACTIVE}) then {
 						_color = [1,0,0,1];
 					};

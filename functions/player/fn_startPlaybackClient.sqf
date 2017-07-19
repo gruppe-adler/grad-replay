@@ -25,7 +25,7 @@ openMap [true, false];
 
 
     {
-    		if (grad_current_playbackLoopPosition >= (count (GRAD_REPLAY_DATABASE select grad_replay_playbackPosition) - 1)) exitWith {};
+    		if (grad_current_playbackLoopPosition >= (count (GRAD_REPLAY_DATABASE select grad_replay_playbackPosition))) exitWith {};
     		
     		
     		

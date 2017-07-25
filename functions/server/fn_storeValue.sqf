@@ -8,4 +8,4 @@ if (!(_vehicle in GRAD_REPLAY_DATABASE_TEMP)) then {
 };
 */
 
-GRAD_REPLAY_DATABASE_TEMP = GRAD_REPLAY_DATABASE_TEMP + [_array];
+GRAD_REPLAY_DATABASE_TEMP append [_array];

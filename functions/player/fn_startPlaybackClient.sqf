@@ -4,6 +4,10 @@ grad_replay_playbackPosition = 0;
 grad_current_ehs = [];
 grad_playback_finished = false;
 
+diag_log format ["parsing replay at serverTime %1", serverTime];
+GRAD_REPLAY_DATABASE = parseSimpleArray GRAD_REPLAY_DATABASE;
+diag_log format ["playing replay at serverTime %1", serverTime];
+
 // just in case he has no map
 if (!("ItemMap" in (items player + assignedItems player))) then {
     player linkItem "itemMap";

@@ -104,7 +104,9 @@ diag_log format ["grad replay: starting record with precision %1", _precision];
 			
 			} forEach _trackedUnits;
 
-		    GRAD_REPLAY_DATABASE = GRAD_REPLAY_DATABASE + [GRAD_REPLAY_DATABASE_TEMP];
+			if (count GRAD_REPLAY_DATABASE_TEMP > 0) then {
+		    	GRAD_REPLAY_DATABASE append [GRAD_REPLAY_DATABASE_TEMP];
+			};
 			GRAD_REPLAY_DATABASE_TEMP = [];
 		    
 		    // end recording and start playback

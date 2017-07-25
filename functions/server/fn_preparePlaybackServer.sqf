@@ -25,7 +25,7 @@ if (isServer || isDedicated) then {
  	["Standby. Replay is loading...", 1.5, ACE_player, 20] remoteExec ["ace_common_displayTextStructured", allPlayers, false]; 
 
 	missionnamespace setVariable ["GRAD_replay_isRunning", true, true];
-	GRAD_REPLAY_DATABSE = str GRAD_REPLAY_DATABASE;
+	GRAD_REPLAY_DATABASE = str GRAD_REPLAY_DATABASE;
 	publicVariable "GRAD_REPLAY_DATABASE";
 	
 	diag_log format ["sending replay at serverTime %1", serverTime];

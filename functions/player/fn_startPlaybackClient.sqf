@@ -4,8 +4,7 @@ grad_replay_playbackPosition = 0;
 grad_current_ehs = [];
 grad_playback_finished = false;
 
-diag_log format ["parsing replay at serverTime %1", serverTime];
-GRAD_REPLAY_DATABASE = parseSimpleArray GRAD_REPLAY_DATABASE;
+// GRAD_REPLAY_DATABASE_LOCAL = parseSimpleArray GRAD_REPLAY_DATABASE_LOCAL;
 diag_log format ["playing replay at serverTime %1", serverTime];
 
 // just in case he has no map
@@ -29,7 +28,7 @@ openMap [true, false];
 
 
     {
-    		if (grad_current_playbackLoopPosition >= (count (GRAD_REPLAY_DATABASE select grad_replay_playbackPosition))) exitWith {};
+    		if (grad_current_playbackLoopPosition >= (count (GRAD_REPLAY_DATABASE_LOCAL select grad_replay_playbackPosition))) exitWith {};
     		
     		
     		
@@ -46,7 +45,7 @@ openMap [true, false];
 
             grad_current_playbackLoopPosition = grad_current_playbackLoopPosition + 1;
 
-	} count (GRAD_REPLAY_DATABASE select grad_replay_playbackPosition);
+	} count (GRAD_REPLAY_DATABASE_LOCAL select grad_replay_playbackPosition);
 	// you begin counting with 0, so delete 1
 
     
@@ -58,7 +57,7 @@ openMap [true, false];
 
     // end recording and start playback
     if (
-    	grad_replay_playbackPosition >= count (GRAD_REPLAY_DATABASE) && 
+    	grad_replay_playbackPosition >= count (GRAD_REPLAY_DATABASE_LOCAL) && 
     	!(grad_playback_finished)
     	) then {
     	grad_playback_finished = true;

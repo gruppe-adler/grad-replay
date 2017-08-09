@@ -1,6 +1,9 @@
 // idea from a script by austin_medic
 // completely reworked by nomisum for Gruppe Adler
 
+GRAD_REPLAY_DATABASE_LOCAL = [];
+GRAD_REPLAY_PLAYBACK_PAUSED = false;
+
 if (!isServer) exitWith {};
 
 
@@ -8,8 +11,8 @@ if (!isServer) exitWith {};
 params [["_precision", 1]];
 
 // constants
-GRAD_REPLAY_PAUSED = false;
-GRAD_REPLAY_STOPPED = false;
+GRAD_REPLAY_RECORDING_PAUSED = false;
+GRAD_REPLAY_RECORDING_STOPPED = false;
 
 GRAD_REPLAY_SIDES = [west, east, civilian, sideLogic, sideEmpty, sideUnknown, sideFriendly, sideEnemy];
 GRAD_REPLAY_EMPTY_TRACKED = true; // vehicle setVariable ["GRAD_replay_track", true];

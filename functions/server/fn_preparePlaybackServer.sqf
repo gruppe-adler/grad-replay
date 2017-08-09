@@ -22,24 +22,31 @@ if (isServer || isDedicated) then {
 	publicVariable "ace_map_BFT_Enabled";
 	publicVariable "ace_map_mapShake";
 	
- 	["Standby. Replay is loading...", 1.5, ACE_player, 20] remoteExec ["ace_common_displayTextStructured", allPlayers, false]; 
 
 	missionnamespace setVariable ["GRAD_replay_isRunning", true, true];
 	_replayLength = count GRAD_REPLAY_DATABASE;
 	diag_log format ["replay length is %1", _replayLength];
 
-	[_replayLength] remoteExec ["GRAD_replay_fnc_receiveData", [0, -2] select isMultiplayer];
-
-
+	// set every client to know whats his number in line and display progress bar
 	{
-		_tidBit = str _x;
-		[_tidBit] remoteExec ["GRAD_replay_fnc_addReplayPart", [0, -2] select isMultiplayer];
+		[_replayLength, _forEachIndex + 1, count (allPlayers - entities "HeadlessClient_F")] remoteExec ["GRAD_replay_fnc_receiveData", _x];
+	} forEach allPlayers - entities "HeadlessClient_F";
+
+	// send to each client one tidbit after another
+	{
+		_currentPlayer = _x;
+		{
+			_tidBit = str _x;
+			[_tidBit] remoteExec ["GRAD_replay_fnc_addReplayPart", _currentPlayer];
+			sleep 0.1;
+		} forEach GRAD_REPLAY_DATABASE;
 		sleep 0.1;
-	} forEach GRAD_REPLAY_DATABASE;
+	} forEach (allPlayers - entities "HeadlessClient_F");
+
 	// publicVariable "GRAD_REPLAY_DATABASE";
-	
+	sleep 1;
 	diag_log format ["sending replay at serverTime %1", serverTime];
-	[] remoteExec ["GRAD_replay_fnc_initReplay", allPlayers, false];
+	[] remoteExec ["GRAD_replay_fnc_initReplay", allPlayers - entities "HeadlessClient_F", false];
 
 	// copyToClipboard str GRAD_REPLAY_DATABASE;
 

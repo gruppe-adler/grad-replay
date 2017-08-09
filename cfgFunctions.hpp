@@ -8,14 +8,21 @@ class GRAD_replay {
         file = MODULES_DIRECTORY\GRAD_replay\functions\player;
 
         class addReplayPart {};
+        class createMapOverlay {};
         class drawIcon {};
         class getRecordEntry {};
         class initReplay {};
+        class onPlaybackPosChanged {};
         class preparePlaybackClient {};
         class receiveData {}
+        class setTimeDisplay {};
+        class showHintPause {};
+        class showHintPlay {};
+        class showPlaybackControl {};
         class showProgressBar {};
         class startPlaybackClient {};
         class stopPlaybackClient {};
+        class syncPlaybackPos {};
     };
 
 	class server {

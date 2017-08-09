@@ -1,3 +1,3 @@
-params ["_count"];
+params ["_count", "_index", "_playerCount"];
 
-[_count] spawn GRAD_replay_fnc_showProgressBar;
+[_count, _index, _playerCount] spawn GRAD_replay_fnc_showProgressBar;

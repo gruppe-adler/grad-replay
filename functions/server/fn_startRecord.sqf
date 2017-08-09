@@ -17,7 +17,7 @@ diag_log format ["grad replay: starting record with precision %1", _precision];
     _args params [];
 
     // just skip if currently paused
-    if (!GRAD_REPLAY_PAUSED) then {
+    if (!GRAD_REPLAY_RECORDING_PAUSED) then {
 
 	    	_players = playableUnits + switchableUnits + allDeadMen;
 	    	_vehicles = vehicles + allDead - allDeadMen;
@@ -105,12 +105,23 @@ diag_log format ["grad replay: starting record with precision %1", _precision];
 			} forEach _trackedUnits;
 
 			if (count GRAD_REPLAY_DATABASE_TEMP > 0) then {
+
+				_hour = floor daytime;
+				_minute = floor ((daytime - _hour) * 60);
+				_second = floor (((((daytime) - (_hour))*60) - _minute)*60);
+				_emptyZeroMinute = "";
+				_emptyZeroSecond = "";
+				if (_minute < 10) then { _emptyZeroMinute = "0"; };
+				if (_second < 10) then { _emptyZeroSecond = "0"; };
+				_time24 = text format ["%1:%2%3:%4%5",_hour,_emptyZeroMinute,_minute,_emptyZeroSecond,_second];
+				GRAD_REPLAY_DATABASE_TEMP append [_time24];
+
 		    	GRAD_REPLAY_DATABASE append [GRAD_REPLAY_DATABASE_TEMP];
 			};
 			GRAD_REPLAY_DATABASE_TEMP = [];
 		    
 		    // end recording and start playback
-		    if (GRAD_REPLAY_STOPPED) then {
+		    if (GRAD_REPLAY_RECORDING_STOPPED) then {
 		    	[_handle] call CBA_fnc_removePerFrameHandler;
 
 		    	call GRAD_replay_fnc_preparePlaybackServer;

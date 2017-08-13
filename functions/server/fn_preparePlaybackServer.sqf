@@ -32,16 +32,12 @@ if (isServer || isDedicated) then {
 		[_replayLength, _forEachIndex + 1, count (allPlayers - entities "HeadlessClient_F")] remoteExec ["GRAD_replay_fnc_receiveData", _x];
 	} forEach allPlayers - entities "HeadlessClient_F";
 
-	// send to each client one tidbit after another
+	// send to all clients at once, but one tidbit after another --> hopefully this works
 	{
-		_currentPlayer = _x;
-		{
-			_tidBit = str _x;
-			[_tidBit] remoteExec ["GRAD_replay_fnc_addReplayPart", _currentPlayer];
-			sleep 0.1;
-		} forEach GRAD_REPLAY_DATABASE;
-		sleep 0.1;
-	} forEach (allPlayers - entities "HeadlessClient_F");
+		_tidBit = str _x;
+		[_tidBit] remoteExec ["GRAD_replay_fnc_addReplayPart", allPlayers - entities "HeadlessClient_F"];
+		sleep 1;
+	} forEach GRAD_REPLAY_DATABASE;
 
 	// publicVariable "GRAD_REPLAY_DATABASE";
 	sleep 1;

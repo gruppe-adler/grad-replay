@@ -6,7 +6,7 @@ _control ctrlSetPosition [0.45,0.45,(150 / 1920) * SafeZoneW,(150 / 1080) * Safe
 
 _control ctrlSetFade 0;
 _control ctrlCommit 0;
-_control ctrlSetFade 1;
-_control ctrlCommit 1;
-sleep 1;
+_control ctrlSetFade 2;
+_control ctrlCommit 2;
+uiSleep 2;
 ctrlDelete _control;

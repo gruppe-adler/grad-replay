@@ -1,7 +1,6 @@
 #include "\z\ace\addons\main\script_component.hpp"
-params ["_handle"];
 // ["Replay finished."] call EFUNC(common,displayTextStructured);
-[_handle] call CBA_fnc_removePerFrameHandler;
+
 disableSerialization;
 uiSleep 5;
 // openMap [false,false];

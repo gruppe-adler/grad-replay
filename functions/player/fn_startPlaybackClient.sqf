@@ -10,7 +10,7 @@ diag_log format ["playing replay at serverTime %1", serverTime];
 
 // openMap [true, false];
 
-[] spawn GRAD_replay_fnc_showPlaybackControl;
+[] call GRAD_replay_fnc_showPlaybackControl;
 
 [{
     params ["_args", "_handle"];
@@ -57,6 +57,10 @@ diag_log format ["playing replay at serverTime %1", serverTime];
     if (!grad_playback_finished && !GRAD_REPLAY_PLAYBACK_PAUSED) then {
         grad_replay_playbackPosition = grad_replay_playbackPosition + 1;
         [grad_replay_playbackPosition] call GRAD_replay_fnc_setTimeDisplay;
+
+        if (!dialog) then {
+            [] call GRAD_replay_fnc_showPlaybackControl;
+        };
     };
 
     // end recording and start playback
@@ -66,21 +70,12 @@ diag_log format ["playing replay at serverTime %1", serverTime];
     	) then {
     	grad_playback_finished = true;
     	grad_replay_playbackPosition = grad_replay_playbackPosition - 1;
-    	[_handle] spawn GRAD_replay_fnc_stopPlaybackClient;
-        
+        [_handle] call CBA_fnc_removePerFrameHandler;
+    	[] spawn GRAD_replay_fnc_stopPlaybackClient;
+
 	};
 
 },0.1,[]] call CBA_fnc_addPerFrameHandler;
-
-[{
-    params ["_args", "_handle"];
-
-    if (!dialog) then {
-        [] spawn GRAD_replay_fnc_showPlaybackControl;
-        if (REPLAY_FINISHED) then { [_handle] call CBA_fnc_removePerFrameHandler; };
-    };
-},1,[]] call CBA_fnc_addPerFrameHandler;
-
 
 if (isMultiplayer && !(serverCommandAvailable "#kick")) exitWith {};
 

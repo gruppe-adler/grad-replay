@@ -32,17 +32,16 @@ with uiNamespace do {
     _progress = linearConversion[ _start, _end, count GRAD_REPLAY_DATABASE_LOCAL, 0, 1 ];
     (uiNamespace getVariable "GRAD_replay_rsc_loadingBar") progressSetPosition _progress;
     
-    if (_progress > 0) then {
+    if (_progress > 0 && _progress < 1) then {
         (uiNamespace getVariable "GRAD_replay_txt_loading") ctrlSetStructuredText parseText format["<t align='center' size='2.3' shadow='0'>LOADING REPLAY</t>"];
     };
 
     // hintsilent format ["showing progress bar %1", _progress];
-
-    if ( _progress >= 1 ) then {
-        [ "TIMER", "onEachFrame" ] call BIS_fnc_removeStackedEventHandler;
-        ctrlDelete (uiNamespace getVariable "GRAD_replay_rsc_loadingBar");
-        ctrlDelete (uiNamespace getVariable "GRAD_replay_txt_loading");
-        ctrlDelete (uiNamespace getVariable "GRAD_replay_txt_loadingInfo");
-        // hint "FINISHED";
+    if (_progress >= 1) then {
+        (uiNamespace getVariable "GRAD_replay_txt_loading") ctrlSetStructuredText parseText format["<t align='center' size='2.3' shadow='0'>WAITING FOR OTHERS</t>"];
     };
+    /*
+    // loading bar gets deleted in initreplay
+    */
+
 }, [ 0, _count ] ] call BIS_fnc_addStackedEventHandler;

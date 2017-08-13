@@ -11,4 +11,9 @@ if (dialog) then {closeDialog 0;};
 
 [player, true] call TFAR_fnc_forceSpectator;
 
+[ "TIMER", "onEachFrame" ] call BIS_fnc_removeStackedEventHandler;
+ctrlDelete (uiNamespace getVariable "GRAD_replay_rsc_loadingBar");
+ctrlDelete (uiNamespace getVariable "GRAD_replay_txt_loading");
+ctrlDelete (uiNamespace getVariable "GRAD_replay_txt_loadingInfo");
+
 [] spawn GRAD_replay_fnc_startPlaybackClient;

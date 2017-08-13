@@ -114,7 +114,7 @@ diag_log format ["grad replay: starting record with precision %1", _precision];
 				if (_minute < 10) then { _emptyZeroMinute = "0"; };
 				if (_second < 10) then { _emptyZeroSecond = "0"; };
 				_time24 = text format ["%1:%2%3:%4%5",_hour,_emptyZeroMinute,_minute,_emptyZeroSecond,_second];
-				GRAD_REPLAY_DATABASE_TEMP append [_time24];
+				GRAD_REPLAY_DATABASE_TEMP append [str _time24];
 
 		    	GRAD_REPLAY_DATABASE append [GRAD_REPLAY_DATABASE_TEMP];
 			};
@@ -124,7 +124,7 @@ diag_log format ["grad replay: starting record with precision %1", _precision];
 		    if (GRAD_REPLAY_RECORDING_STOPPED) then {
 		    	[_handle] call CBA_fnc_removePerFrameHandler;
 
-		    	call GRAD_replay_fnc_preparePlaybackServer;
+		    	[] spawn GRAD_replay_fnc_preparePlaybackServer;
 			};
 	};
 

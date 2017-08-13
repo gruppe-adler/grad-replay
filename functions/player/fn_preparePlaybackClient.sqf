@@ -7,7 +7,7 @@ GCamKill = true;
 	
 if (dialog) then {closeDialog 0;};
 
-["Starting Replay."] call EFUNC(common,displayTextStructured);
+// ["Starting Replay."] call EFUNC(common,displayTextStructured);
 
 [player, true] call TFAR_fnc_forceSpectator;
 

@@ -13,6 +13,8 @@ diag_log format ["playing replay at serverTime %1", serverTime];
 [] spawn GRAD_replay_fnc_showPlaybackControl;
 
 [{
+    params ["_args", "_handle"];
+
 	// delete icons frame before
 	if (count grad_current_ehs > 0) then {
 		{
@@ -64,11 +66,23 @@ diag_log format ["playing replay at serverTime %1", serverTime];
     	) then {
     	grad_playback_finished = true;
     	grad_replay_playbackPosition = grad_replay_playbackPosition - 1;
-    	[] spawn GRAD_replay_fnc_stopPlaybackClient;
+    	[_handle] spawn GRAD_replay_fnc_stopPlaybackClient;
+        
 	};
 
 },0.1,[]] call CBA_fnc_addPerFrameHandler;
 
+[{
+    params ["_args", "_handle"];
+
+    if (!dialog) then {
+        [] spawn GRAD_replay_fnc_showPlaybackControl;
+        if (REPLAY_FINISHED) then { [_handle] call CBA_fnc_removePerFrameHandler; };
+    };
+},1,[]] call CBA_fnc_addPerFrameHandler;
+
+
+if (isMultiplayer && !(serverCommandAvailable "#kick")) exitWith {};
 
 [{
     [grad_replay_playbackPosition] remoteExec ["GRAD_replay_fnc_syncPlaybackPos", [0,-2] select isDedicated, false];

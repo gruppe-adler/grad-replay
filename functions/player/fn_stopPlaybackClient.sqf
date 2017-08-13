@@ -1,9 +1,10 @@
 #include "\z\ace\addons\main\script_component.hpp"
-
-["Replay finished."] call EFUNC(common,displayTextStructured);
-
-sleep 6;
+params ["_handle"];
+// ["Replay finished."] call EFUNC(common,displayTextStructured);
+[_handle] call CBA_fnc_removePerFrameHandler;
+disableSerialization;
+uiSleep 5;
 // openMap [false,false];
-
+if (dialog) then {closeDialog 2;};
 REPLAY_FINISHED = true;
 publicVariable "REPLAY_FINISHED";

@@ -36,7 +36,7 @@ if (isServer || isDedicated) then {
 	{
 		_tidBit = str _x;
 		[_tidBit, _forEachIndex] remoteExec ["GRAD_replay_fnc_addReplayPart", allPlayers - entities "HeadlessClient_F"];
-		sleep 0.1; // set to zero for debugging ordering
+		sleep GRAD_REPLAY_SENDING_DELAY; // set to zero for debugging ordering
 	} forEach GRAD_REPLAY_DATABASE;
 
 	// publicVariable "GRAD_REPLAY_DATABASE";

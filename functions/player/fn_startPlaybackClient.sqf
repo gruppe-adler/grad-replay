@@ -66,6 +66,7 @@ diag_log format ["playing replay at serverTime %1", serverTime];
     // end recording and start playback
     if (
     	grad_replay_playbackPosition >= count (GRAD_REPLAY_DATABASE_LOCAL) && 
+        count (GRAD_REPLAY_DATABASE_LOCAL) >= GRAD_REPLAY_DATABASE_TARGET_COUNT_LOCAL &&
     	!(grad_playback_finished)
     	) then {
     	grad_playback_finished = true;

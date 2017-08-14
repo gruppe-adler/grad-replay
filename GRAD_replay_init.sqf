@@ -1,12 +1,10 @@
 // idea from a script by austin_medic
 // completely reworked by nomisum for Gruppe Adler
-
 GRAD_REPLAY_DATABASE_LOCAL = [];
+GRAD_REPLAY_DATABASE_TARGET_COUNT_LOCAL = 999999; // something really high to prevent from finishing at once
 GRAD_REPLAY_PLAYBACK_PAUSED = false;
 
 if (!isServer) exitWith {};
-
-
 
 params [["_precision", 1]];
 

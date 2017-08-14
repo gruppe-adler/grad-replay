@@ -1,7 +1,7 @@
 #include "\z\ace\addons\main\script_component.hpp"
 // ["Replay finished."] call EFUNC(common,displayTextStructured);
 
-disableSerialization;
+//disableSerialization;
 uiSleep 5;
 // openMap [false,false];
 if (dialog) then {closeDialog 2;};

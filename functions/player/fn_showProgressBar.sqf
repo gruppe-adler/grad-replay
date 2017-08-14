@@ -1,16 +1,21 @@
 params ["_count", "_index", "_playerCount"];
 
+_xPos = SafeZoneX + (160 / 1920) * SafeZoneW;
+_yPos = SafeZoneY + (910 / 1080) * SafeZoneH;
+_width = (1600 / 1920) * SafeZoneW;
+_height = (40 / 1080) * SafeZoneH;
+
 with uiNamespace do {
     disableSerialization;
     GRAD_replay_txt_loading = findDisplay 46 ctrlCreate ["RscStructuredText", -1];
-    GRAD_replay_txt_loading ctrlSetPosition [ safezoneX + 0.5, 0.4, 1, 0.1];
+    GRAD_replay_txt_loading ctrlSetPosition [ _xPos, 0.4, _width, 0.1];
     GRAD_replay_txt_loading ctrlSetBackgroundColor [0, 0, 0, 0.8];
     GRAD_replay_txt_loading ctrlSetFont "RobotoCondensed";
     GRAD_replay_txt_loading ctrlSetStructuredText parseText format["<t align='center' size='2.3' shadow='0'>WAITING FOR REPLAY</t>"];
     GRAD_replay_txt_loading ctrlCommit 0;
 
     GRAD_replay_txt_loadingInfo = findDisplay 46 ctrlCreate ["RscStructuredText", -1];
-    GRAD_replay_txt_loadingInfo ctrlSetPosition [ safezoneX + 0.5, 0.475, 1, 0.1];
+    GRAD_replay_txt_loadingInfo ctrlSetPosition [ _xPos, 0.475, _width, 0.1];
     GRAD_replay_txt_loadingInfo ctrlSetBackgroundColor [0, 0, 0, 0];
     GRAD_replay_txt_loadingInfo ctrlSetTextColor [1, 1, 1, 0.35];
     GRAD_replay_txt_loadingInfo ctrlSetFont "RobotoCondensed";
@@ -18,7 +23,7 @@ with uiNamespace do {
     GRAD_replay_txt_loadingInfo ctrlCommit 0;
 
     GRAD_replay_rsc_loadingBar = findDisplay 46 ctrlCreate ["RscProgress", -1];
-    GRAD_replay_rsc_loadingBar ctrlSetPosition [ safezoneX + 0.5, 0.4, 1, 0.01];
+    GRAD_replay_rsc_loadingBar ctrlSetPosition [ _xPos, 0.4, _width, 0.01];
     GRAD_replay_rsc_loadingBar ctrlSetTextColor [209/255, 141/255, 31/255, 1];
     GRAD_replay_rsc_loadingBar progressSetPosition 0;
     GRAD_replay_rsc_loadingBar ctrlCommit 0;

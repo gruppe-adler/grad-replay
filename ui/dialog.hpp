@@ -37,7 +37,7 @@ class playbackControl {
             h = "(20 / 1080) * SafeZoneH";
             // type = CT_XSLIDER;
             // style = SL_HORZ;
-            color[] = {1,1,1,0.4};
+            color[] = {1,1,1,1};
             colorActive[] = {1,1,1,1}; // {0.8,0.5,0.1,1};
             colorDisabled[] = {0.5,0.5,0.5,0.2};
             thumb = "#(argb,8,8,3)color(0.8,0.5,0.1,1)";
@@ -73,6 +73,20 @@ class playbackControl {
             x = "SafeZoneX + (1760 / 1920) * SafeZoneW";
             y = "SafeZoneY + (910 / 1080) * SafeZoneH";
             w = "(120 / 1920) * SafeZoneW";
+            h = "(40 / 1080) * SafeZoneH";
+        };
+
+        class playPauseDisplay: RscPicture {
+           
+            idc = 80005;
+            access = 0;
+            colorBackground[] = {0,0,0,0.85};
+
+            text = "node_modules\grad_replay\ui\pause.paa";
+
+            x = "SafeZoneX + (120 / 1920) * SafeZoneW";
+            y = "SafeZoneY + (910 / 1080) * SafeZoneH";
+            w = "(40 / 1920) * SafeZoneW";
             h = "(40 / 1080) * SafeZoneH";
         };
     };

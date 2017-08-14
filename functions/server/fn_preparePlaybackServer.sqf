@@ -35,12 +35,14 @@ if (isServer || isDedicated) then {
 	// send to all clients at once, but one tidbit after another --> hopefully this works
 	{
 		_tidBit = str _x;
-		[_tidBit] remoteExec ["GRAD_replay_fnc_addReplayPart", allPlayers - entities "HeadlessClient_F"];
-		sleep 0.4;
+		[_tidBit, _forEachIndex] remoteExec ["GRAD_replay_fnc_addReplayPart", allPlayers - entities "HeadlessClient_F"];
+		sleep 0.1; // set to zero for debugging ordering
 	} forEach GRAD_REPLAY_DATABASE;
 
 	// publicVariable "GRAD_REPLAY_DATABASE";
-	sleep 1;
+	if (isMultiplayer) then {
+		sleep 1;
+	};
 	diag_log format ["sending replay at serverTime %1", serverTime];
 	[] remoteExec ["GRAD_replay_fnc_initReplay", allPlayers - entities "HeadlessClient_F", false];
 

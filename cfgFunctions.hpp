@@ -15,9 +15,11 @@ class GRAD_replay {
         class onPlaybackPosChanged {};
         class preparePlaybackClient {};
         class receiveData {}
+        class setPlayPauseDisplay {};
         class setTimeDisplay {};
         class showHintPause {};
         class showHintPlay {};
+        class showHintReplayFinished {};
         class showPlaybackControl {};
         class showProgressBar {};
         class startPlaybackClient {};

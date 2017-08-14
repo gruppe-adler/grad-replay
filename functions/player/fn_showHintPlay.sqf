@@ -1,3 +1,5 @@
+[false] call GRAD_replay_fnc_setPlayPauseDisplay;
+
 disableSerialization;
 
 _control = (findDisplay 80000) ctrlCreate ['RscPicture', -1];

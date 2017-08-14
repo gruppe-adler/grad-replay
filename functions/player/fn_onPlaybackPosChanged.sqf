@@ -3,7 +3,7 @@ params ["_control"];
 if (isMultiplayer && !(serverCommandAvailable "#kick")) exitWith {};
 
 grad_replay_playbackPosition = 
-	floor (
+	ceil (
 		linearConversion [
 			0,
 			10,

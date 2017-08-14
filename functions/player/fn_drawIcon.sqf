@@ -3,7 +3,6 @@ params ["_map", "_index"];
 _scale = ctrlMapScale _map;
 _showName = _scale < 0.03;
 
-
 _icon = [GRAD_REPLAY_DATABASE_LOCAL, grad_replay_playbackPosition, _index, 0] call GRAD_replay_fnc_getRecordEntry;
 _color = [GRAD_REPLAY_DATABASE_LOCAL, grad_replay_playbackPosition, _index, 1] call GRAD_replay_fnc_getRecordEntry;
 _pos = [GRAD_REPLAY_DATABASE_LOCAL, grad_replay_playbackPosition, _index, 2] call GRAD_replay_fnc_getRecordEntry;

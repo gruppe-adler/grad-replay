@@ -4,7 +4,9 @@ private ["_return"];
 
 _return = _database;
 {
-    if (count _return <= _x) exitWith {
+
+    if (isNil "_x" || {count _return <= _x}) exitWith {
+    	if (isNil "_x") then { diag_log format ["fucking nil detected"]; };
         if (isNil "_defaultValue") then {_return = nil} else {_return = _defaultValue};
     };
     _return = _return select _x;

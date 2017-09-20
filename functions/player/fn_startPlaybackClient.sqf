@@ -34,9 +34,6 @@ diag_log format ["playing replay at serverTime %1", serverTime];
     {
     		if (grad_current_playbackLoopPosition >= (count (GRAD_REPLAY_DATABASE_LOCAL select (grad_replay_playbackPosition))) - 1) exitWith {};
     		
-    		
-    		
-
     		_fickediefackfack = grad_current_playbackLoopPosition;
 
 			_eh = ((findDisplay 80000) displayCtrl 1337) ctrlAddEventHandler ["Draw",format [
@@ -51,16 +48,6 @@ diag_log format ["playing replay at serverTime %1", serverTime];
 
 	} count (GRAD_REPLAY_DATABASE_LOCAL select grad_replay_playbackPosition);
 	// you begin counting with 0, so delete 1
-    
-    // counter
-    if (!grad_playback_finished && !GRAD_REPLAY_PLAYBACK_PAUSED) then {
-        grad_replay_playbackPosition = grad_replay_playbackPosition + 1;
-        [grad_replay_playbackPosition] call GRAD_replay_fnc_setTimeDisplay;
-
-        if (!dialog) then {
-            [] call GRAD_replay_fnc_showPlaybackControl;
-        };
-    };
     
     // end recording and start playback
     if (
@@ -80,6 +67,16 @@ diag_log format ["playing replay at serverTime %1", serverTime];
     	[] spawn GRAD_replay_fnc_stopPlaybackClient;  
         
 	};
+
+     // counter
+    if (!grad_playback_finished && !GRAD_REPLAY_PLAYBACK_PAUSED) then {
+        grad_replay_playbackPosition = grad_replay_playbackPosition + 1;
+        [grad_replay_playbackPosition] call GRAD_replay_fnc_setTimeDisplay;
+
+        if (!dialog) then {
+            [] call GRAD_replay_fnc_showPlaybackControl;
+        };
+    };
 
    
 

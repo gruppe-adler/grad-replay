@@ -31,6 +31,7 @@ class GRAD_replay {
 		file = MODULES_DIRECTORY\GRAD_replay\functions\server;
 
 		class getSideColor {};
+        class init {};
         class pauseRecord {};
         class preparePlaybackServer {};
         class setMeSpectator {};

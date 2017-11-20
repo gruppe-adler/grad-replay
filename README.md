@@ -41,10 +41,10 @@ call GRAD_replay_fnc_stopRecord;
 ### Customization
 change variables in functions/server/fn_init.sqf
 
-GRAD_REPLAY_SIDES: sides tracked
-GRAD_REPLAY_AI_VEHICLES_TRACKED: if ai vehicles are tracked
-GRAD_REPLAY_AI_ONFOOT_TRACKED: if ai on foot is tracked
-REPLAY_STEPS_PER_TICK: steps played back at once
+* GRAD_REPLAY_SIDES: sides tracked
+* GRAD_REPLAY_AI_VEHICLES_TRACKED: if ai vehicles are tracked
+* GRAD_REPLAY_AI_ONFOOT_TRACKED: if ai on foot is tracked
+* REPLAY_STEPS_PER_TICK: steps played back at once
 
 ### Script commands
 to pause recording, set `GRAD_REPLAY_RECORDING_PAUSED` to true on server / false to resume

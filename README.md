@@ -39,7 +39,7 @@ call GRAD_replay_fnc_stopRecord;
 ```
 
 ### Important
-Currently there is no helper function to resume normal gameplay after replay, this means all assets will be frozen and TFAR spectator channel will be set for all players, furthermore every wound will be healed and all spectator cams left.
+Currently there is **no helper function to resume normal gameplay after replay has played**, this means all assets will be frozen and TFAR spectator channel will be set for all players, furthermore every wound will be healed and all spectator cams left.
 
 ### Customization
 change variables in functions/server/fn_init.sqf

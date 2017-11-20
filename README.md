@@ -1,9 +1,10 @@
 # grad_replay
-arma3 in-game mission replay script (working but wip)
+ARMA3 mission replay script (working but wip)
+* Records player and AI movement and replays at end of mission.
+* Meant for PvP but pimped to support AI as well
+* Mission duration should be matched to replay precision (see below) - the longer the mission, the less precision is recommended. Better precision (smaller values) results in longer loading times.
 
-records player and AI movement and replays at end of mission
-
-## required mods
+### Required Mods
 CBA
 
 # How to install

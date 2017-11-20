@@ -16,7 +16,7 @@ diag_log format ["grad replay: starting record with precision %1", _precision];
     params ["_args", "_handle"];
     _args params [];
 
-    // just skip if currently paused
+    // only skip if currently paused
     if (!GRAD_REPLAY_RECORDING_PAUSED) then {
 
 	    	_players = playableUnits + switchableUnits + allDeadMen;
@@ -26,23 +26,26 @@ diag_log format ["grad replay: starting record with precision %1", _precision];
 	    	_terminals = allMissionObjects "Land_DataTerminal_01_F"; // speciality for mission "breaking contact"
 	    	_trackedUnits append _terminals;
 
-	    	if (GRAD_CIVILIAN_TRAFFIC_TRACKED) then {
+	    	if (GRAD_REPLAY_AI_VEHICLES_TRACKED) then {
+	    		_trackedUnits append _vehicles;
+	    	};
+
+	    	if (GRAD_REPLAY_AI_ONFOOT_TRACKED) then {
 	    		_trackedUnits append _ai;
 	    	};
 
-	    	if (GRAD_REPLAY_EMPTY_TRACKED) then {
-	    		_trackedUnits append _vehicles;
-	    	};
+	    	diag_log format ["tracked: %1",_trackedUnits];
 
 		    {
 		    	_unit = _x;
 
 
-		    	if (_unit getVariable ["GRAD_replay_track", false] || isPlayer _unit) then {
+		    	// if (_unit getVariable ["GRAD_replay_track", false] || isPlayer _unit) then {
 
 		    		_isEmptyVehicle = _unit isKindOf "LandVehicle" && ({alive _x} count (crew _unit) == 0);
 					_isMan = (vehicle _unit) isKindOf "Man";
 					_isCustomObject = _unit getVariable ["GRAD_replay_track", false];
+					_isAI = !isPlayer _unit;
 					// _isPlayerVehicle = _unit isPlayer;
 
 		    		_name = if (alive _unit && _isMan) then {name _unit} else {""};
@@ -93,10 +96,11 @@ diag_log format ["grad replay: starting record with precision %1", _precision];
 					// current values: position, side, kindof
 					if ((_isMan && _side in GRAD_REPLAY_SIDES && (_unit getVariable ["grad_gcamspec_firstSpawn", true])) || 
 						_isEmptyVehicle ||
-						(_isCustomObject && _side in GRAD_REPLAY_SIDES)) then {
+						(_isCustomObject && _side in GRAD_REPLAY_SIDES ||
+						_isAI)) then {
 						[[_icon,_color,_pos,_dir,_name,_groupname]] call GRAD_replay_fnc_storeValue;
 					};
-				};
+				// };
 
 				// diag_log format ["grad replay: storing %1, %2, %3, %4, %5, %6", _unit,_color,_pos,_dir,_special,_veh];
 

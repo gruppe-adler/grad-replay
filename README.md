@@ -26,7 +26,7 @@ class CfgFunctions {
 Init.sqf:
 `[2] call GRAD_replay_fnc_init; // number is precision of replay, 2 means every 2 seconds one snapshot`
 
-### 5. Catch the ending of your mission and put this before
+### 5. Put this when you want to replay (just before you want to end the mission)
 Must be executed on server only!
 ```
 call GRAD_replay_fnc_stopRecord;
@@ -37,6 +37,9 @@ call GRAD_replay_fnc_stopRecord;
    ["END1"] remoteExec ["endMission",0,false]; // your custom end mission call or whatever you want to do after replay
 }, []] call CBA_fnc_waitUntilAndExecute;
 ```
+
+### Important
+Currently there is no helper function to resume normal gameplay after replay, this means all assets will be frozen and TFAR spectator channel will be set for all players, furthermore every wound will be healed and all spectator cams left.
 
 ### Customization
 change variables in functions/server/fn_init.sqf

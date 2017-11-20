@@ -23,15 +23,16 @@ class CfgFunctions {
   #include "node_modules\grad_replay\cfgFunctions.hpp"
  };
 ```
-### 4. Initialize script
-Init.sqf:
+### 4. Initialize script in init.sqf
 `[2] call GRAD_replay_fnc_init; // number is precision of replay, 2 means every 2 seconds one snapshot`
 
-### 5. Put this when you want to replay (just before you want to end the mission)
+### 5. Put this where you want the replay to start (recommended: end of mission)
 Must be executed on server only!
 ```
-call GRAD_replay_fnc_stopRecord;
+// stops record, sends data and starts replay
+call GRAD_replay_fnc_stopRecord; 
 
+// ends mission after replay is over
 [{
 	REPLAY_FINISHED
 }, {

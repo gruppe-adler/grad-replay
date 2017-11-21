@@ -9,7 +9,7 @@ CBA, ACE3
 
 # How to install
 ### 1. Download Release
-### 2. extract GRAD_replay folder into <mission folder>/node_modules
+### 2. extract GRAD_replay folder into [mission folder]/node_modules
 ### 3. Add the following to the description.ext
 
 ```

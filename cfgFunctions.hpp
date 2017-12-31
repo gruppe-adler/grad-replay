@@ -2,7 +2,7 @@
     #define MODULES_DIRECTORY node_modules
 #endif
 
-class GRAD-replay {
+class GRAD_replay {
 
     class player {
         file = MODULES_DIRECTORY\GRAD-replay\functions\player;

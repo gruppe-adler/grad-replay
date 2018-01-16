@@ -82,6 +82,7 @@ diag_log format ["playing replay at serverTime %1", serverTime];
 
 },0.1,[]] call CBA_fnc_addPerFrameHandler;
 
+// admin client syncs his progress
 if (isMultiplayer && !(serverCommandAvailable "#kick")) exitWith {};
 
 [{

@@ -1,4 +1,4 @@
-# grad_replay
+# grad-replay
 ARMA3 mission replay script (working but wip)
 * Records player and AI movement and replays at end of mission.
 * Meant for PvP but pimped to support AI as well
@@ -13,14 +13,14 @@ CBA, ACE3
 ### 3. Add the following to the description.ext
 
 ```
-#include "node_modules\grad_replay\ui\defines.hpp"
-#include "node_modules\grad_replay\ui\dialog.hpp"
+#include "node_modules\grad-replay\ui\defines.hpp"
+#include "node_modules\grad-replay\ui\dialog.hpp"
 ```
 
 ```
 // if CfgFunctions already exists, just put the #include part inside
 class CfgFunctions {
-  #include "node_modules\grad_replay\cfgFunctions.hpp"
+  #include "node_modules\grad-replay\cfgFunctions.hpp"
  };
 ```
 ### 4. Initialize script in init.sqf

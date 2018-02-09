@@ -82,7 +82,7 @@ class playbackControl {
             access = 0;
             colorBackground[] = {0,0,0,0.85};
 
-            text = "node_modules\grad_replay\ui\pause.paa";
+            text = "node_modules\grad-replay\ui\pause.paa";
 
             x = "SafeZoneX + (120 / 1920) * SafeZoneW";
             y = "SafeZoneY + (910 / 1080) * SafeZoneH";

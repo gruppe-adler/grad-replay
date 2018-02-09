@@ -3,7 +3,7 @@ params ["_isPlay"];
 disableSerialization;
 
 if (_isPlay) then {
-	((findDisplay 80000) displayCtrl 80005) ctrlSetText "node_modules\grad_replay\ui\play.paa";
+	((findDisplay 80000) displayCtrl 80005) ctrlSetText "node_modules\grad-replay\ui\play.paa";
 } else {
-	((findDisplay 80000) displayCtrl 80005) ctrlSetText "node_modules\grad_replay\ui\pause.paa";
+	((findDisplay 80000) displayCtrl 80005) ctrlSetText "node_modules\grad-replay\ui\pause.paa";
 };

@@ -5,7 +5,7 @@
 class GRAD_replay {
 
     class player {
-        file = MODULES_DIRECTORY\GRAD-replay\functions\player;
+        file = MODULES_DIRECTORY\grad-replay\functions\player;
 
         class addReplayPart {};
         class createMapOverlay {};
@@ -28,7 +28,7 @@ class GRAD_replay {
     };
 
 	class server {
-		file = MODULES_DIRECTORY\GRAD-replay\functions\server;
+		file = MODULES_DIRECTORY\grad-replay\functions\server;
 
 		class getSideColor {};
         class init {};

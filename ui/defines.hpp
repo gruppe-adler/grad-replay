@@ -87,7 +87,7 @@
 #define GUI_GRID_WAbs    (1)
 #define GUI_GRID_HAbs    (1)
 
-class RscSlider
+class grad_replay_RscSlider
 {
 style = "0x400 + 0x10";
 type = 43;  // this is the more "modern" slider. Type = 3 is the old dull one.
@@ -101,7 +101,7 @@ border = "\A3\ui_f\data\gui\cfg\slider\border_ca.paa";
 thumb = "\A3\ui_f\data\gui\cfg\slider\thumb_ca.paa";
 };
 
-class RscStructuredText
+class grad_replay_RscStructuredText
 {
     access = 0;
 	idc = -1;
@@ -120,7 +120,7 @@ class RscStructuredText
     shadow = 0;
 };
 
-class RscStructuredTextTooltip
+class grad_replay_RscStructuredTextTooltip
 {
     access = 0;
     idc = -1;
@@ -139,7 +139,7 @@ class RscStructuredTextTooltip
     shadow = 0;
 };
 
-class RscStructuredTextHeadline
+class grad_replay_RscStructuredTextHeadline
 {
     access = 0;
 	idc = -1;
@@ -159,7 +159,7 @@ class RscStructuredTextHeadline
 };
 
 
-class RscText
+class grad_replay_RscText
 {
     access = 0;
     idc = -1;
@@ -180,7 +180,7 @@ class RscText
 
 };
 
-class RscPicture
+class grad_replay_RscPicture
 {
     access = 0;
     idc = -1;
@@ -200,7 +200,7 @@ class RscPicture
     h = 0.15;
 };
 
-class RscButton
+class grad_replay_RscButton
 {
 
    access = 0;
@@ -234,7 +234,7 @@ class RscButton
     period = 0;
 };
 
-class RscButtonSmall
+class grad_replay_RscButtonSmall
 {
 
     access = 0;
@@ -268,7 +268,7 @@ class RscButtonSmall
     borderSize = 0;
 };
 
-class RscFrame
+class grad_replay_RscFrame
 {
     type = CT_STATIC;
     idc = -1;
@@ -281,7 +281,7 @@ class RscFrame
     text = "";
 };
 
-class RscBackground
+class grad_replay_RscBackground
 {
    type = CT_STATIC;
     idc = -1;
@@ -294,7 +294,7 @@ class RscBackground
     text = "";
 
 };
-class RscModel {
+class grad_replay_RscModel {
         onObjectMoved = "systemChat str _this";
         idc = -1;
         type = CT_OBJECT_CONTAINER;
@@ -311,7 +311,7 @@ class RscModel {
         enableZoom = 1;
         zoomDuration = 0.001;
 };
-class RscCombo {
+class grad_replay_RscCombo {
     	access = 0;
     	type = 4;
     	colorSelect[] =
@@ -325,25 +325,25 @@ class RscCombo {
     	{
     		0,    		0,    		0,    		1
     	};
-    	colorScrollbar[] =
+    	colograd_replay_rScrollbar[] =
     	{
     		1,    		0,    		0,    		1
     	};
     	soundSelect[] =
     	{
-    		"\A3\ui_f\data\sound\RscCombo\soundSelect",
+    		"\A3\ui_f\data\sound\grad_replay_RscCombo\soundSelect",
     		0.1,
     		1
     	};
     	soundExpand[] =
     	{
-    		"\A3\ui_f\data\sound\RscCombo\soundExpand",
+    		"\A3\ui_f\data\sound\grad_replay_RscCombo\soundExpand",
     		0.1,
     		1
     	};
     	soundCollapse[] =
     	{
-    		"\A3\ui_f\data\sound\RscCombo\soundCollapse",
+    		"\A3\ui_f\data\sound\grad_replay_RscCombo\soundCollapse",
     		0.1,
     		1
     	};
@@ -381,8 +381,8 @@ class RscCombo {
     		1,
     		0.7
     	};
-    	arrowEmpty = "\A3\ui_f\data\GUI\RscCommon\rsccombo\arrow_combo_ca.paa";
-    	arrowFull = "\A3\ui_f\data\GUI\RscCommon\rsccombo\arrow_combo_active_ca.paa";
+    	arrowEmpty = "\A3\ui_f\data\GUI\grad_replay_RscCommon\grad_replay_rsccombo\arrow_combo_ca.paa";
+    	arrowFull = "\A3\ui_f\data\GUI\grad_replay_RscCommon\grad_replay_rsccombo\arrow_combo_active_ca.paa";
     	wholeHeight = 0.45;
     	color[] =
     	{
@@ -420,7 +420,7 @@ class RscCombo {
        };
 };
 
-class RscMapControl
+class grad_replay_RscMapControl
 {
   access = 0;
   idc = -1;

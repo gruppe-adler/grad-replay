@@ -2,7 +2,7 @@
 
 disableSerialization;
 
-private _control = (findDisplay 80000) ctrlCreate ['RscPicture', -1];
+private _control = (findDisplay 80000) ctrlCreate ['grad_replay_RscPicture', -1];
 _control ctrlSetText 'node_modules\grad-replay\ui\pause.paa';
 _control ctrlSetPosition [0.45,0.45,(150 / 1920) * SafeZoneW,(150 / 1080) * SafeZoneH];
 

@@ -28,7 +28,7 @@ class playbackControl {
 
 
     class controls {
-        // A slider to change the overcast value (look at grad_Replay_RscXSlider - more pretty version of grad_Replay_RscSlider)
+        // A slider to change the overcast value (look at grad_Replay_RscXSlider - more pretty version of RscSlider)
         class overcastSlider: grad_Replay_RscSlider {
             idc = 80003;
             x = "SafeZoneX + (160 / 1920) * SafeZoneW";

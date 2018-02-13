@@ -3,23 +3,19 @@ params ["_map", "_index"];
 _scale = ctrlMapScale _map;
 _showName = _scale < 0.03;
 
-/*
-_icon = [GRAD_REPLAY_DATABASE_LOCAL, grad_replay_playbackPosition, _index, 0, ""] call GRAD_replay_fnc_getRecordEntry;
-_color = [GRAD_REPLAY_DATABASE_LOCAL, grad_replay_playbackPosition, _index, 1, [0,0,0,0]] call GRAD_replay_fnc_getRecordEntry;
-_pos = [GRAD_REPLAY_DATABASE_LOCAL, grad_replay_playbackPosition, _index, 2, [0,0,0]] call GRAD_replay_fnc_getRecordEntry;
-_dir = [GRAD_REPLAY_DATABASE_LOCAL, grad_replay_playbackPosition, _index, 3, 0] call GRAD_replay_fnc_getRecordEntry;
-_name = [GRAD_REPLAY_DATABASE_LOCAL, grad_replay_playbackPosition, _index, 4, ""] call GRAD_replay_fnc_getRecordEntry;
-_groupname = [GRAD_REPLAY_DATABASE_LOCAL, grad_replay_playbackPosition, _index, 5, ""] call GRAD_replay_fnc_getRecordEntry;
-*/
+
+
 
 (GRAD_REPLAY_DATABASE_LOCAL select grad_replay_playbackPosition select _index) params [
-    ["_icon", "", [""]],
-    ["_color", [0,0,0,0], [[0,0,0,0]]],
-    ["_pos", [0,0,0], [[0,0,0]]],
-    ["_dir", 0, [0]],
-    ["_name", "", [""]],
-    ["_groupname", "", [""]]
+    ["_icon", ""],
+    ["_color", [0,0,0,0]],
+    ["_pos", [0,0,0]],
+    ["_dir", 0],
+    ["_name", ""],
+    ["_groupname", ""]
 ];
+
+// diag_log format ["index: %1 %2 %3 %4 %5 %6 %7 %8", _index, _icon, _color, _pos, _dir, _name, _groupname, _map];
 
 _name =  if (_showName) then { _name + " " + _groupname } else { "" };
 

@@ -4,7 +4,7 @@ with uiNamespace do {
     disableSerialization;
 
     _xPos = SafeZoneX + (160 / 1920) * SafeZoneW;
-    _yPos = SafeZoneY + (900 / 1080) * SafeZoneH;
+    _yPos = SafeZoneY + (910 / 1080) * SafeZoneH;
     _width = (1600 / 1920) * SafeZoneW;
     _height = (40 / 1080) * SafeZoneH;
 

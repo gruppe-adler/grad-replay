@@ -34,7 +34,7 @@ diag_log format ["grad replay: starting record with precision %1", _precision];
 	    		_trackedUnits append _ai;
 	    	};
 
-	    	diag_log format ["tracked: %1",_trackedUnits];
+	    	// diag_log format ["tracked: %1",_trackedUnits];
 
 		    {
 		    	_unit = _x;

@@ -14,10 +14,10 @@ GRAD_REPLAY_RECORDING_STOPPED = false;
 
 GRAD_REPLAY_SENDING_DELAY = 0.1;
 
-GRAD_REPLAY_SIDES = [west, east, civilian, sideLogic, sideEmpty, sideUnknown, sideFriendly, sideEnemy];
+GRAD_REPLAY_SIDES = [west, east, independent];
 // vehicle setVariable ["GRAD_replay_track", true];
-GRAD_REPLAY_AI_VEHICLES_TRACKED = true; 
-GRAD_REPLAY_AI_ONFOOT_TRACKED = true;
+GRAD_REPLAY_AI_VEHICLES_TRACKED = false; 
+GRAD_REPLAY_AI_ONFOOT_TRACKED = false;
 
 
 GRAD_REPLAY_DATABASE_TEMP = [];

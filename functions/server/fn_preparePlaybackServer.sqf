@@ -4,7 +4,12 @@ if (isServer || isDedicated) then {
 	
 	{ 
 		if (isMultiplayer) then {
-			_x enableSimulationGlobal false; 
+			_x enableSimulationGlobal false;
+			
+			// freeze vehicle
+			if (!(vehicle _x isEqualTo _x) && _x isEqualTo (driver vehicle _x)) then {
+					vehicle _x attachTo [_x];
+			};
 		} else {
 			_x enableSimulation false;
 		};

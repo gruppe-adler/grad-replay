@@ -1,3 +1,6 @@
+[![Release](https://img.shields.io/github/release/gruppe-adler/grad-replay.svg)](https://github.com/gruppe-adler/grad-replay/release)
+[![License](https://img.shields.io/github/license/gruppe-adler/grad-replay.svg)](https://github.com/gruppe-adler/grad-replay/license)
+
 # grad-replay
 ARMA3 mission replay script (working but wip)
 * Records player and AI movement and replays at end of mission.

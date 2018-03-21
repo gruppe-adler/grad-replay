@@ -7,7 +7,7 @@ class playbackControl {
 
     class controlsBackground
         {   
-            class backgroundMap : grad_Replay_RscMapControl {
+            class backgroundMap : grad_replay_RscMapControl {
                 idc = 1337;
                 x = safezoneXAbs;
                 y = safezoneY;
@@ -15,7 +15,7 @@ class playbackControl {
                 h = safezoneH;
             };
 
-            class dlgBackground: grad_Replay_RscBackground
+            class dlgBackground: grad_replay_RscBackground
             {
                 idc = 1336;
                 x = "SafeZoneX + (160 / 1920) * SafeZoneW";
@@ -28,8 +28,8 @@ class playbackControl {
 
 
     class controls {
-        // A slider to change the overcast value (look at grad_Replay_RscXSlider - more pretty version of RscSlider)
-        class overcastSlider: grad_Replay_RscSlider {
+        // A slider to change the overcast value (look at grad_replay_RscXSlider - more pretty version of RscSlider)
+        class overcastSlider: grad_replay_RscSlider {
             idc = 80003;
             x = "SafeZoneX + (160 / 1920) * SafeZoneW";
             y = "SafeZoneY + (920 / 1080) * SafeZoneH";
@@ -40,6 +40,10 @@ class playbackControl {
             color[] = {1,1,1,1};
             colorActive[] = {1,1,1,1}; // {0.8,0.5,0.1,1};
             colorDisabled[] = {0.5,0.5,0.5,0.2};
+
+            colorFocused[] = {1,1,1,0.4};
+            colorBackground[] = {1,1,1,0.4};
+            colorBackgroundDisabled[] = {1,1,1,0.4};
             thumb = "#(argb,8,8,3)color(0.8,0.5,0.1,1)";
             arrowEmpty = "#(argb,8,8,3)color(0,0,0,0)";
             arrowFull = "#(argb,8,8,3)color(0,0,0,0)";
@@ -50,7 +54,7 @@ class playbackControl {
             onSliderPosChanged = "[_this] call GRAD_replay_fnc_onPlaybackPosChanged"; // added onSliderPosChanged event handler
         };
 
-        class timeDisplay: grad_Replay_RscStructuredText {
+        class timeDisplay: grad_replay_RscStructuredText {
            
             idc = 80004;
             access = 0;
@@ -76,7 +80,7 @@ class playbackControl {
             h = "(40 / 1080) * SafeZoneH";
         };
 
-        class playPauseDisplay: grad_Replay_RscPicture {
+        class playPauseDisplay: grad_replay_RscPicture {
            
             idc = 80005;
             access = 0;

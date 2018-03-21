@@ -4,7 +4,9 @@ _scale = ctrlMapScale _map;
 _showName = _scale < 0.03;
 
 
-
+if ((typeName (GRAD_REPLAY_DATABASE_LOCAL select grad_replay_playbackPosition select _index)) isEqualTo "STRING") exitWith {
+	diag_log format ["grad-replay: catch time trying to infiltrate at %1", _index];
+};
 
 (GRAD_REPLAY_DATABASE_LOCAL select grad_replay_playbackPosition select _index) params [
     ["_icon", ""],

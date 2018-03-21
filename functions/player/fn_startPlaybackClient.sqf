@@ -71,6 +71,7 @@ diag_log format ["playing replay at serverTime %1", serverTime];
         	// grad_replay_playbackPosition = grad_replay_playbackPosition - 1;
             [_handle] call CBA_fnc_removePerFrameHandler;
         	[] spawn GRAD_replay_fnc_stopPlaybackClient;
+            ((findDisplay 80000) displayCtrl 80003) ctrlEnable false;
         
 	};
 

@@ -23,7 +23,7 @@ with uiNamespace do {
     GRAD_replay_txt_loadingInfo ctrlCommit 0;
 
     GRAD_replay_rsc_loadingBar = findDisplay 46 ctrlCreate ["grad_replay_RscProgress", -1];
-    GRAD_replay_rsc_loadingBar ctrlSetPosition [ _xPos, 0.4, _width, 0.01];
+    GRAD_replay_rsc_loadingBar ctrlSetPosition [ _xPos, 0.4, _width, 0.005];
     GRAD_replay_rsc_loadingBar ctrlSetTextColor [209/255, 141/255, 31/255, 1];
     GRAD_replay_rsc_loadingBar progressSetPosition 0;
     GRAD_replay_rsc_loadingBar ctrlCommit 0;

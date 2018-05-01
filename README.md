@@ -16,14 +16,14 @@ CBA, ACE3
 ### 3. Add the following to the description.ext
 
 ```
-#include "node_modules\grad-replay\ui\defines.hpp"
-#include "node_modules\grad-replay\ui\dialog.hpp"
+#include "node_modules\@gruppe-adler\replay\ui\defines.hpp"
+#include "node_modules\@gruppe-adler\replay\ui\dialog.hpp"
 ```
 
 ```
 // if CfgFunctions already exists, just put the #include part inside
 class CfgFunctions {
-  #include "node_modules\grad-replay\cfgFunctions.hpp"
+  #include "node_modules\@gruppe-adler\replay\cfgFunctions.hpp"
  };
 ```
 ### 4. Initialize script in init.sqf

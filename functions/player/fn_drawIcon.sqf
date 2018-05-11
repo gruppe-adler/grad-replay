@@ -1,9 +1,6 @@
 params ["_map", "_index"];
 
-private _array = (GRAD_REPLAY_DATABASE_LOCAL select grad_replay_playbackPosition param [_index,[]]);
-if ((typeName _array) isEqualTo "STRING" || _array isEqualTo []) exitWith {
-	//diag_log format ["grad-replay: catch time trying to infiltrate at %1", _index];
-};
+private _array = (GRAD_REPLAY_DATABASE_LOCAL select grad_replay_playbackPosition param [_index,[],[[]]);
 
 _scale = ctrlMapScale _map;
 _showName = _scale < 0.03;

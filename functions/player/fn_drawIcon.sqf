@@ -9,12 +9,14 @@ _scale = ctrlMapScale _map;
 _showName = _scale < 0.03;
 
 
-private _icon =  _array param [0, ""];
-private _color =  _array param [1, [0,0,0,0]];
-private _pos =  _array param [2, [0,0,0]];
-private _dir =  _array param [3, 0];
-private _name =  _array param [4, ""];
-private _groupname =  _array param [5, ""];
+_array params [
+    ["_icon", ""],
+    ["_color", [0,0,0,0]],
+    ["_pos", [0,0,0]],
+    ["_dir", 0],
+    ["_name", ""],
+    ["_groupname", ""]
+];
 
 _name =  if (_showName) then { _name + " " + _groupname } else { "" };
 

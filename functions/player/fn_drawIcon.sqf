@@ -1,23 +1,20 @@
 params ["_map", "_index"];
 
+private _array = (GRAD_REPLAY_DATABASE_LOCAL select grad_replay_playbackPosition param [_index,[]]);
+if ((typeName _array) isEqualTo "STRING" || _array isEqualTo []) exitWith {
+	//diag_log format ["grad-replay: catch time trying to infiltrate at %1", _index];
+};
+
 _scale = ctrlMapScale _map;
 _showName = _scale < 0.03;
 
 
-if ((typeName (GRAD_REPLAY_DATABASE_LOCAL select grad_replay_playbackPosition select _index)) isEqualTo "STRING") exitWith {
-	diag_log format ["grad-replay: catch time trying to infiltrate at %1", _index];
-};
-
-(GRAD_REPLAY_DATABASE_LOCAL select grad_replay_playbackPosition select _index) params [
-    ["_icon", ""],
-    ["_color", [0,0,0,0]],
-    ["_pos", [0,0,0]],
-    ["_dir", 0],
-    ["_name", ""],
-    ["_groupname", ""]
-];
-
-// diag_log format ["index: %1 %2 %3 %4 %5 %6 %7 %8", _index, _icon, _color, _pos, _dir, _name, _groupname, _map];
+private _icon =  _array param [0, ""];
+private _color =  _array param [1, [0,0,0,0]];
+private _pos =  _array param [2, [0,0,0]];
+private _dir =  _array param [3, 0];
+private _name =  _array param [4, ""];
+private _groupname =  _array param [5, ""];
 
 _name =  if (_showName) then { _name + " " + _groupname } else { "" };
 

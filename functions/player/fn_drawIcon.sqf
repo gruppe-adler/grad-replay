@@ -1,6 +1,6 @@
 params ["_map", "_index"];
 
-private _array = (GRAD_REPLAY_DATABASE_LOCAL select grad_replay_playbackPosition param [_index,[],[[]]);
+private _array = (GRAD_REPLAY_DATABASE_LOCAL select grad_replay_playbackPosition param [_index,[],[[]]]);
 
 _scale = ctrlMapScale _map;
 _showName = _scale < 0.03;

@@ -15,9 +15,9 @@ GRAD_REPLAY_DATABASE = [];
 
 // vehicle setVariable ["GRAD_replay_track", true];
 
-GRAD_REPLAY_SIDES = [(missionConfigFile >> "GRAD_Replay"), "trackedSides", [west, east, civilian]] call BIS_fnc_returnConfigEntry;
-GRAD_REPLAY_AI_VEHICLES_TRACKED = [(missionConfigFile >> "GRAD_Replay"), "trackVehicles", false] call BIS_fnc_returnConfigEntry;
-GRAD_REPLAY_AI_ONFOOT_TRACKED = [(missionConfigFile >> "GRAD_Replay"), "trackAI", false] call BIS_fnc_returnConfigEntry;
+GRAD_REPLAY_SIDES = [(missionConfigFile >> "GRAD_Replay"), "trackEDsides", [west, east, civilian]] call BIS_fnc_returnConfigEntry;
+GRAD_REPLAY_AI_VEHICLES_TRACKED = [(missionConfigFile >> "GRAD_Replay"), "trackEDvehicles", false] call BIS_fnc_returnConfigEntry;
+GRAD_REPLAY_AI_ONFOOT_TRACKED = [(missionConfigFile >> "GRAD_Replay"), "trackEDAI", false] call BIS_fnc_returnConfigEntry;
 REPLAY_STEPS_PER_TICK = [(missionConfigFile >> "GRAD_Replay"), "stepsPerTick", 1] call BIS_fnc_returnConfigEntry;
 private _precision = [(missionConfigFile >> "GRAD_Replay"), "precision", 1] call BIS_fnc_returnConfigEntry;
 

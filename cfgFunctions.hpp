@@ -14,7 +14,9 @@ class GRAD_replay {
         class initReplay {};
         class onPlaybackPosChanged {};
         class preparePlaybackClient {};
-        class receiveData {}
+        class receiveData {};
+        class restoreHealth {};
+        class saveHealth {};
         class setPlayPauseDisplay {};
         class setTimeDisplay {};
         class showHintPause {};

@@ -57,13 +57,14 @@ call GRAD_replay_fnc_stopRecord;
 Currently there is **no helper function to resume normal gameplay after replay has played**, this means all assets will be frozen and TFAR spectator channel will be set for all players, furthermore every wound will be healed and all spectator cams left.
 
 ### Customization
-Adding the following code to the GRAD_Replay class in the description.ext enables saving at replay start.
+Adding the following code to the GRAD_Replay class in the description.ext enables saving and other options at replay start.
 
 ```
-saveHealth = true;                  //enables Health saving at replay start
+saveHealth = true;                  //enables health saving at replay start
+saveVehicles = true;                //enables status saveing of vehicles at replay start
 ```
 
-the saved health can be restored with the following command.
+The saved health can be restored with the following command.
 ```
 [] call GRAD_replay_fnc_restoreHealth;
 ```

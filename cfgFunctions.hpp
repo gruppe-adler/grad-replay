@@ -15,8 +15,6 @@ class GRAD_replay {
         class onPlaybackPosChanged {};
         class preparePlaybackClient {};
         class receiveData {};
-        class restoreHealth {};
-        class saveHealth {};
         class setPlayPauseDisplay {};
         class setTimeDisplay {};
         class showHintPause {};
@@ -29,10 +27,17 @@ class GRAD_replay {
         class syncPlaybackPos {};
     };
 
+    class save {
+      file = MODULES_DIRECTORY\@gruppe-adler\replay\functions\save;
+
+      class restoreHealth {};
+      class saveHealth {};
+    };
+
 	class server {
 		file = MODULES_DIRECTORY\@gruppe-adler\replay\functions\server;
 
-		class getSideColor {};
+		    class getSideColor {};
         class init {};
         class pauseRecord {};
         class preparePlaybackServer {};

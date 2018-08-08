@@ -31,6 +31,7 @@ class CfgFunctions {
 class GRAD_Replay {
   precision = 5;                          // number is precision of replay, 5 means every 5 seconds one snapshot
   trackedSides = [west, east, civilian];  // defines the sides that will be tracked (possible are west, east, independant, civilian)
+  stepsPerTick = 1;                       // defines steps played back at once
   trackVehicles = false;                  // defines if empty and AI steered vehicles will be tracked
   trackAI = false;                        // defines if AI will be tracked
 };
@@ -54,14 +55,6 @@ call GRAD_replay_fnc_stopRecord;
 
 ### Important
 Currently there is **no helper function to resume normal gameplay after replay has played**, this means all assets will be frozen and TFAR spectator channel will be set for all players, furthermore every wound will be healed and all spectator cams left.
-
-### Customization
-change variables in functions/server/fn_init.sqf
-
-* `GRAD_REPLAY_SIDES` sides tracked
-* `GRAD_REPLAY_AI_VEHICLES_TRACKED` if ai vehicles are tracked
-* `GRAD_REPLAY_AI_ONFOOT_TRACKED` if ai on foot is tracked
-* `REPLAY_STEPS_PER_TICK` steps played back at once
 
 ### Script commands
 to pause recording, set `GRAD_REPLAY_RECORDING_PAUSED` to true on server / false to resume

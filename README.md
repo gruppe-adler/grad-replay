@@ -26,14 +26,23 @@ class CfgFunctions {
   #include "node_modules\@gruppe-adler\replay\cfgFunctions.hpp"
  };
 ```
+
+```
+class GRAD_Replay {
+  precision = 5;                          // number is precision of replay, 5 means every 5 seconds one snapshot
+  trackedSides = [west, east, civilian];  // defines the sides that will be tracked (possible are west, east, independant, civilian)
+  trackVehicles = false;                  // defines if empty and AI steered vehicles will be tracked
+  trackAI = false;                        // defines if AI will be tracked
+};
+```
 ### 4. Initialize script in init.sqf
-`[2] call GRAD_replay_fnc_init; // number is precision of replay, 2 means every 2 seconds one snapshot`
+`[] call GRAD_replay_fnc_init;`
 
 ### 5. Put this where you want the replay to start (recommended: end of mission)
 Must be executed on server only!
 ```
 // stops record, sends data and starts replay
-call GRAD_replay_fnc_stopRecord; 
+call GRAD_replay_fnc_stopRecord;
 
 // ends mission after replay is over
 [{

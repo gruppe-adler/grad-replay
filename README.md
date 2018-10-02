@@ -29,11 +29,11 @@ class CfgFunctions {
 
 ```
 class GRAD_Replay {
-  precision = 5;                          // number is precision of replay, 5 means every 5 seconds one snapshot
-  trackedSides = ["west", "east", "civilian"];  // defines the sides that will be tracked (possible are west, east, independant, civilian)
-  stepsPerTick = 1;                       // defines steps played back at once
-  trackedVehicles = 0;                  // defines if empty and AI steered vehicles will be tracked
-  trackedAI = 0;                        // defines if AI will be tracked
+  precision = 5;                                    // precision of replay, 5 means every 5 seconds one snapshot (number)
+  trackedSides[] = {"west", "east", "civilian"};    // defines the sides that will be tracked (possible are "west", "east", "independant", "civilian") (array)
+  stepsPerTick = 1;                                 // defines steps played back at once (number)
+  trackedVehicles = 0;                              // defines if empty and AI steered vehicles will be tracked (0/1)
+  trackedAI = 0;                                    // defines if AI will be tracked (0/1)
 };
 ```
 ### 4. Initialize script in init.sqf

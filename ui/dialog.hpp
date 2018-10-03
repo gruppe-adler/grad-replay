@@ -6,7 +6,7 @@ class playbackControl {
     enableSimulation = 0;
 
     class controlsBackground
-        {   
+        {
             class backgroundMap : grad_replay_RscMapControl {
                 idc = 1337;
                 x = safezoneXAbs;
@@ -14,20 +14,22 @@ class playbackControl {
                 w = safezoneWAbs;
                 h = safezoneH;
             };
-
-            class dlgBackground: grad_replay_RscBackground
-            {
-                idc = 1336;
-                x = "SafeZoneX + (160 / 1920) * SafeZoneW";
-                y = "SafeZoneY + (910 / 1080) * SafeZoneH";
-                w = "(1600 / 1920) * SafeZoneW";
-                h = "(40 / 1080) * SafeZoneH";
-                colorBackground[] = {0,0,0,0.8};
-            };
         };
 
 
     class controls {
+
+        // this can't be a controlsBackground class, or it will disappear while slider is unselected
+        class dlgBackground: grad_replay_RscBackground
+        {
+            idc = 1336;
+            x = "SafeZoneX + (160 / 1920) * SafeZoneW";
+            y = "SafeZoneY + (910 / 1080) * SafeZoneH";
+            w = "(1600 / 1920) * SafeZoneW";
+            h = "(40 / 1080) * SafeZoneH";
+            colorBackground[] = {0,0,0,0.8};
+        };
+
         // A slider to change the overcast value (look at grad_replay_RscXSlider - more pretty version of RscSlider)
         class overcastSlider: grad_replay_RscSlider {
             idc = 80003;
@@ -55,7 +57,7 @@ class playbackControl {
         };
 
         class timeDisplay: grad_replay_RscStructuredText {
-           
+
             idc = 80004;
             access = 0;
             type = CT_STRUCTURED_TEXT;
@@ -81,7 +83,7 @@ class playbackControl {
         };
 
         class playPauseDisplay: grad_replay_RscPicture {
-           
+
             idc = 80005;
             access = 0;
             colorBackground[] = {0,0,0,0.85};

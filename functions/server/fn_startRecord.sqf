@@ -91,7 +91,7 @@ private _currentSaveState = [];
 
 		// todo filter empty vehicles and crew
 
-		_dir = getDir (vehicle _unit);
+		_dir = round (getDir (vehicle _unit));
 
 		if (_unit getVariable ["ACE_isUnconscious", false]) then {
 			_colorID = _colorID + 5;

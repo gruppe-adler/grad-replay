@@ -122,6 +122,10 @@ private _currentSaveState = [];
 	if (count GRAD_REPLAY_DATABASE_TEMP > 0) then {
 
 		GRAD_REPLAY_DATABASE_TEMP append [[daytime,"HH:MM:SS"] call BIS_fnc_timeToString];
+
+		diag_log ["GRAD_REPLAY_DATABASE_TEMP"];
+		diag_log GRAD_REPLAY_DATABASE_TEMP;
+
 		GRAD_REPLAY_DATABASE append [GRAD_REPLAY_DATABASE_TEMP];
 	};
 	GRAD_REPLAY_DATABASE_TEMP = [];

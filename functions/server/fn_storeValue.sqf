@@ -22,9 +22,9 @@ private _typeDefaults = [
 	""		// group name
 ];
 
-diag_log ["fnc_storeValue"];
+/* diag_log ["fnc_storeValue"];
 diag_log ["_currentUnitData",_currentUnitData];
-diag_log ["_newUnitData",_newUnitData];
+diag_log ["_newUnitData",_newUnitData]; */
 
 for [{_i=0},{_i<((count _currentUnitData) max (count _newUnitData))},{_i=_i+1}] do {
 	_typeDefault = _typeDefaults select _i;
@@ -38,8 +38,8 @@ for [{_i=0},{_i<((count _currentUnitData) max (count _newUnitData))},{_i=_i+1}] 
 	};
 };
 
-diag_log ["_newSaveData",_newSaveData];
+/* diag_log ["_newSaveData",_newSaveData];
 diag_log ["_currentUnitData",_currentUnitData];
-diag_log ["end fnc_storeValue"];
+diag_log ["end fnc_storeValue"]; */
 
 GRAD_REPLAY_DATABASE_TEMP append [_newSaveData];

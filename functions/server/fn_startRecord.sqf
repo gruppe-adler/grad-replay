@@ -68,7 +68,10 @@ private _currentSaveState = [];
 		_name = if (alive _unit && _isMan) then {name _unit} else {""};
 		_groupname = if (_unit isEqualTo (leader group _unit)) then {" (" + groupId (group _unit) + ")"} else {""};
 		_veh = vehicle _unit;
+
 		_pos = getpos _unit;
+		_pos resize 2;
+
 		_side = side _unit;
 		_colorID = [_side] call GRAD_replay_fnc_getSideColorID;
 		_type = typeOf (vehicle _unit);

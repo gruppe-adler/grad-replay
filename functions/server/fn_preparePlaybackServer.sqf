@@ -1,4 +1,4 @@
-#include "\z\ace\addons\main\script_component.hpp"
+#include "script_component.hpp"
 
 if (!isServer) exitWith {};
 
@@ -30,7 +30,8 @@ publicVariable "ace_map_mapShake";
 
 missionnamespace setVariable ["GRAD_replay_isRunning", true, true];
 _replayLength = count GRAD_REPLAY_DATABASE;
-diag_log format ["replay length is %1", _replayLength];
+INFO_1("Started sending replay at serverTime %1",serverTime);
+INFO_1("Replay length is %1",_replayLength);
 
 private _allPlayers = allPlayers - entities "HeadlessClient_F";
 
@@ -40,7 +41,6 @@ private _allPlayers = allPlayers - entities "HeadlessClient_F";
 } forEach _allPlayers;
 
 // send to all clients at once, but one tidbit after another --> hopefully this works
-diag_log format ["sending replay at serverTime %1", serverTime];
 {
 	[_x, _forEachIndex] remoteExecCall ["GRAD_replay_fnc_addReplayPart", _allPlayers];
 	sleep GRAD_REPLAY_SENDING_DELAY; // set to zero for debugging ordering
@@ -54,7 +54,7 @@ diag_log format ["sending replay at serverTime %1", serverTime];
 	30,
 	{
 		[] remoteExec ["GRAD_replay_fnc_initReplay", _this select 0, false];
-		diag_log format ["grad-replay: fn_preparePlaybackServer - waiting for players timed out, missing players: %1",(_this select 0) select {!(_x getVariable ["grad_replay_playerReceivalComplete",false])}];
+		INFO_1("Waiting for players timed out. Missing players: %1",(_this select 0) select {!(_x getVariable ["grad_replay_playerReceivalComplete",false])});
 	}
 ] call CBA_fnc_waitUntilAndExecute;
 

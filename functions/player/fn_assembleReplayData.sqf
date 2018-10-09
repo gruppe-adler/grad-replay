@@ -1,3 +1,8 @@
+#include "script_component.hpp"
+
+INFO("Assembling replay data.");
+private _startTime = diag_tickTime;
+
 GRAD_REPLAY_DATABASE_LOCAL_ASSEMBLED = [];
 
 private _currentUnitsDataStates = [];
@@ -16,7 +21,7 @@ private _typeDefaults = [
     {
 		// catch nil entries, not sure what's causing them
 		if (isNil "_x") then {
-			diag_log ["fn_assembleReplayData: interval data is nil at index %1",_forEachIndex];
+			ERROR_1("Interval data is nil at index %1.",_forEachIndex);
 
 		} else {
 			// timestamp
@@ -51,3 +56,5 @@ private _typeDefaults = [
     GRAD_REPLAY_DATABASE_LOCAL_ASSEMBLED pushBack _intervalData;
     false
 } count GRAD_REPLAY_DATABASE_LOCAL;
+
+INFO_1("Assembling completed in %1s",diag_tickTime - _startTime);

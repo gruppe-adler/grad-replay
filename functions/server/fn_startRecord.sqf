@@ -1,6 +1,8 @@
+#include "script_component.hpp"
+
 params ["_precision"];
 
-diag_log format ["grad replay: starting record with precision %1", _precision];
+INFO_1("Starting recording with precision %1",_precision);
 
 {
 	_x setVariable ["GRAD_replay_persistentName", name _x, true];

@@ -1,3 +1,5 @@
+#include "script_component.hpp"
+
 params [["_currentUnitData",[]],["_nextTickData",[]],["_unitID",-1],["_newUnitData",[]]];
 
 // _newUnitData contents: [_icon,_colorID,_pos,_dir,_name,_groupname]
@@ -12,10 +14,6 @@ private _typeDefaults = [
 	"",		// name
 	""		// group name
 ];
-
-/* diag_log ["fn_storeValue"];
-diag_log ["_currentUnitData",_currentUnitData];
-diag_log ["_newUnitData",_newUnitData]; */
 
 for [{_i=0},{_i<((count _currentUnitData) max (count _newUnitData))},{_i=_i+1}] do {
 	_typeDefault = _typeDefaults select _i;

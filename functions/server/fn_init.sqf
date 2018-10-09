@@ -22,10 +22,7 @@ private _precision = [(missionConfigFile >> "GRAD_Replay"), "precision", 1] call
 
 [_precision] call GRAD_replay_fnc_startRecord;
 
-diag_log format ["grad replay: starting record"];
 
 /* to start playback:
-
 [] GRAD_replay_fnc_stopRecord;
-
 */

@@ -1,3 +1,4 @@
+#include "script_component.hpp"
 #include "\z\ace\addons\main\script_component.hpp"
 
 grad_current_ehs = [];
@@ -5,8 +6,7 @@ grad_playback_finished = false;
 grad_replay_playbackPosition = 0;
 grad_current_playbackLoopPosition = 0;
 
-diag_log format ["playing replay at serverTime %1", serverTime];
-
+INFO_1("Playing replay at serverTime %1.", serverTime);
 
 // openMap [true, false];
 
@@ -56,11 +56,7 @@ diag_log format ["playing replay at serverTime %1", serverTime];
            count (GRAD_REPLAY_DATABASE_LOCAL_ASSEMBLED) >= GRAD_REPLAY_DATABASE_TARGET_COUNT_LOCAL &&
     	   !(grad_playback_finished)
     	) exitWith {
-            diag_log format ["playbackpos: %1, count: %2, count target: %3",
-                grad_replay_playbackPosition,
-                count (GRAD_REPLAY_DATABASE_LOCAL_ASSEMBLED), 
-                GRAD_REPLAY_DATABASE_TARGET_COUNT_LOCAL
-            ];
+            INFO_3("playbackpos: %1, count: %2, count target: %3",grad_replay_playbackPosition,count (GRAD_REPLAY_DATABASE_LOCAL_ASSEMBLED),GRAD_REPLAY_DATABASE_TARGET_COUNT_LOCAL);
 
             if ((isMultiplayer && !(serverCommandAvailable "#kick")) || !isMultiplayer) then {
                 [] remoteExec ["GRAD_replay_fnc_showHintReplayFinished", [0,-2] select isDedicated];

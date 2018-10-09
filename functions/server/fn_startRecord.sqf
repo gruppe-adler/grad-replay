@@ -43,7 +43,7 @@ private _currentSaveState = [];
 		_trackedUnits append _ai;
 	};
 
-	diag_log ["_trackedUnits",_trackedUnits];
+	/* diag_log ["_trackedUnits",_trackedUnits]; */
 
 	// _nextTickData contains all the data of the next timestamp that is then appended to GRAD_REPLAY_DATABASE
 	_nextTickData = [];

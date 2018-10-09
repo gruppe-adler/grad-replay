@@ -121,7 +121,7 @@ private _currentSaveState = [];
 	} count _trackedUnits;
 
 	if (count _nextTickData > 0) then {
-		_nextTickData append [[daytime,"HH:MM:SS"] call BIS_fnc_timeToString];
+		_nextTickData append [dayTime];
 		GRAD_REPLAY_DATABASE append [_nextTickData];
 	};
 

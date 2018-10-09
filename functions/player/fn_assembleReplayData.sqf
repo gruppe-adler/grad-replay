@@ -17,7 +17,7 @@ private _typeDefaults = [
     {
 
         // timestamp
-        if (_x isEqualType "") exitWith {
+        if (_x isEqualType 0) exitWith {
             _intervalData pushBack _x;
         };
 

@@ -5,7 +5,6 @@ grad_playback_finished = false;
 grad_replay_playbackPosition = 0;
 grad_current_playbackLoopPosition = 0;
 
-// GRAD_REPLAY_DATABASE_LOCAL = parseSimpleArray GRAD_REPLAY_DATABASE_LOCAL;
 diag_log format ["playing replay at serverTime %1", serverTime];
 
 
@@ -25,11 +24,11 @@ diag_log format ["playing replay at serverTime %1", serverTime];
 
     grad_current_ehs = []; // reset eventhandler draws
     grad_current_playbackLoopPosition = 0; // reset loop
-    
+
     // adjust progressbar
     if (!isNull (findDisplay 80000)) then {
-        sliderSetPosition [80003, linearConversion [0,count GRAD_REPLAY_DATABASE_LOCAL,grad_replay_playbackPosition,0,10]];
-        ((findDisplay 80000) displayCtrl 80003) ctrlSetTooltip format ["%1 | %2", grad_replay_playbackPosition, count GRAD_REPLAY_DATABASE_LOCAL - 1];
+        sliderSetPosition [80003, linearConversion [0,count GRAD_REPLAY_DATABASE_LOCAL_ASSEMBLED,grad_replay_playbackPosition,0,10]];
+        ((findDisplay 80000) displayCtrl 80003) ctrlSetTooltip format ["%1 | %2", grad_replay_playbackPosition, count GRAD_REPLAY_DATABASE_LOCAL_ASSEMBLED - 1];
     };
 
     {
@@ -40,26 +39,26 @@ diag_log format ["playing replay at serverTime %1", serverTime];
     				"[
                        _this select 0,
                        %1
-                    ] call GRAD_replay_fnc_drawIcon;", 
+                    ] call GRAD_replay_fnc_drawIcon;",
                 _fickediefackfack]
             ];
 			grad_current_ehs append [_eh];
 
-            if (grad_current_playbackLoopPosition < (count (GRAD_REPLAY_DATABASE_LOCAL select (grad_replay_playbackPosition))) - 1) then {
+            if (grad_current_playbackLoopPosition < (count (GRAD_REPLAY_DATABASE_LOCAL_ASSEMBLED select (grad_replay_playbackPosition))) - 1) then {
                 grad_current_playbackLoopPosition = grad_current_playbackLoopPosition + 1;
             };
-    
-    } forEach (GRAD_REPLAY_DATABASE_LOCAL select grad_replay_playbackPosition);
-    
+
+    } forEach (GRAD_REPLAY_DATABASE_LOCAL_ASSEMBLED select grad_replay_playbackPosition);
+
     // end playback
     if (
-    	   grad_replay_playbackPosition >= (count (GRAD_REPLAY_DATABASE_LOCAL) - 1) && 
-           count (GRAD_REPLAY_DATABASE_LOCAL) >= GRAD_REPLAY_DATABASE_TARGET_COUNT_LOCAL &&
+    	   grad_replay_playbackPosition >= (count (GRAD_REPLAY_DATABASE_LOCAL_ASSEMBLED) - 1) &&
+           count (GRAD_REPLAY_DATABASE_LOCAL_ASSEMBLED) >= GRAD_REPLAY_DATABASE_TARGET_COUNT_LOCAL &&
     	   !(grad_playback_finished)
     	) exitWith {
-            diag_log format ["playbackpos: %1, count: %2, count target: %3", 
-                grad_replay_playbackPosition, 
-                count (GRAD_REPLAY_DATABASE_LOCAL), 
+            diag_log format ["playbackpos: %1, count: %2, count target: %3",
+                grad_replay_playbackPosition,
+                count (GRAD_REPLAY_DATABASE_LOCAL_ASSEMBLED), 
                 GRAD_REPLAY_DATABASE_TARGET_COUNT_LOCAL
             ];
 
@@ -72,7 +71,7 @@ diag_log format ["playing replay at serverTime %1", serverTime];
             [_handle] call CBA_fnc_removePerFrameHandler;
         	[] spawn GRAD_replay_fnc_stopPlaybackClient;
             ((findDisplay 80000) displayCtrl 80003) ctrlEnable false;
-        
+
 	};
 
      // counter
@@ -85,7 +84,7 @@ diag_log format ["playing replay at serverTime %1", serverTime];
         };
     };
 
-   
+
 
 },0.1,[]] call CBA_fnc_addPerFrameHandler;
 

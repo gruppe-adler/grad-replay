@@ -32,14 +32,16 @@ missionnamespace setVariable ["GRAD_replay_isRunning", true, true];
 _replayLength = count GRAD_REPLAY_DATABASE;
 diag_log format ["replay length is %1", _replayLength];
 
+private _allPlayers = allPlayers - entities "HeadlessClient_F";
+
 // set every client to know whats his number in line and display progress bar
 {
-	[_replayLength, _forEachIndex + 1, count (allPlayers - entities "HeadlessClient_F")] remoteExec ["GRAD_replay_fnc_receiveData", _x];
-} forEach allPlayers - entities "HeadlessClient_F";
+	[_replayLength, _forEachIndex + 1, count _allPlayers] remoteExec ["GRAD_replay_fnc_receiveData", _x];
+} forEach _allPlayers;
 
 // send to all clients at once, but one tidbit after another --> hopefully this works
 {
-	[_x, _forEachIndex] remoteExec ["GRAD_replay_fnc_addReplayPart", allPlayers - entities "HeadlessClient_F"];
+	[_x, _forEachIndex] remoteExec ["GRAD_replay_fnc_addReplayPart", _allPlayers];
 	sleep GRAD_REPLAY_SENDING_DELAY; // set to zero for debugging ordering
 } forEach GRAD_REPLAY_DATABASE;
 

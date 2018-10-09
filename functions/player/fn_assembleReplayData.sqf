@@ -1,5 +1,4 @@
-private _compressedData = GRAD_REPLAY_DATABASE_LOCAL;
-GRAD_REPLAY_DATABASE_LOCAL = [];
+GRAD_REPLAY_DATABASE_LOCAL_ASSEMBLED = [];
 
 private _currentUnitsDataStates = [];
 private _typeDefaults = [
@@ -15,35 +14,40 @@ private _typeDefaults = [
     _compressedIntervalData = _x;
     _intervalData = [];
     {
+		// catch nil entries, not sure what's causing them
+		if (isNil "_x") then {
+			diag_log ["fn_assembleReplayData: interval data is nil at index %1",_forEachIndex];
 
-        // timestamp
-        if (_x isEqualType 0) exitWith {
-            _intervalData pushBack _x;
-        };
+		} else {
+			// timestamp
+	        if (_x isEqualType 0) exitWith {
+	            _intervalData pushBack _x;
+	        };
 
-        // data array
-        if (_x isEqualType []) then {
-            _unitData = [];
-            _compressedUnitData = _x;
+	        // data array
+	        if (_x isEqualType []) then {
+	            _unitData = [];
+	            _compressedUnitData = _x;
 
-            if (_forEachIndex >= count _currentUnitsDataStates) then {
-                _currentUnitsDataStates pushBack [];
-            };
-            _currentUnitDataState = _currentUnitsDataStates select _forEachIndex;
+	            if (_forEachIndex >= count _currentUnitsDataStates) then {
+	                _currentUnitsDataStates pushBack [];
+	            };
+	            _currentUnitDataState = _currentUnitsDataStates select _forEachIndex;
 
-            {
-                if (isNil "_x") then {
-                    _unitData pushBack (_currentUnitDataState param [_forEachIndex,_typeDefaults select _forEachIndex]);
-                } else {
-                    _currentUnitDataState set [_forEachIndex,_x];
-                    _unitData pushBack _x;
-                };
-            } forEach _compressedUnitData;
+	            {
+	                if (isNil "_x") then {
+	                    _unitData pushBack (_currentUnitDataState param [_forEachIndex,_typeDefaults select _forEachIndex]);
+	                } else {
+	                    _currentUnitDataState set [_forEachIndex,_x];
+	                    _unitData pushBack _x;
+	                };
+	            } forEach _compressedUnitData;
 
-            _intervalData pushBack _unitData;
-        };
+	            _intervalData pushBack _unitData;
+	        };
+		};
     } forEach _compressedIntervalData;
 
-    GRAD_REPLAY_DATABASE_LOCAL pushBack _intervalData;
+    GRAD_REPLAY_DATABASE_LOCAL_ASSEMBLED pushBack _intervalData;
     false
-} count _compressedData;
+} count GRAD_REPLAY_DATABASE_LOCAL;

@@ -1,6 +1,6 @@
 params ["_map", "_index"];
 
-private _positionData = GRAD_REPLAY_DATABASE_LOCAL param [grad_replay_playbackPosition,[]];
+private _positionData = GRAD_REPLAY_DATABASE_LOCAL_ASSEMBLED param [grad_replay_playbackPosition,[]];
 if !(_positionData isEqualType []) exitWith {};
 
 private _iconData = _positionData param [_index,[]];

@@ -45,8 +45,8 @@ private _currentSaveState = [];
 
 	diag_log ["_trackedUnits",_trackedUnits];
 
-	// diag_log format ["tracked: %1",_trackedUnits];
-
+	// _nextTickData contains all the data of the next timestamp that is then appended to GRAD_REPLAY_DATABASE
+	_nextTickData = [];
 	{
 		_unit = _x;
 
@@ -112,25 +112,17 @@ private _currentSaveState = [];
 			_isEmptyVehicle ||
 			(_isCustomObject && _side in GRAD_REPLAY_SIDES || _isAI)
 		) then {
-			[_currentUnitData,[_icon,_colorID,_pos,_dir,_name,_groupname]] call GRAD_replay_fnc_storeValue;
+			[_currentUnitData,_nextTickData,_unitID,[_icon,_colorID,_pos,_dir,_name,_groupname]] call GRAD_replay_fnc_storeValue;
 		};
-
-		// diag_log format ["grad replay: storing %1, %2, %3, %4, %5, %6", _unit,_colorID,_pos,_dir,_special,_veh];
 
 		// };
 
 		false
 	} count _trackedUnits;
 
-	if (count GRAD_REPLAY_DATABASE_TEMP > 0) then {
-
-		GRAD_REPLAY_DATABASE_TEMP append [[daytime,"HH:MM:SS"] call BIS_fnc_timeToString];
-
-		diag_log ["GRAD_REPLAY_DATABASE_TEMP"];
-		diag_log GRAD_REPLAY_DATABASE_TEMP;
-
-		GRAD_REPLAY_DATABASE append [GRAD_REPLAY_DATABASE_TEMP];
+	if (count _nextTickData > 0) then {
+		_nextTickData append [[daytime,"HH:MM:SS"] call BIS_fnc_timeToString];
+		GRAD_REPLAY_DATABASE append [_nextTickData];
 	};
-	GRAD_REPLAY_DATABASE_TEMP = [];
 
 },_precision,[_currentSaveState]] call CBA_fnc_addPerFrameHandler;

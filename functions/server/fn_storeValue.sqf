@@ -1,16 +1,7 @@
-params [["_currentUnitData",[]],["_newUnitData",[]]];
+params [["_currentUnitData",[]],["_nextTickData",[]],["_unitID",-1],["_newUnitData",[]]];
 
-// _unit,_side,_pos,_dir,_kindof,_veh,_hide
-
-// prevent markers to render double on the same position (e.g. full team in vehicle)
-/*
-if (!(_vehicle in GRAD_REPLAY_DATABASE_TEMP)) then {
-	GRAD_REPLAY_DATABASE_TEMP = GRAD_REPLAY_DATABASE_TEMP + [_array];
-};
-*/
-
+// _newUnitData contents: [_icon,_colorID,_pos,_dir,_name,_groupname]
 if (count _newUnitData == 0) exitWith {};
-// [_icon,_colorID,_pos,_dir,_name,_groupname]
 
 private _newSaveData = [];
 private _typeDefaults = [
@@ -22,7 +13,7 @@ private _typeDefaults = [
 	""		// group name
 ];
 
-/* diag_log ["fnc_storeValue"];
+/* diag_log ["fn_storeValue"];
 diag_log ["_currentUnitData",_currentUnitData];
 diag_log ["_newUnitData",_newUnitData]; */
 
@@ -38,8 +29,4 @@ for [{_i=0},{_i<((count _currentUnitData) max (count _newUnitData))},{_i=_i+1}] 
 	};
 };
 
-/* diag_log ["_newSaveData",_newSaveData];
-diag_log ["_currentUnitData",_currentUnitData];
-diag_log ["end fnc_storeValue"]; */
-
-GRAD_REPLAY_DATABASE_TEMP append [_newSaveData];
+_nextTickData set [_unitID,_newSaveData];

@@ -10,7 +10,6 @@ if (!isServer) exitWith {};
 GRAD_REPLAY_RECORDING_PAUSED = false;
 GRAD_REPLAY_RECORDING_STOPPED = false;
 GRAD_REPLAY_SENDING_DELAY = 0.1;
-GRAD_REPLAY_DATABASE_TEMP = [];
 GRAD_REPLAY_DATABASE = [];
 
 // vehicle setVariable ["GRAD_replay_track", true];

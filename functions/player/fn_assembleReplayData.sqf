@@ -20,10 +20,8 @@ private _typeDefaults = [
     _intervalData = [];
     {
 		// catch nil entries, not sure what's causing them
-		if (isNil "_x") then {
-			ERROR_1("Interval data is nil at index %1.",_forEachIndex);
+		if (!isNil "_x") then {
 
-		} else {
 			// timestamp
 	        if (_x isEqualType 0) exitWith {
 	            _intervalData pushBack _x;

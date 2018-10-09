@@ -9,7 +9,7 @@ if (!isServer) exitWith {};
 // constants
 GRAD_REPLAY_RECORDING_PAUSED = false;
 GRAD_REPLAY_RECORDING_STOPPED = false;
-GRAD_REPLAY_SENDING_DELAY = 0.1;
+GRAD_REPLAY_SENDING_DELAY = 0.05;
 GRAD_REPLAY_DATABASE = [];
 
 // vehicle setVariable ["GRAD_replay_track", true];

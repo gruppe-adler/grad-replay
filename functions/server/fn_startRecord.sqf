@@ -80,12 +80,12 @@ private _currentSaveState = [];
 
 		// mark funkwagen if he is sending in red // speciality for mission "breaking contact"
 		if (_type isEqualTo "rhs_gaz66_r142_vv" && {_veh getVariable ["tf_range",0] == 50000}) then {
-			_colorID = 12;
+			_colorID = 11;
 		};
 
 		// speciality for mission "breaking contact"
 		if (_type isEqualTo "Land_DataTerminal_01_F" && !(isNil "GRAD_TERMINAL_ACTIVE") && {GRAD_TERMINAL_ACTIVE}) then {
-			_colorID = 12;
+			_colorID = 11;
 		};
 
 		if (_isEmptyVehicle && !_isMan) then {
@@ -103,7 +103,7 @@ private _currentSaveState = [];
 
 		if (!alive _unit && (_isMan || _isEmptyVehicle)) then {
 			_groupname = _unit getVariable ["GRAD_replay_persistentName", ""];
-			_colorID = 11;
+			_colorID = 10;
 		};
 
 		// current values: position, side, kindof

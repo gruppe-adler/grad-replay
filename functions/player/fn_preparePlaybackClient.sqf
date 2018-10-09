@@ -9,5 +9,4 @@ ctrlDelete (uiNamespace getVariable "GRAD_replay_rsc_loadingBar");
 ctrlDelete (uiNamespace getVariable "GRAD_replay_txt_loading");
 ctrlDelete (uiNamespace getVariable "GRAD_replay_txt_loadingInfo");
 
-[] call GRAD_replay_fnc_assembleReplayData;
 [] spawn GRAD_replay_fnc_startPlaybackClient;

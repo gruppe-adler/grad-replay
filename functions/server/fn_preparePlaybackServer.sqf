@@ -40,16 +40,22 @@ private _allPlayers = allPlayers - entities "HeadlessClient_F";
 } forEach _allPlayers;
 
 // send to all clients at once, but one tidbit after another --> hopefully this works
+diag_log format ["sending replay at serverTime %1", serverTime];
 {
-	[_x, _forEachIndex] remoteExec ["GRAD_replay_fnc_addReplayPart", _allPlayers];
+	[_x, _forEachIndex] remoteExecCall ["GRAD_replay_fnc_addReplayPart", _allPlayers];
 	sleep GRAD_REPLAY_SENDING_DELAY; // set to zero for debugging ordering
 } forEach GRAD_REPLAY_DATABASE;
 
-// publicVariable "GRAD_REPLAY_DATABASE";
-if (isMultiplayer) then {
-	sleep 1;
-};
-diag_log format ["sending replay at serverTime %1", serverTime];
-[] remoteExec ["GRAD_replay_fnc_initReplay", allPlayers - entities "HeadlessClient_F", false];
+// wait until all clients have received all the data and assembled it
+[
+	{{!(_x getVariable ["grad_replay_playerReceivalComplete",false])} count (_this select 0) == 0},
+	{[] remoteExec ["GRAD_replay_fnc_initReplay", _this select 0, false]},
+	[_allPlayers],
+	30,
+	{
+		[] remoteExec ["GRAD_replay_fnc_initReplay", _this select 0, false];
+		diag_log format ["grad-replay: fn_preparePlaybackServer - waiting for players timed out, missing players: %1",(_this select 0) select {!(_x getVariable ["grad_replay_playerReceivalComplete",false])}];
+	}
+] call CBA_fnc_waitUntilAndExecute;
 
 // copyToClipboard str GRAD_REPLAY_DATABASE;

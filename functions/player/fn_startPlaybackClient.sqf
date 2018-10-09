@@ -1,5 +1,4 @@
 #include "script_component.hpp"
-#include "\z\ace\addons\main\script_component.hpp"
 
 grad_current_ehs = [];
 grad_playback_finished = false;

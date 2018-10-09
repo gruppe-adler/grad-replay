@@ -1,6 +1,3 @@
-#include "\z\ace\addons\main\script_component.hpp"
-
-
 createDialog "playbackControl";
 
 if (serverCommandAvailable "#kick" || !isMultiplayer) then {
@@ -15,7 +12,7 @@ if (serverCommandAvailable "#kick" || !isMultiplayer) then {
 							} else {
 								[] remoteExec ['GRAD_replay_fnc_showHintPlay', [0,-2] select isDedicated, false];
 							};
-							
+
 							publicVariable 'GRAD_REPLAY_PLAYBACK_PAUSED'; true
 						};"]
 			];

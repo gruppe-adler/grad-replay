@@ -41,21 +41,33 @@ private _allPlayers = allPlayers - entities "HeadlessClient_F";
 } forEach _allPlayers;
 
 // send to all clients at once, but one tidbit after another --> hopefully this works
-{
-	[_x, _forEachIndex] remoteExecCall ["GRAD_replay_fnc_addReplayPart", _allPlayers];
+for [{_i=0},{_i < ceil (_replayLength / GRAD_REPLAY_SENDING_CHUNK_SIZE)},{_i=_i+1}] do {
+	_startIndex = _i * GRAD_REPLAY_SENDING_CHUNK_SIZE;
+	_endIndex = _startIndex + GRAD_REPLAY_SENDING_CHUNK_SIZE;
+	if (_endIndex >= _replayLength) then {_endIndex = _replayLength - 1};
+
+	_chunk = [];
+	for [{_j=_startIndex},{_j<=_endIndex},{_j=_j+1}] do {
+	    _chunk pushBack (GRAD_REPLAY_DATABASE select _j);
+	};
+	
+	[_chunk,_startIndex] remoteExecCall ["GRAD_replay_fnc_addReplayPart", _allPlayers];
 	sleep GRAD_REPLAY_SENDING_DELAY; // set to zero for debugging ordering
-} forEach GRAD_REPLAY_DATABASE;
+};
+
 
 // wait until all clients have received all the data and assembled it
-[
-	{{!(_x getVariable ["grad_replay_playerReceivalComplete",false])} count (_this select 0) == 0},
-	{[] remoteExec ["GRAD_replay_fnc_initReplay", _this select 0, false]},
-	[_allPlayers],
-	30,
-	{
-		[] remoteExec ["GRAD_replay_fnc_initReplay", _this select 0, false];
-		INFO_1("Waiting for players timed out. Missing players: %1",(_this select 0) select {!(_x getVariable ["grad_replay_playerReceivalComplete",false])});
-	}
-] call CBA_fnc_waitUntilAndExecute;
+private _waitCondition = {
+	{!(_x getVariable ["grad_replay_playerReceivalComplete",false])} count (_this select 0) == 0
+};
+private _onComplete = {
+	[] remoteExec ["GRAD_replay_fnc_initReplay", _this select 0, false]
+};
+private _onTimeout = {
+	[] remoteExec ["GRAD_replay_fnc_initReplay", _this select 0, false];
+	_missingPlayers = (_this select 0) select {!(_x getVariable ["grad_replay_playerReceivalComplete",false])};
+	INFO_1("Waiting for players timed out. Missing players: %1",_missingPlayers);
+};
+[_waitCondition,_onComplete,[_allPlayers],30,_onTimeout] call CBA_fnc_waitUntilAndExecute;
 
 // copyToClipboard str GRAD_REPLAY_DATABASE;

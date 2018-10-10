@@ -1,11 +1,17 @@
 #include "script_component.hpp"
 
-INFO("Assembling replay data.");
-private _startTime = diag_tickTime;
+params [["_part",0],["_startIndex",0],["_startTime",diag_tickTime],["_currentUnitsDataStates",[]]];
 
-GRAD_REPLAY_DATABASE_LOCAL_ASSEMBLED = [];
+if (_part == 0) then {
+	INFO("Assembling replay data.");
+} else {
+	INFO_2("Continuing assembly at index %1 (recursion %2).",_startIndex,_part);
+};
 
-private _currentUnitsDataStates = [];
+if (isNil "GRAD_REPLAY_DATABASE_LOCAL_ASSEMBLED") then {
+	GRAD_REPLAY_DATABASE_LOCAL_ASSEMBLED = [];
+};
+
 private _typeDefaults = [
 	"",		// icon
 	-1,		// color ID
@@ -15,10 +21,16 @@ private _typeDefaults = [
 	""		// group name
 ];
 
-{
-    _compressedIntervalData = _x;
+private _interrupt = false;
+private _startTimePart = diag_tickTime;
+private _continueAt = 0;
+
+for [{_i=_startIndex},{_i< count GRAD_REPLAY_DATABASE_LOCAL},{_i=_i+1}] do {
+
+	_compressedIntervalData = GRAD_REPLAY_DATABASE_LOCAL select _i;
     _intervalData = [];
-    {
+
+	{
 		// catch nil entries, not sure what's causing them
 		if (!isNil "_x") then {
 
@@ -52,7 +64,12 @@ private _typeDefaults = [
     } forEach _compressedIntervalData;
 
     GRAD_REPLAY_DATABASE_LOCAL_ASSEMBLED pushBack _intervalData;
-    false
-} count GRAD_REPLAY_DATABASE_LOCAL;
+
+	if ((diag_tickTime - _startTimePart) > 0.2) exitWith {_interrupt = true; _continueAt = _i + 1};
+};
+
+if (_interrupt) exitWith {
+	[{_this call grad_replay_fnc_assembleReplayData},[_part + 1,_continueAt,_startTime,_currentUnitsDataStates]] call CBA_fnc_execNextFrame;
+};
 
 INFO_1("Assembling completed in %1s",diag_tickTime - _startTime);

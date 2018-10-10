@@ -29,8 +29,11 @@ publicVariable "ace_map_mapShake";
 
 
 missionnamespace setVariable ["GRAD_replay_isRunning", true, true];
+
+INFO("Sending database to clients.");
+private _startTime = diag_tickTime;
+
 _replayLength = count GRAD_REPLAY_DATABASE;
-INFO_1("Started sending replay at serverTime %1",serverTime);
 INFO_1("Replay length is %1",_replayLength);
 
 private _allPlayers = allPlayers - entities "HeadlessClient_F";
@@ -50,24 +53,26 @@ for [{_i=0},{_i < ceil (_replayLength / GRAD_REPLAY_SENDING_CHUNK_SIZE)},{_i=_i+
 	for [{_j=_startIndex},{_j<=_endIndex},{_j=_j+1}] do {
 	    _chunk pushBack (GRAD_REPLAY_DATABASE select _j);
 	};
-	
+
 	[_chunk,_startIndex] remoteExecCall ["GRAD_replay_fnc_addReplayPart", _allPlayers];
 	sleep GRAD_REPLAY_SENDING_DELAY; // set to zero for debugging ordering
 };
 
+INFO_1("Database sending completed in %1s.",(diag_tickTime - _startTime));
 
 // wait until all clients have received all the data and assembled it
 private _waitCondition = {
 	{!(_x getVariable ["grad_replay_playerReceivalComplete",false])} count (_this select 0) == 0
 };
 private _onComplete = {
-	[] remoteExec ["GRAD_replay_fnc_initReplay", _this select 0, false]
+	INFO_1("All players have received and assembled database. Total time since start of function: %1.",(diag_tickTime - (_this select 1)));
+	[] remoteExec ["GRAD_replay_fnc_initReplay", _this select 0, false];
 };
 private _onTimeout = {
 	[] remoteExec ["GRAD_replay_fnc_initReplay", _this select 0, false];
 	_missingPlayers = (_this select 0) select {!(_x getVariable ["grad_replay_playerReceivalComplete",false])};
 	INFO_1("Waiting for players timed out. Missing players: %1",_missingPlayers);
 };
-[_waitCondition,_onComplete,[_allPlayers],30,_onTimeout] call CBA_fnc_waitUntilAndExecute;
+[_waitCondition,_onComplete,[_allPlayers,_startTime],30,_onTimeout] call CBA_fnc_waitUntilAndExecute;
 
 // copyToClipboard str GRAD_REPLAY_DATABASE;

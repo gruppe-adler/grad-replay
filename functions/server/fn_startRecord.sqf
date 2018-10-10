@@ -31,17 +31,20 @@ private _currentSaveState = [];
     if (GRAD_REPLAY_RECORDING_PAUSED) exitWith {};
 
 	_players = playableUnits + switchableUnits + allDeadMen;
-	_vehicles = vehicles + allDead - allDeadMen;
-	_ai = allUnits - playableUnits - switchableUnits;
 	_trackedUnits = _players;
 	_terminals = allMissionObjects "Land_DataTerminal_01_F"; // speciality for mission "breaking contact"
 	_trackedUnits append _terminals;
 
 	if (GRAD_REPLAY_AI_VEHICLES_TRACKED) then {
+		// filter weapon holders
+		_vehicles = (vehicles + allDead - allDeadMen) select {
+			!(typeOf _x in ["WeaponHolder","WeaponHolder_Single_F","WeaponHolderSimulated","WeaponHolderSimulated_Scripted"])
+		};
 		_trackedUnits append _vehicles;
 	};
 
 	if (GRAD_REPLAY_AI_ONFOOT_TRACKED) then {
+		_ai = allUnits - playableUnits - switchableUnits;
 		_trackedUnits append _ai;
 	};
 

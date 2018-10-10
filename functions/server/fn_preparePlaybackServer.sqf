@@ -68,7 +68,7 @@ private _onComplete = {
 };
 private _onTimeout = {
 	[] remoteExec ["GRAD_replay_fnc_initReplay", _this select 0, false];
-	_missingPlayers = (_this select 0) select {!(_x getVariable ["grad_replay_playerReceivalComplete",false])};
+	_missingPlayers = (_this select 0) select {!(_x getVariable ["grad_replay_playerReceiptComplete",false])};
 	INFO_1("Waiting for players timed out. Missing players: %1",_missingPlayers);
 };
 [_waitCondition,_onComplete,[_allPlayers,_startTime],30,_onTimeout] call CBA_fnc_waitUntilAndExecute;

@@ -61,9 +61,7 @@ for [{_i=0},{_i < ceil (_replayLength / GRAD_REPLAY_SENDING_CHUNK_SIZE)},{_i=_i+
 INFO_1("Database sending completed in %1s.",(diag_tickTime - _startTime));
 
 // wait until all clients have received all the data and assembled it
-private _waitCondition = {
-	{!(_x getVariable ["grad_replay_playerReceivalComplete",false])} count (_this select 0) == 0
-};
+private _waitCondition = {{!(_x getVariable ["grad_replay_playerAssemblyComplete",false])} count (_this select 0) == 0};
 private _onComplete = {
 	INFO_1("All players have received and assembled database. Total time since start of function: %1.",(diag_tickTime - (_this select 1)));
 	[] remoteExec ["GRAD_replay_fnc_initReplay", _this select 0, false];

@@ -68,8 +68,9 @@ for [{_i=_startIndex},{_i< count GRAD_REPLAY_DATABASE_LOCAL},{_i=_i+1}] do {
 	if ((diag_tickTime - _startTimePart) > 0.2) exitWith {_interrupt = true; _continueAt = _i + 1};
 };
 
-if (_interrupt) exitWith {
+if (_interrupt) then {
 	[{_this call grad_replay_fnc_assembleReplayData},[_part + 1,_continueAt,_startTime,_currentUnitsDataStates]] call CBA_fnc_execNextFrame;
+} else {
+	player setVariable ["grad_replay_playerAssemblyComplete",true,true];
+	INFO_1("Assembling completed in %1s",diag_tickTime - _startTime);
 };
-
-INFO_1("Assembling completed in %1s",diag_tickTime - _startTime);

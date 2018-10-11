@@ -18,7 +18,7 @@ private _fnc_disableUnit = if (isMultiplayer) then {
 {
     _x call _fnc_disableUnit;
     _x setVariable ["ace_map_hideBlueForceMarker", true];
-} forEach allUnits;
+} count allUnits;
 
 // remove ace blu force tracking marker
 

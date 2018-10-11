@@ -57,8 +57,9 @@ private _currentSaveState = [];
         _unit = _x;
         _veh = vehicle _unit;
         _isEmptyVehicle = _unit isKindOf "LandVehicle" && {{alive _x} count (crew _unit) == 0};
+        _isMan = _veh isKindOf "Man";
 
-        if ([_unit,_veh,_isEmptyVehicle] call grad_replay_fnc_canTrackUnit) then {
+        if ([_unit,_veh,_isEmptyVehicle,_isMan] call grad_replay_fnc_canTrackUnit) then {
             _unitID = _unit getVariable "grad_replay_unitID";
             if (isNil "_unitID") then {
                 _unitID = _currentSaveState pushBack [];
@@ -66,7 +67,6 @@ private _currentSaveState = [];
             };
             _currentUnitData = _currentSaveState select _unitID;
 
-            _isMan = _veh isKindOf "Man";
 
             _name = if (alive _unit && _isMan) then {name _unit} else {""};
             _groupname = if (_unit isEqualTo (leader group _unit)) then {" (" + groupId (group _unit) + ")"} else {""};

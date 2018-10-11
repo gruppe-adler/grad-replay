@@ -22,15 +22,15 @@ private _name =  if (_showName) then { _name + " " + _groupname } else { "" };
 private _color = [_colorID] call grad_replay_fnc_getColorFromID;
 
 _map drawIcon [
-			_icon,
-			_color,
-			_pos,
-			24,
-			24,
-			_dir,
-			_name,
-			1,
-			0.03,
-			'TahomaB',
-			'right'
+    _icon,
+    _color,
+    _pos,
+    24,
+    24,
+    _dir,
+    _name,
+    1,
+    0.03,
+    'TahomaB',
+    'right'
 ];

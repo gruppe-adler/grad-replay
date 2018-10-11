@@ -29,11 +29,11 @@ class GRAD_replay {
         class syncPlaybackPos {};
     };
 
-	class server {
-		file = MODULES_DIRECTORY\@gruppe-adler\replay\functions\server;
+    class server {
+        file = MODULES_DIRECTORY\@gruppe-adler\replay\functions\server;
 
         class canTrackUnit {};
-		class getSideColorID {};
+        class getSideColorID {};
         class init {};
         class pauseRecord {};
         class preparePlaybackServer {};
@@ -41,5 +41,5 @@ class GRAD_replay {
         class startRecord {};
         class stopRecord {};
         class storeValue {};
-	};
+    };
 };

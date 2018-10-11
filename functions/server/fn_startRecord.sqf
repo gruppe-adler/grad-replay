@@ -108,8 +108,7 @@ private _currentSaveState = [];
             [_currentUnitData,_nextTickData,_unitID,[_icon,_colorID,_pos,_dir,_name,_groupname]] call GRAD_replay_fnc_storeValue;
         };
 
-        false
-    } count _trackedUnits;
+    } forEach _trackedUnits;
 
     if (count _nextTickData > 0) then {
         _nextTickData pushBack dayTime;

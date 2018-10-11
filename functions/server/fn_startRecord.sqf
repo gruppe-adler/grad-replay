@@ -35,7 +35,7 @@ private _currentSaveState = [];
     _terminals = allMissionObjects "Land_DataTerminal_01_F"; // speciality for mission "breaking contact"
     _trackedUnits append _terminals;
 
-    if (GRAD_REPLAY_VEHICLES_TRACKED) then {
+    if (GRAD_REPLAY_AI_VEHICLES_TRACKED ) then {
         // filter weapon holders
         _vehicles = (vehicles + allDead - allDeadMen) select {
             !(typeOf _x in ["WeaponHolder","WeaponHolder_Single_F","WeaponHolderSimulated","WeaponHolderSimulated_Scripted","GroundWeaponHolder","GroundWeaponHolder_Scripted"])

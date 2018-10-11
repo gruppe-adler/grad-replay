@@ -11,7 +11,7 @@ params ["_chunk", "_startIndex"];
 private _targetCount = missionNamespace getVariable ["GRAD_REPLAY_DATABASE_TARGET_COUNT_LOCAL",9999999];
 if ({!isNil "_x"} count GRAD_REPLAY_DATABASE_LOCAL >= _targetCount) then {
 
-    // apparently function can run multiple times parallelly --> exit here if other instance was first
+    // apparently function can run multiple times in parallel --> exit here if other instance was first
     if (player getVariable ["grad_replay_playerReceiptComplete",false]) exitWith {};
     player setVariable ["grad_replay_playerReceiptComplete",true,true];
 

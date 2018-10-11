@@ -2,20 +2,22 @@
 
 if (!isServer) exitWith {};
 
+private _fnc_disableUnit = if (isMultiplayer) then {
+    {
+        _this enableSimulationGlobal false;
+
+        // freeze vehicle
+        if (!(vehicle _this isEqualTo _this) && _this isEqualTo (driver vehicle _this)) then {
+            vehicle _this attachTo [_this];
+        };
+    }
+} else {
+    {_this enableSimulation false}
+};
+
 {
-	if (isMultiplayer) then {
-		_x enableSimulationGlobal false;
-
-		// freeze vehicle
-		if (!(vehicle _x isEqualTo _x) && _x isEqualTo (driver vehicle _x)) then {
-				vehicle _x attachTo [_x];
-		};
-	} else {
-		_x enableSimulation false;
-	};
-
+    _x call _fnc_disableUnit;
 	_x setVariable ["ace_map_hideBlueForceMarker", true];
-
 } forEach allUnits;
 
 // remove ace blu force tracking marker
@@ -45,14 +47,14 @@ private _allPlayers = allPlayers - entities "HeadlessClient_F";
 
 // send to all clients at once, but one tidbit after another --> hopefully this works
 for [{_i=0},{_i < ceil (_replayLength / GRAD_REPLAY_SENDING_CHUNK_SIZE)},{_i=_i+1}] do {
+
 	_startIndex = _i * GRAD_REPLAY_SENDING_CHUNK_SIZE;
+    if (_startIndex >= _replayLength) exitWith {};
+
 	_endIndex = _startIndex + GRAD_REPLAY_SENDING_CHUNK_SIZE;
 	if (_endIndex >= _replayLength) then {_endIndex = _replayLength - 1};
 
-	_chunk = [];
-	for [{_j=_startIndex},{_j<=_endIndex},{_j=_j+1}] do {
-	    _chunk pushBack (GRAD_REPLAY_DATABASE select _j);
-	};
+    _chunk = GRAD_REPLAY_DATABASE select [_startIndex, _endIndex - _startIndex + 1];
 
 	[_chunk,_startIndex] remoteExecCall ["GRAD_replay_fnc_addReplayPart", _allPlayers];
 	sleep GRAD_REPLAY_SENDING_DELAY; // set to zero for debugging ordering
@@ -61,7 +63,7 @@ for [{_i=0},{_i < ceil (_replayLength / GRAD_REPLAY_SENDING_CHUNK_SIZE)},{_i=_i+
 INFO_1("Database sending completed in %1s.",(diag_tickTime - _startTime));
 
 // wait until all clients have received all the data and assembled it
-private _waitCondition = {{!(_x getVariable ["grad_replay_playerAssemblyComplete",false])} count (_this select 0) == 0};
+private _waitCondition = {(_this select 0) findIf {!(_x getVariable ["grad_replay_playerAssemblyComplete",false])} < 0};
 private _onComplete = {
 	INFO_1("All players have received and assembled database. Total time since start of function: %1.",(diag_tickTime - (_this select 1)));
 	[] remoteExec ["GRAD_replay_fnc_initReplay", _this select 0, false];

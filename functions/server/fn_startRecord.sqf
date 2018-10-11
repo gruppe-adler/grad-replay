@@ -38,7 +38,7 @@ private _currentSaveState = [];
 	if (GRAD_REPLAY_VEHICLES_TRACKED) then {
 		// filter weapon holders
 		_vehicles = (vehicles + allDead - allDeadMen) select {
-			!(typeOf _x in ["WeaponHolder","WeaponHolder_Single_F","WeaponHolderSimulated","WeaponHolderSimulated_Scripted"])
+			!(typeOf _x in ["WeaponHolder","WeaponHolder_Single_F","WeaponHolderSimulated","WeaponHolderSimulated_Scripted","GroundWeaponHolder","GroundWeaponHolder_Scripted"])
 		};
 		_trackedUnits append _vehicles;
 	};
@@ -56,7 +56,7 @@ private _currentSaveState = [];
 	{
 		_unit = _x;
 		_veh = vehicle _unit;
-		_isEmptyVehicle = _unit isKindOf "LandVehicle" && ({alive _x} count (crew _unit) == 0);
+		_isEmptyVehicle = _unit isKindOf "LandVehicle" && {{alive _x} count (crew _unit) == 0};
 
 		if ([_unit,_veh,_isEmptyVehicle] call grad_replay_fnc_canTrackUnit) then {
 			_unitID = _unit getVariable "grad_replay_unitID";
@@ -112,8 +112,8 @@ private _currentSaveState = [];
 	} count _trackedUnits;
 
 	if (count _nextTickData > 0) then {
-		_nextTickData append [dayTime];
-		GRAD_REPLAY_DATABASE append [_nextTickData];
+		_nextTickData pushBack dayTime;
+		GRAD_REPLAY_DATABASE pushBack _nextTickData;
 	};
 
 },_precision,[_currentSaveState]] call CBA_fnc_addPerFrameHandler;

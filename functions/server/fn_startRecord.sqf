@@ -5,10 +5,6 @@ params ["_precision"];
 INFO_1("Starting recording with precision %1",_precision);
 
 {
-    _x setVariable ["GRAD_replay_persistentName", name _x, true];
-} forEach allUnits;
-
-{
     _x setVariable ["GRAD_replay_track", true];
     _x setVariable ["asr_ai_exclude", true];
 } forEach playableUnits + switchableUnits + allPlayers;

@@ -19,10 +19,14 @@ GRAD_REPLAY_AI_VEHICLES_TRACKED = ([(missionConfigFile >> "GRAD_Replay"), "track
 GRAD_REPLAY_AI_ONFOOT_TRACKED = ([(missionConfigFile >> "GRAD_Replay"), "trackedAI", 0] call BIS_fnc_returnConfigEntry) == 1;
 REPLAY_STEPS_PER_TICK = [(missionConfigFile >> "GRAD_Replay"), "stepsPerTick", 1] call BIS_fnc_returnConfigEntry;
 GRAD_REPLAY_SENDING_CHUNK_SIZE = [(missionConfigFile >> "GRAD_Replay"), "sendingChunkSize", 10] call BIS_fnc_returnConfigEntry;
+GRAD_REPLAY_TRACKSHOTS = ([(missionConfigFile >> "GRAD_Replay"), "trackShots", 0] call BIS_fnc_returnConfigEntry) == 1;
 private _precision = [(missionConfigFile >> "GRAD_Replay"), "precision", 1] call BIS_fnc_returnConfigEntry;
 
-[_precision] call GRAD_replay_fnc_startRecord;
+if (GRAD_REPLAY_TRACKSHOTS) then {
+    ["CAManBase","firedMan",{_this call grad_replay_fnc_onFiredMan}] call CBA_fnc_addClassEventHandler;
+};
 
+[_precision] call GRAD_replay_fnc_startRecord;
 
 /* to start playback:
 [] GRAD_replay_fnc_stopRecord;

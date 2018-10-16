@@ -13,12 +13,13 @@ if (isNil "GRAD_REPLAY_DATABASE_LOCAL_ASSEMBLED") then {
 };
 
 private _typeDefaults = [
-    "",		// icon
-    -1,		// color ID
-    [0,0],	// pos2D
-    -1,		// dir
-    "",		// name
-    ""		// group name
+    "",         // icon
+    -1,         // color ID
+    [0,0],      // pos2D
+    -1,         // dir
+    "",         // name
+    "",         // group name
+    []          // fired target
 ];
 
 private _interrupt = false;

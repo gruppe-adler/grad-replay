@@ -13,9 +13,9 @@ _iconData params [
     ["_pos", [0,0,0]],
     ["_dir", 0],
     ["_name", ""],
-    ["_groupname", ""]
+    ["_groupname", ""],
+    ["_firedTarget",[]]
 ];
-
 
 private _showName = (ctrlMapScale _map) < 0.03;
 private _name =  if (_showName) then { _name + " " + _groupname } else { "" };
@@ -34,3 +34,7 @@ _map drawIcon [
     'TahomaB',
     'right'
 ];
+
+if !(_firedTarget isEqualTo []) then {
+    _map drawLine [_pos,_firedTarget,[1,0,0,1]];
+};

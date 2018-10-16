@@ -35,6 +35,7 @@ class GRAD_replay {
         class canTrackUnit {};
         class getSideColorID {};
         class init {};
+        class onFiredMan {};
         class pauseRecord {};
         class preparePlaybackServer {};
         class setMeSpectator {};

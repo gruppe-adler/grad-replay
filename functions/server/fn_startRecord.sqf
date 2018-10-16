@@ -78,6 +78,9 @@ private _currentSaveState = [];
             _type = typeOf _veh;
             _icon = getText (configfile >> "CfgVehicles" >> _type >> "icon");
 
+            _firedTarget = _unit getVariable ["grad_replay_firedTarget",[]];
+            _unit setVariable ["grad_replay_firedTarget",nil];
+
             // mark funkwagen if he is sending in red // speciality for mission "breaking contact"
             if (_type isEqualTo "rhs_gaz66_r142_vv" && {_veh getVariable ["tf_range",0] == 50000}) then {
                 _colorID = 11;
@@ -100,7 +103,7 @@ private _currentSaveState = [];
                 };
             };
 
-            [_currentUnitData,_nextTickData,_unitID,[_icon,_colorID,_pos,_dir,_name,_groupname]] call GRAD_replay_fnc_storeValue;
+            [_currentUnitData,_nextTickData,_unitID,[_icon,_colorID,_pos,_dir,_name,_groupname,_firedTarget]] call GRAD_replay_fnc_storeValue;
         };
 
     } forEach _trackedUnits;

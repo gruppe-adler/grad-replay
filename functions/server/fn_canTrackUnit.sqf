@@ -1,11 +1,16 @@
-params ["_unit","_veh","_isEmptyVehicle","_isMan"];
+params ["_unit","_veh","_isVehicle","_isEmptyVehicle","_isMan"];
 
+// always track things
+if (!_isVehicle && !_isMan) exitWith {true};
 
 // always track empty vehicles
 if (_isEmptyVehicle) exitWith {true};
 
-// never track non-driver units in vehicles to avoid duplicate icons
-if (_isMan && {driver _veh != _unit}) exitWith {false};
+// never track non empty vehicle objects (only effective commander has icon)
+if (_isVehicle) exitWith {false};
+
+// never track more than the effective commander in a vehicle to avoid duplicate icons
+if (effectiveCommander _veh != _unit) exitWith {false};
 
 // always track if explicitly set by user
 if (_unit getVariable ["grad_replay_track",false]) exitWith {true};

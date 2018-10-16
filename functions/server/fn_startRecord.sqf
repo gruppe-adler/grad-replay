@@ -6,7 +6,6 @@ INFO_1("Starting recording with precision %1",_precision);
 
 {
     _x setVariable ["GRAD_replay_persistentName", name _x, true];
-
 } forEach allUnits;
 
 {
@@ -56,10 +55,13 @@ private _currentSaveState = [];
     {
         _unit = _x;
         _veh = vehicle _unit;
-        _isEmptyVehicle = _unit isKindOf "LandVehicle" && {{alive _x} count (crew _unit) == 0};
-        _isMan = _veh isKindOf "Man";
+        _isMan = _unit isKindOf "Man";
+        _isVehicle = !_isMan && {_unit isKindOf "AllVehicles"};
+        _isEmptyVehicle = _isVehicle && {{alive _x} count (crew _unit) == 0};
 
-        if ([_unit,_veh,_isEmptyVehicle,_isMan] call grad_replay_fnc_canTrackUnit) then {
+        if ([_unit,_veh,_isVehicle,_isEmptyVehicle,_isMan] call grad_replay_fnc_canTrackUnit) then {
+
+            // set tracking ID if unit doesn't have one
             _unitID = _unit getVariable "grad_replay_unitID";
             if (isNil "_unitID") then {
                 _unitID = _currentSaveState pushBack [];
@@ -67,14 +69,15 @@ private _currentSaveState = [];
             };
             _currentUnitData = _currentSaveState select _unitID;
 
-
-            _name = if (alive _unit && _isMan) then {name _unit} else {""};
-            _groupname = if (_unit isEqualTo (leader group _unit)) then {" (" + groupId (group _unit) + ")"} else {""};
+            // use ACE_Name so it works with dead units
+            _name = _unit getVariable ["ACE_Name",""];
 
             _pos = getpos _unit;
             _pos resize 2;
 
-            _side = side _unit;
+            _groupname = if (_unit isEqualTo (leader group _unit)) then {" (" + groupId (group _unit) + ")"} else {""};
+            _dir = round (getDir _veh);
+            _side = if (_isMan) then {side _unit} else {sideEmpty};
             _colorID = [_side] call GRAD_replay_fnc_getSideColorID;
             _type = typeOf _veh;
             _icon = getText (configfile >> "CfgVehicles" >> _type >> "icon");
@@ -89,20 +92,16 @@ private _currentSaveState = [];
                 _colorID = 11;
             };
 
-            if (_isEmptyVehicle) then {
-                _colorID = [sideEmpty] call GRAD_replay_fnc_getSideColorID;
-            };
-
-            _dir = round (getDir _veh);
-
-            if (_unit getVariable ["ACE_isUnconscious", false]) then {
-                _colorID = _colorID + 5;
-                _groupname = "unconscious";
-            };
-
-            if (!alive _unit && (_isMan || _isEmptyVehicle)) then {
-                _groupname = _unit getVariable ["GRAD_replay_persistentName", ""];
+            // set dead unit color to grey, independent of side
+            if (!alive _unit) then {
                 _colorID = 10;
+            } else {
+
+                // colorID for unconscious is hardcoded to be +5 of side
+                if (_unit getVariable ["ACE_isUnconscious", false]) then {
+                    _colorID = _colorID + 5;
+                    _groupname = "unconscious";
+                };
             };
 
             [_currentUnitData,_nextTickData,_unitID,[_icon,_colorID,_pos,_dir,_name,_groupname]] call GRAD_replay_fnc_storeValue;
@@ -110,9 +109,7 @@ private _currentSaveState = [];
 
     } forEach _trackedUnits;
 
-    if (count _nextTickData > 0) then {
-        _nextTickData pushBack dayTime;
-        GRAD_REPLAY_DATABASE pushBack _nextTickData;
-    };
+    _nextTickData pushBack dayTime;
+    GRAD_REPLAY_DATABASE pushBack _nextTickData;
 
 },_precision,[_currentSaveState]] call CBA_fnc_addPerFrameHandler;

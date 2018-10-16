@@ -24,7 +24,7 @@ private _colors = [
     [0.7,0.6,0,0.5],        // 9: SIDEEMPTY unconscious
 
     // other
-    [0.2,0.2,0.2,1],        // 10: dead unit
+    [0.2,0.2,0.2,0.5],      // 10: dead unit
     [1,0,0,1]               // 11: funkwagen-red when sending, speciality for mission "breaking contact"
 ];
 

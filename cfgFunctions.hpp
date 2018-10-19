@@ -8,8 +8,10 @@ class GRAD_replay {
         file = MODULES_DIRECTORY\@gruppe-adler\replay\functions\player;
 
         class addReplayPart {};
+        class assembleReplayData {};
         class createMapOverlay {};
         class drawIcon {};
+        class getColorFromID {};
         class getRecordEntry {};
         class initReplay {};
         class onPlaybackPosChanged {};
@@ -27,10 +29,11 @@ class GRAD_replay {
         class syncPlaybackPos {};
     };
 
-	class server {
-		file = MODULES_DIRECTORY\@gruppe-adler\replay\functions\server;
+    class server {
+        file = MODULES_DIRECTORY\@gruppe-adler\replay\functions\server;
 
-		class getSideColor {};
+        class canTrackUnit {};
+        class getSideColorID {};
         class init {};
         class pauseRecord {};
         class preparePlaybackServer {};
@@ -38,5 +41,5 @@ class GRAD_replay {
         class startRecord {};
         class stopRecord {};
         class storeValue {};
-	};
+    };
 };

@@ -1,7 +1,5 @@
-#include "\z\ace\addons\main\script_component.hpp"
-
 {_x setMarkerAlphaLocal 0;} forEach allMapMarkers; // hide all markers for replay --> to be tested
-	
+
 if (dialog) then {closeDialog 0;};
 
 [ "TIMER", "onEachFrame" ] call BIS_fnc_removeStackedEventHandler;

@@ -23,17 +23,18 @@ CBA, ACE3
 ```
 // if CfgFunctions already exists, just put the #include part inside
 class CfgFunctions {
-  #include "node_modules\@gruppe-adler\replay\cfgFunctions.hpp"
- };
+    #include "node_modules\@gruppe-adler\replay\cfgFunctions.hpp"
+};
 ```
 
 ```
 class GRAD_Replay {
-  precision = 5;                                    // precision of replay, 5 means every 5 seconds one snapshot (number)
-  trackedSides[] = {"west", "east", "civilian"};    // defines the sides that will be tracked (possible are "west", "east", "independant", "civilian") (array)
-  stepsPerTick = 1;                                 // defines steps played back at once (number)
-  trackedVehicles = 0;                              // defines if empty and AI steered vehicles will be tracked (0/1)
-  trackedAI = 0;                                    // defines if AI will be tracked (0/1)
+    precision = 5;                                    // precision of replay, 5 means every 5 seconds one snapshot (number)
+    trackedSides[] = {"west", "east", "civilian"};    // defines the sides that will be tracked (possible are "west", "east", "independant", "civilian") (array)
+    stepsPerTick = 1;                                 // defines steps played back at once (number)
+    trackedVehicles = 0;                              // defines if empty and AI steered vehicles will be tracked (0/1)
+    trackedAI = 0;                                    // defines if AI will be tracked (0/1)
+    sendingChunkSize = 10;                            // higher number means replay loading is faster, but might cause instability / lags during loading
 };
 ```
 ### 4. Initialize script in init.sqf
@@ -47,9 +48,9 @@ call GRAD_replay_fnc_stopRecord;
 
 // ends mission after replay is over
 [{
-	REPLAY_FINISHED
+    REPLAY_FINISHED
 }, {
-   ["END1"] remoteExec ["endMission",0,false]; // your custom end mission call or whatever you want to do after replay
+    ["END1"] remoteExec ["endMission",0,false]; // your custom end mission call or whatever you want to do after replay
 }, []] call CBA_fnc_waitUntilAndExecute;
 ```
 

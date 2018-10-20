@@ -6,7 +6,6 @@ if !(_positionData isEqualType []) exitWith {};
 private _iconData = _positionData param [_index,[]];
 if !(_iconData isEqualType []) exitWith {};
 
-
 _iconData params [
     ["_icon", ""],
     ["_colorID", -1],
@@ -14,7 +13,7 @@ _iconData params [
     ["_dir", 0],
     ["_name", ""],
     ["_groupname", ""],
-    ["_firedTarget",[]]
+    ""
 ];
 
 private _showName = (ctrlMapScale _map) < 0.03;
@@ -34,7 +33,3 @@ _map drawIcon [
     'TahomaB',
     'right'
 ];
-
-if !(_firedTarget isEqualTo []) then {
-    _map drawLine [_pos,_firedTarget,[1,0,0,1]];
-};

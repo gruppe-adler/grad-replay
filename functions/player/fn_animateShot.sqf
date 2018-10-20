@@ -22,7 +22,7 @@ private _color = [_colorID] call grad_replay_fnc_getColorFromID;
 private _shotDir = _pos getDir _firedTarget;
 private _shotDistance = _pos distance _firedTarget;
 private _drawEH = -1;
-private _shotAnimTicks = ceil (_shotDistance / GRAD_REPLAY_SHOTANIMSPEED);
+private _shotAnimTicks = (ceil (_shotDistance / GRAD_REPLAY_SHOTANIMSPEED)) min 30;
 private _shotAnimCurrentTick = 1;
 
 [{

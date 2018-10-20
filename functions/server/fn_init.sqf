@@ -11,7 +11,7 @@ GRAD_REPLAY_RECORDING_PAUSED = false;
 GRAD_REPLAY_RECORDING_STOPPED = false;
 GRAD_REPLAY_SENDING_DELAY = 0.05;
 GRAD_REPLAY_DATABASE = [];
-GRAD_REPLAY_SHOTANIMSPEED = 400;     // how fast projectiles move during replay in meters per 0.1s
+GRAD_REPLAY_SHOTANIMSPEED = 60;     // how fast projectiles move during replay in meters per 0.1s
 
 // vehicle setVariable ["GRAD_replay_track", true];
 

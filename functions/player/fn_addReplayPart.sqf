@@ -16,7 +16,6 @@ if ({!isNil "_x"} count GRAD_REPLAY_DATABASE_LOCAL >= _targetCount) then {
     player setVariable ["grad_replay_playerReceiptComplete",true,true];
 
     INFO_1("Client replay receipt completed at serverTime %1",serverTime);
-    diag_log [{!isNil "_x"} count GRAD_REPLAY_DATABASE_LOCAL,count GRAD_REPLAY_DATABASE_LOCAL,_targetCount,_startIndex,count _chunk];
 
     [{[] call grad_replay_fnc_assembleReplayData},[],1] call CBA_fnc_waitAndExecute;
 };

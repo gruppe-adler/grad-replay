@@ -2,7 +2,7 @@
 
 params ["_unit", "", "", "", "", "", "_projectile", "_vehicle"];
 
-// only effective commander is tracked if unit is inside a vehicle
+// only effective commander is tracked if unit is inside a vehicle --> proceed as if effective commander fired the shot
 _unit = effectiveCommander vehicle _unit;
 
 // make sure unit is being tracked

@@ -16,6 +16,7 @@ _iconData params [
     ["_firedTarget",[]]
 ];
 
+// unit did not fire shot this tick
 if (_firedTarget isEqualTo []) exitWith {};
 
 private _color = [_colorID] call grad_replay_fnc_getColorFromID;
@@ -30,7 +31,6 @@ private _shotAnimCurrentTick = 1;
     params ["_args","_handle"];
     _args params ["_drawEH","_shotAnimCurrentTick","_shotAnimTicks","_map","_pos","_firedTarget","_color","_shotDir"];
 
-
     _newShotEndPos = if (_shotAnimCurrentTick > _shotAnimTicks) then {
         _firedTarget
     } else {
@@ -44,8 +44,10 @@ private _shotAnimCurrentTick = 1;
         _pos getPos [GRAD_REPLAY_SHOTANIMSPEED * _startPosTick,_shotDir]
     };
 
+    // remove previous draw EH
     _map ctrlRemoveEventHandler ["Draw",_drawEH];
 
+    // create new draw EH and save ID in _drawEH (_args set [0,...])
     if (_startPosTick > _shotAnimTicks) then {
         [_handle] call CBA_fnc_removePerFrameHandler;
     } else {
@@ -66,7 +68,6 @@ private _shotAnimCurrentTick = 1;
     params ["_args","_handle"];
     _args params ["_drawEH","_shotAnimCurrentTick","_shotAnimTicks","_map","_pos","_firedTarget","_color","_shotDir"];
 
-
     _newShotPos = if (_shotAnimCurrentTick > _shotAnimTicks) then {
         _color set [3,(_color select 3) - 0.2];
         _firedTarget;
@@ -74,8 +75,10 @@ private _shotAnimCurrentTick = 1;
         _pos getPos [GRAD_REPLAY_SHOTANIMSPEED * _shotAnimCurrentTick,_shotDir];
     };
 
+    // remove previous draw EH
     _map ctrlRemoveEventHandler ["Draw",_drawEH];
 
+    // create new draw EH and save ID in _drawEH (_args set [0,...])
     if (_color select 3 <= 0) then {
         [_handle] call CBA_fnc_removePerFrameHandler;
     } else {

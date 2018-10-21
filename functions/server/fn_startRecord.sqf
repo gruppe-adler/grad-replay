@@ -78,6 +78,7 @@ private _currentSaveState = [];
             _type = typeOf _veh;
             _icon = getText (configfile >> "CfgVehicles" >> _type >> "icon");
 
+            // firedTarget is being set by fn_onFiredMan --> if it has a value, save and reset the variable
             _firedTarget = _unit getVariable ["grad_replay_firedTarget",[]];
             _unit setVariable ["grad_replay_firedTarget",nil];
 

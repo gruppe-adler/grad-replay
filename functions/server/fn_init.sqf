@@ -3,6 +3,7 @@
 GRAD_REPLAY_DATABASE_LOCAL = [];
 GRAD_REPLAY_DATABASE_TARGET_COUNT_LOCAL = 999999; // something really high to prevent from finishing at once
 GRAD_REPLAY_PLAYBACK_PAUSED = false;
+GRAD_REPLAY_SHOTANIMSPEED = 60;     // how fast projectiles move during replay in meters per 0.1s
 
 if (!isServer) exitWith {};
 
@@ -11,7 +12,6 @@ GRAD_REPLAY_RECORDING_PAUSED = false;
 GRAD_REPLAY_RECORDING_STOPPED = false;
 GRAD_REPLAY_SENDING_DELAY = 0.05;
 GRAD_REPLAY_DATABASE = [];
-GRAD_REPLAY_SHOTANIMSPEED = 60;     // how fast projectiles move during replay in meters per 0.1s
 
 // vehicle setVariable ["GRAD_replay_track", true];
 

@@ -2,7 +2,8 @@
 
 params ["_unit", "", "", "", "", "", "_projectile", "_vehicle"];
 
-diag_log ["firedMan",_this];
+// only effective commander is tracked if unit is inside a vehicle
+_unit = effectiveCommander vehicle _unit;
 
 // make sure unit is being tracked
 private _unitID = _unit getVariable ["grad_replay_unitID",-1];

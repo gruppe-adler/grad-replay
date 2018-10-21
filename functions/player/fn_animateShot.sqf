@@ -25,6 +25,7 @@ private _drawEH = -1;
 private _shotAnimTicks = (floor (_shotDistance / GRAD_REPLAY_SHOTANIMSPEED)) min 30;
 private _shotAnimCurrentTick = 1;
 
+// flying lines Star Wars style animation
 [{
     params ["_args","_handle"];
     _args params ["_drawEH","_shotAnimCurrentTick","_shotAnimTicks","_map","_pos","_firedTarget","_color","_shotDir"];

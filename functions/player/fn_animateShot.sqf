@@ -30,6 +30,42 @@ private _shotAnimCurrentTick = 1;
     _args params ["_drawEH","_shotAnimCurrentTick","_shotAnimTicks","_map","_pos","_firedTarget","_color","_shotDir"];
 
 
+    _newShotEndPos = if (_shotAnimCurrentTick > _shotAnimTicks) then {
+        _firedTarget
+    } else {
+        _pos getPos [GRAD_REPLAY_SHOTANIMSPEED * _shotAnimCurrentTick,_shotDir]
+    };
+
+    _startPosTick = (_shotAnimCurrentTick - 2) max 0;
+    _newShotStartPos = if (_startPosTick > _shotAnimTicks) then {
+        _firedTarget
+    } else {
+        _pos getPos [GRAD_REPLAY_SHOTANIMSPEED * _startPosTick,_shotDir]
+    };
+
+    _map ctrlRemoveEventHandler ["Draw",_drawEH];
+
+    if (_startPosTick > _shotAnimTicks) then {
+        [_handle] call CBA_fnc_removePerFrameHandler;
+    } else {
+        _args set [0,
+            _map ctrlAddEventHandler ["Draw",
+                format ["(_this select 0) drawLine [%1,%2,%3]",_newShotStartPos,_newShotEndPos,_color]
+            ]
+        ];
+    };
+
+    _args set [1,_shotAnimCurrentTick + 1];
+
+},0.1,[_drawEH,_shotAnimCurrentTick,_shotAnimTicks,_map,_pos,_firedTarget,_color,_shotDir]] call CBA_fnc_addPerFrameHandler;
+
+
+// continuous lines style animation
+/* [{
+    params ["_args","_handle"];
+    _args params ["_drawEH","_shotAnimCurrentTick","_shotAnimTicks","_map","_pos","_firedTarget","_color","_shotDir"];
+
+
     _newShotPos = if (_shotAnimCurrentTick > _shotAnimTicks) then {
         _color set [3,(_color select 3) - 0.2];
         _firedTarget;
@@ -51,4 +87,4 @@ private _shotAnimCurrentTick = 1;
 
     _args set [1,_shotAnimCurrentTick + 1];
 
-},0.1,[_drawEH,_shotAnimCurrentTick,_shotAnimTicks,_map,_pos,_firedTarget,_color,_shotDir]] call CBA_fnc_addPerFrameHandler;
+},0.1,[_drawEH,_shotAnimCurrentTick,_shotAnimTicks,_map,_pos,_firedTarget,_color,_shotDir]] call CBA_fnc_addPerFrameHandler; */

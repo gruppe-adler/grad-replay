@@ -32,8 +32,9 @@ INFO_1("Playing replay at serverTime %1.", serverTime);
 
     {
         private _fickediefackfack = grad_current_playbackLoopPosition;
+        private _map = ((findDisplay 80000) displayCtrl 1337);
 
-        private _eh = ((findDisplay 80000) displayCtrl 1337) ctrlAddEventHandler ["Draw",
+        private _eh = _map ctrlAddEventHandler ["Draw",
             format [
                 "[
                    _this select 0,
@@ -41,7 +42,10 @@ INFO_1("Playing replay at serverTime %1.", serverTime);
                 ] call GRAD_replay_fnc_drawIcon;",
             _fickediefackfack]
         ];
-        grad_current_ehs append [_eh];
+
+        [_map,_fickediefackfack] call grad_replay_fnc_animateShot;
+
+        grad_current_ehs pushBack _eh;
 
         if (grad_current_playbackLoopPosition < (count (GRAD_REPLAY_DATABASE_LOCAL_ASSEMBLED select (grad_replay_playbackPosition))) - 1) then {
             grad_current_playbackLoopPosition = grad_current_playbackLoopPosition + 1;

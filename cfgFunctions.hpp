@@ -8,6 +8,7 @@ class GRAD_replay {
         file = MODULES_DIRECTORY\@gruppe-adler\replay\functions\player;
 
         class addReplayPart {};
+        class animateShot {};
         class assembleReplayData {};
         class createMapOverlay {};
         class drawIcon {};
@@ -35,6 +36,7 @@ class GRAD_replay {
         class canTrackUnit {};
         class getSideColorID {};
         class init {};
+        class onFiredMan {};
         class pauseRecord {};
         class preparePlaybackServer {};
         class setMeSpectator {};

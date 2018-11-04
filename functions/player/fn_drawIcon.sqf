@@ -6,16 +6,15 @@ if !(_positionData isEqualType []) exitWith {};
 private _iconData = _positionData param [_index,[]];
 if !(_iconData isEqualType []) exitWith {};
 
-
 _iconData params [
     ["_icon", ""],
     ["_colorID", -1],
     ["_pos", [0,0,0]],
     ["_dir", 0],
     ["_name", ""],
-    ["_groupname", ""]
+    ["_groupname", ""],
+    ""
 ];
-
 
 private _showName = (ctrlMapScale _map) < 0.03;
 private _name =  if (_showName) then { _name + " " + _groupname } else { "" };

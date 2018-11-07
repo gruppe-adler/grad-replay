@@ -1,8 +1,6 @@
 #include "script_component.hpp"
 
-params ["_precision"];
-
-INFO_1("Starting recording with precision %1",_precision);
+INFO_1("Starting recording with precision %1",GRAD_REPLAY_PRECISION);
 
 {
     _x setVariable ["GRAD_replay_track", true];
@@ -112,4 +110,4 @@ private _currentSaveState = [];
     _nextTickData pushBack dayTime;
     GRAD_REPLAY_DATABASE pushBack _nextTickData;
 
-},_precision,[_currentSaveState]] call CBA_fnc_addPerFrameHandler;
+},GRAD_REPLAY_PRECISION,[_currentSaveState]] call CBA_fnc_addPerFrameHandler;

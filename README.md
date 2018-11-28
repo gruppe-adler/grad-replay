@@ -34,7 +34,8 @@ class GRAD_Replay {
     stepsPerTick = 1;                                 // defines steps played back at once (number)
     trackedVehicles = 0;                              // defines if empty and AI steered vehicles will be tracked (0/1)
     trackedAI = 0;                                    // defines if AI will be tracked (0/1)
-    sendingChunkSize = 10;                            // higher number means replay loading is faster, but might cause instability / lags during loading
+    sendingChunkSize = 10;                            // higher number means replay loading is faster, but might cause instability / lags during loading (number)
+    trackShots = 0;                                   // defines if shots will be tracked (0/1)
 };
 ```
 ### 4. Initialize script in init.sqf

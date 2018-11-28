@@ -15,19 +15,33 @@ GRAD_REPLAY_DATABASE = [];
 
 // vehicle setVariable ["GRAD_replay_track", true];
 
-GRAD_REPLAY_SIDES = ([(missionConfigFile >> "GRAD_Replay"), "trackedSides", ["west", "east", "civilian"]] call BIS_fnc_returnConfigEntry) apply {call compile _x};
-GRAD_REPLAY_AI_VEHICLES_TRACKED = ([(missionConfigFile >> "GRAD_Replay"), "trackedVehicles", 0] call BIS_fnc_returnConfigEntry) == 1;
-GRAD_REPLAY_AI_ONFOOT_TRACKED = ([(missionConfigFile >> "GRAD_Replay"), "trackedAI", 0] call BIS_fnc_returnConfigEntry) == 1;
-REPLAY_STEPS_PER_TICK = [(missionConfigFile >> "GRAD_Replay"), "stepsPerTick", 1] call BIS_fnc_returnConfigEntry;
-GRAD_REPLAY_SENDING_CHUNK_SIZE = [(missionConfigFile >> "GRAD_Replay"), "sendingChunkSize", 10] call BIS_fnc_returnConfigEntry;
-GRAD_REPLAY_TRACKSHOTS = ([(missionConfigFile >> "GRAD_Replay"), "trackShots", 0] call BIS_fnc_returnConfigEntry) == 1;
-private _precision = [(missionConfigFile >> "GRAD_Replay"), "precision", 1] call BIS_fnc_returnConfigEntry;
+if (isNil "GRAD_REPLAY_SIDES") then {
+    GRAD_REPLAY_SIDES = ([(missionConfigFile >> "GRAD_Replay"), "trackedSides", ["west", "east", "civilian"]] call BIS_fnc_returnConfigEntry) apply {call compile _x};
+};
+if (isNil "GRAD_REPLAY_AI_VEHICLES_TRACKED") then {
+    GRAD_REPLAY_AI_VEHICLES_TRACKED = ([(missionConfigFile >> "GRAD_Replay"), "trackedVehicles", 0] call BIS_fnc_returnConfigEntry) == 1;
+};
+if (isNil "GRAD_REPLAY_AI_ONFOOT_TRACKED") then {
+    GRAD_REPLAY_AI_ONFOOT_TRACKED = ([(missionConfigFile >> "GRAD_Replay"), "trackedAI", 0] call BIS_fnc_returnConfigEntry) == 1;
+};
+if (isNil "REPLAY_STEPS_PER_TICK") then {
+    REPLAY_STEPS_PER_TICK = [(missionConfigFile >> "GRAD_Replay"), "stepsPerTick", 1] call BIS_fnc_returnConfigEntry;
+};
+if (isNil "GRAD_REPLAY_SENDING_CHUNK_SIZE") then {
+    GRAD_REPLAY_SENDING_CHUNK_SIZE = [(missionConfigFile >> "GRAD_Replay"), "sendingChunkSize", 10] call BIS_fnc_returnConfigEntry;
+};
+if (isNil "GRAD_REPLAY_TRACKSHOTS") then {
+    GRAD_REPLAY_TRACKSHOTS = ([(missionConfigFile >> "GRAD_Replay"), "trackShots", 0] call BIS_fnc_returnConfigEntry) == 1;
+};
+if (isNil "GRAD_REPLAY_PRECISION") then {
+    GRAD_REPLAY_PRECISION = [(missionConfigFile >> "GRAD_Replay"), "precision", 1] call BIS_fnc_returnConfigEntry;
+};
 
 if (GRAD_REPLAY_TRACKSHOTS) then {
     ["CAManBase","firedMan",{_this call grad_replay_fnc_onFiredMan}] call CBA_fnc_addClassEventHandler;
 };
 
-[_precision] call GRAD_replay_fnc_startRecord;
+[] call GRAD_replay_fnc_startRecord;
 
 /* to start playback:
 [] GRAD_replay_fnc_stopRecord;

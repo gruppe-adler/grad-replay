@@ -2,9 +2,12 @@
 
 if (!isServer) exitWith {};
 
+["GRAD_replay_preparingPlayback",{true}] call CBA_fnc_globalEvent;
+
 private _fnc_disableUnit = if (isMultiplayer) then {
     {
         _this enableSimulationGlobal false;
+        [""] remoteExec ["switchMove", _this];
 
         // freeze vehicle
         if (!(vehicle _this isEqualTo _this) && _this isEqualTo (driver vehicle _this)) then {
@@ -12,7 +15,10 @@ private _fnc_disableUnit = if (isMultiplayer) then {
         };
     }
 } else {
-    {_this enableSimulation false}
+    {
+        _this enableSimulation false;
+        _this switchMove "";
+    }
 };
 
 {

@@ -7,3 +7,4 @@ uiSleep 5;
 if (dialog) then {closeDialog 2;};
 REPLAY_FINISHED = true;
 publicVariable "REPLAY_FINISHED";
+["GRAD_replay_finished",{true}] call CBA_fnc_globalEvent;

@@ -56,7 +56,7 @@ private _currentSaveState = [];
         if ([_unit,_veh,_isVehicle,_isEmptyVehicle,_isMan] call grad_replay_fnc_canTrackUnit) then {
 
             // set tracking ID if unit doesn't have one
-            _unitID = _unit getVariable "grad_replay_unitID";
+            private _unitID = _unit getVariable ["grad_replay_unitID",0];
             if (isNil "_unitID") then {
                 _unitID = _currentSaveState pushBack [];
                 _unit setVariable ["grad_replay_unitID",_unitID];

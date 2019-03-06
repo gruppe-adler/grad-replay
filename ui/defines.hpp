@@ -445,7 +445,7 @@ class grad_replay_RscMapControl
   y = 0.10;
   w = 0.80;
   h = 0.60;
-
+  widthRailWay = 1;
   moveOnEdges = 0;
     shadow = 1;
     ptsPerSquareSea = 5;

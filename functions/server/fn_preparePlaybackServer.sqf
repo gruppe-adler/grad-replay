@@ -41,7 +41,7 @@ missionnamespace setVariable ["GRAD_replay_isRunning", true, true];
 INFO("Sending database to clients.");
 private _startTime = diag_tickTime;
 
-_replayLength = count GRAD_REPLAY_DATABASE;
+private _replayLength = count GRAD_REPLAY_DATABASE;
 INFO_1("Replay length is %1",_replayLength);
 
 private _allPlayers = allPlayers - entities "HeadlessClient_F";
@@ -69,7 +69,10 @@ for [{_i=0},{_i < ceil (_replayLength / GRAD_REPLAY_SENDING_CHUNK_SIZE)},{_i=_i+
 INFO_1("Database sending completed in %1s.",(diag_tickTime - _startTime));
 
 // wait until all clients have received all the data and assembled it
-private _waitCondition = {(_this select 0) findIf {!(_x getVariable ["grad_replay_playerAssemblyComplete",false])} < 0};
+private _waitCondition = {
+    params ["_allPlayers"];
+    (_allPlayers arrayIntersect allPlayers) findIf {!(_x getVariable ["grad_replay_playerAssemblyComplete",false])} < 0
+};
 
 private _onComplete = {
     params ["_allPlayers","_startTime"];

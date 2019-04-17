@@ -70,15 +70,24 @@ INFO_1("Database sending completed in %1s.",(diag_tickTime - _startTime));
 
 // wait until all clients have received all the data and assembled it
 private _waitCondition = {(_this select 0) findIf {!(_x getVariable ["grad_replay_playerAssemblyComplete",false])} < 0};
+
 private _onComplete = {
-    INFO_1("All players have received and assembled database. Total time since start of function: %1.",(diag_tickTime - (_this select 1)));
-    [] remoteExec ["GRAD_replay_fnc_initReplay", _this select 0, false];
+    params ["_allPlayers","_startTime"];
+
+    _allPlayers = _allPlayers select {!isNull _x};
+    INFO_1("All players have received and assembled database. Total time since start of function: %1.",(diag_tickTime - _startTime));
+    [] remoteExec ["GRAD_replay_fnc_initReplay", _allPlayers, false];
 };
+
 private _onTimeout = {
-    [] remoteExec ["GRAD_replay_fnc_initReplay", _this select 0, false];
-    _missingPlayers = (_this select 0) select {!(_x getVariable ["grad_replay_playerReceiptComplete",false])};
+    params ["_allPlayers","_startTime"];
+    private _missingPlayers = _allPlayers select {!(_x getVariable ["grad_replay_playerReceiptComplete",false])};
+    _allPlayers = _allPlayers select {!isNull _x};
+
+    [] remoteExec ["GRAD_replay_fnc_initReplay", _allPlayers, false];
     INFO_1("Waiting for players timed out. Missing players: %1",_missingPlayers);
 };
-[_waitCondition,_onComplete,[_allPlayers,_startTime],30,_onTimeout] call CBA_fnc_waitUntilAndExecute;
+
+[_waitCondition,_onComplete,[_allPlayers,_startTime],45,_onTimeout] call CBA_fnc_waitUntilAndExecute;
 
 // copyToClipboard str GRAD_REPLAY_DATABASE;

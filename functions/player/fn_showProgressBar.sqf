@@ -27,24 +27,23 @@ with uiNamespace do {
     GRAD_replay_rsc_loadingBar ctrlSetTextColor [209/255, 141/255, 31/255, 1];
     GRAD_replay_rsc_loadingBar progressSetPosition 0;
     GRAD_replay_rsc_loadingBar ctrlCommit 0;
-    
-    
-
 };
+
 
 [ "TIMER", "onEachFrame", {
     params[ "_start", "_end" ];
     _progress = linearConversion[ _start, _end, count GRAD_REPLAY_DATABASE_LOCAL, 0, 1 ];
     (uiNamespace getVariable "GRAD_replay_rsc_loadingBar") progressSetPosition _progress;
-    
-    if (_progress > 0 && _progress < 1) then {
-        (uiNamespace getVariable "GRAD_replay_txt_loading") ctrlSetStructuredText parseText format["<t align='center' size='2.3' shadow='0'>LOADING REPLAY</t>"];
+
+    private _loadText = switch (true) do {
+        case (_progress == 0): {"WAITING FOR REPLAY"};
+        case (_progress < 1): {"RECEIVING REPLAY DATA"};
+        case (!(player getVariable ["grad_replay_playerAssemblyComplete",false])): {"ASSEMBLING REPLAY DATA"};
+        default {"WAITING FOR OTHERS"};
     };
 
-    // hintsilent format ["showing progress bar %1", _progress];
-    if (_progress >= 1) then {
-        (uiNamespace getVariable "GRAD_replay_txt_loading") ctrlSetStructuredText parseText format["<t align='center' size='2.3' shadow='0'>WAITING FOR OTHERS</t>"];
-    };
+    (uiNamespace getVariable "GRAD_replay_txt_loading") ctrlSetStructuredText parseText format ["<t align='center' size='2.3' shadow='0'>%1</t>",_loadText];
+
     /*
     // loading bar gets deleted in initreplay
     */

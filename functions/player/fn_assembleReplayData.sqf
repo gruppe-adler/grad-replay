@@ -45,6 +45,13 @@ for [{_i=_startIndex},{_i< count GRAD_REPLAY_DATABASE_LOCAL},{_i=_i+1}] do {
                 _unitData = [];
                 _compressedUnitData = _x;
 
+                // replace typeOf with icon
+                _type = _compressedUnitData param [0,""];
+                if !(_type isEqualTo "") then {
+                    _compressedUnitData set [0,getText (configfile >> "CfgVehicles" >> _type >> "icon")];
+                };
+
+                // check if this unit has existing data states or if it is new
                 if (_forEachIndex >= count _currentUnitsDataStates) then {
                     _currentUnitsDataStates pushBack [];
                 };

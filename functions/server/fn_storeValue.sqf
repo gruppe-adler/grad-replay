@@ -2,12 +2,12 @@
 
 params [["_currentUnitData",[]],["_nextTickData",[]],["_unitID",-1],["_newUnitData",[]]];
 
-// _newUnitData contents: [_icon,_colorID,_pos,_dir,_name,_groupname]
+// _newUnitData contents: [_type,_colorID,_pos,_dir,_name,_groupname]
 if (count _newUnitData == 0) exitWith {};
 
 private _newSaveData = [];
 private _typeDefaults = [
-    "",         // icon
+    "",         // typeOf
     -1,         // color ID
     [0,0],      // pos2D
     -1,         // dir

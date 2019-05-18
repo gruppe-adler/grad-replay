@@ -74,7 +74,6 @@ private _currentSaveState = [];
             _side = if (_isMan) then {side _unit} else {sideEmpty};
             _colorID = [_side] call GRAD_replay_fnc_getSideColorID;
             _type = typeOf _veh;
-            _icon = getText (configfile >> "CfgVehicles" >> _type >> "icon");
 
             // firedTarget is being set by fn_onFiredMan --> if it has a value, save and reset the variable
             _firedTarget = _unit getVariable ["grad_replay_firedTarget",[]];
@@ -102,7 +101,7 @@ private _currentSaveState = [];
                 };
             };
 
-            [_currentUnitData,_nextTickData,_unitID,[_icon,_colorID,_pos,_dir,_name,_groupname,_firedTarget]] call GRAD_replay_fnc_storeValue;
+            [_currentUnitData,_nextTickData,_unitID,[_type,_colorID,_pos,_dir,_name,_groupname,_firedTarget]] call GRAD_replay_fnc_storeValue;
         };
 
     } forEach _trackedUnits;

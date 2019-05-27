@@ -92,4 +92,4 @@ if (isMultiplayer && !(serverCommandAvailable "#kick")) exitWith {};
 
 [{
     [grad_replay_playbackPosition] remoteExec ["GRAD_replay_fnc_syncPlaybackPos", [0,-2] select isDedicated, false];
-},1,[]] call CBA_fnc_addPerFrameHandler;
+},10,[]] call CBA_fnc_addPerFrameHandler;

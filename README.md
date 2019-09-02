@@ -36,7 +36,7 @@ class GRAD_Replay {
     trackedAI = 0;                                    // defines if AI will be tracked (0/1)
     sendingChunkSize = 10;                            // higher number means replay loading is faster, but might cause instability / lags during loading (number)
     trackShots = 0;                                   // defines if shots will be tracked (0/1)
-    upload = 1;         // defines if replay data will be uploaded to replay.gruppe-adler.de (0/1)
+    upload = 1;                                       // defines if replay data will be uploaded to replay.gruppe-adler.de (0/1)
 };
 ```
 ### 4. Initialize script in init.sqf

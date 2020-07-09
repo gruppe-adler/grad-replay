@@ -23,4 +23,9 @@ GRAD_CINEMACAM = objNull;
 GCamKill = true;
 
 // let players be able to talk already
-[player, true] call TFAR_fnc_forceSpectator;
+if (isClass (configFile >> "CfgPatches" >> "task_force_radio")) then {
+    [player, true] call TFAR_fnc_forceSpectator;
+};
+if (isClass (configFile >> "CfgPatches" >> "acre_main")) then {
+    [true] call acre_api_fnc_setSpectator;
+};

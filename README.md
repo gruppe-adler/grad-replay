@@ -66,4 +66,4 @@ Note that for the upload setting to have an effect, you need to have [grad-repla
 Currently there is **no helper function to resume normal gameplay after replay has played**, this means all assets will be frozen and TFAR spectator channel will be set for all players, furthermore every wound will be healed and all spectator cams left.
 
 ### Script commands
-to pause recording, set `GRAD_REPLAY_RECORDING_PAUSED` to true on server / false to resume
+to pause recording, run server-side `[true] call GRAD_replay_fnc_pauseRecord` , to resume call `[false] call GRAD_replay_fnc_pauseRecord`

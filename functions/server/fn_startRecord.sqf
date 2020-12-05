@@ -56,52 +56,40 @@ private _currentSaveState = [];
         if ([_unit,_veh,_isVehicle,_isEmptyVehicle,_isMan] call grad_replay_fnc_canTrackUnit) then {
 
             // set tracking ID if unit doesn't have one
-            _unitID = _unit getVariable "grad_replay_unitID";
+            private _unitID = _unit getVariable "grad_replay_unitID";
             if (isNil "_unitID") then {
                 _unitID = _currentSaveState pushBack [];
                 _unit setVariable ["grad_replay_unitID",_unitID];
             };
-            _currentUnitData = _currentSaveState select _unitID;
+            private _currentUnitData = _currentSaveState select _unitID;
 
             // use ACE_Name so it works with dead units
-            _name = _unit getVariable ["ACE_Name",""];
+            private _name = _unit getVariable ["ACE_Name",""];
 
-            _pos = getpos _unit;
+            private _pos = getpos _unit;
             _pos resize 2;
-
-            _groupname = if (_unit isEqualTo (leader group _unit)) then {" (" + groupId (group _unit) + ")"} else {""};
-            _dir = round (getDir _veh);
-            _side = if (_isMan) then {side _unit} else {sideEmpty};
-            _colorID = [_side] call GRAD_replay_fnc_getSideColorID;
-            _type = typeOf _veh;
+            
+            private _dir = round (getDir _veh);
+            private _type = typeOf _veh;
 
             // firedTarget is being set by fn_onFiredMan --> if it has a value, save and reset the variable
-            _firedTarget = _unit getVariable ["grad_replay_firedTarget",[]];
+            private _firedTarget = _unit getVariable ["grad_replay_firedTarget",[]];
             _unit setVariable ["grad_replay_firedTarget",nil];
 
-            // mark funkwagen if he is sending in red // speciality for mission "breaking contact"
-            if (_type isEqualTo "rhs_gaz66_r142_vv" && {_veh getVariable ["tf_range",0] == 50000}) then {
-                _colorID = 11;
+
+            private _groupname = if (_unit isEqualTo (leader group _unit)) then {" (" + groupId (group _unit) + ")"} else {""};
+            if (alive _unit && {_unit getVariable ["ACE_isUnconscious", false]}) then {
+                _groupname = "unconscious";
             };
 
-            // speciality for mission "breaking contact"
-            if (_type isEqualTo "Land_DataTerminal_01_F" && !(isNil "GRAD_TERMINAL_ACTIVE") && {GRAD_TERMINAL_ACTIVE}) then {
-                _colorID = 11;
-            };
+            private _colorID = [_unit] call grad_replay_fnc_getColorIdForUnit;
 
-            // set dead unit color to grey, independent of side
-            if (!alive _unit) then {
-                _colorID = 10;
-            } else {
-
-                // colorID for unconscious is hardcoded to be +5 of side
-                if (_unit getVariable ["ACE_isUnconscious", false]) then {
-                    _colorID = _colorID + 5;
-                    _groupname = "unconscious";
-                };
-            };
-
-            [_currentUnitData,_nextTickData,_unitID,[_type,_colorID,_pos,_dir,_name,_groupname,_firedTarget]] call GRAD_replay_fnc_storeValue;
+            [
+                _currentUnitData,
+                _nextTickData,
+                _unitID,
+                [_type, _colorID, _pos, _dir, _name, _groupname, _firedTarget]
+            ] call GRAD_replay_fnc_storeValue;
         };
 
     } forEach _trackedUnits;

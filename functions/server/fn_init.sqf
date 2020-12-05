@@ -7,11 +7,34 @@ GRAD_REPLAY_SHOTANIMSPEED = 60;     // how fast projectiles move during replay i
 
 if (!isServer) exitWith {};
 
+GRAD_REPLAY_COLORS = [
+
+    // side color IDs
+    [0,0.3,0.6,1],          // 0: WEST
+    [0.5,0,0,1],            // 1: EAST
+    [0,0.5,0,1],            // 2: INDEPENDENT
+    [0.4,0,0.5,1],          // 3: CIVILIAN
+    [0.7,0.6,0,1],          // 4: SIDEEMPTY
+
+    // unconscious IDs are currently hardcoded to be exactly +5 in fn_startRecord!
+    [0,0.3,0.6,0.5],        // 5: WEST unconscious
+    [0.5,0,0,0.5],          // 6: EAST unconscious
+    [0,0.5,0,0.5],          // 7: INDEPENDENT unconscious
+    [0.4,0,0.5,0.5],        // 8: CIVILIAN unconscious
+    [0.7,0.6,0,0.5],        // 9: SIDEEMPTY unconscious
+
+    // other
+    [0.2,0.2,0.2,0.5]      // 10: dead unit
+
+    // NOTE: this color array can change during recording
+];
+
 // constants
+GRAD_REPLAY_DATABASE = [];
 GRAD_REPLAY_RECORDING_PAUSED = false;
 GRAD_REPLAY_RECORDING_STOPPED = false;
 GRAD_REPLAY_SENDING_DELAY = 0.05;
-GRAD_REPLAY_DATABASE = [];
+
 
 // vehicle setVariable ["GRAD_replay_track", true];
 
@@ -46,3 +69,4 @@ if (GRAD_REPLAY_TRACKSHOTS) then {
 /* to start playback:
 [] GRAD_replay_fnc_stopRecord;
 */
+

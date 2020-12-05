@@ -33,6 +33,8 @@ class GRAD_replay {
     class server {
         file = MODULES_DIRECTORY\@gruppe-adler\replay\functions\server;
 
+        class getColorIdForUnit {};
+        class getColorIdForUnit_bySide {};
         class canTrackUnit {};
         class getSideColorID {};
         class init {};

@@ -34,7 +34,7 @@ ace_map_mapShake = false;
 
 publicVariable "ace_map_BFT_Enabled";
 publicVariable "ace_map_mapShake";
-
+publicVariable "GRAD_REPLAY_COLORS";
 
 missionnamespace setVariable ["GRAD_replay_isRunning", true, true];
 

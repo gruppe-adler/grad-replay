@@ -62,6 +62,19 @@ class GRAD_Replay {
 
 Note that for the upload setting to have an effect, you need to have [grad-replay-intercept](https://github.com/gruppe-adler/grad_replay_intercept) (and the Intercept mod) loaded on your server. Check the repo's README to see how to configure it to upload to your server.
 
+#### individual colors for units
+
+define *grad_replay_color* global variable on a unit as a callback that returns a color in the format `[<red>, <green>, <blue>, <opacity>]` , each value a number from the interval 0..1
+
+example:
+
+```sqf
+_unit setVariable ["grad_replay_color", {[[0.0, 0.9, 1.0, 0.8]}, true];
+```
+
+you can change the color anytime during the mission to cause the color to change during replay.
+NOTE: color will be adjusted automatically for incapacitation & death
+
 ### Important
 Currently there is **no helper function to resume normal gameplay after replay has played**, this means all assets will be frozen and TFAR spectator channel will be set for all players, furthermore every wound will be healed and all spectator cams left.
 
